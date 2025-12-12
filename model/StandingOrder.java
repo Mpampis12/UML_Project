@@ -17,15 +17,15 @@ public class StandingOrder {
     private OrderStatus status;
     private int attempts;
 
-    private final int next_time_on_faild = 2; //two days
+    private final int NEXT_TIME_ON_FAILED = 2; //two days
     
     
-    enum StandingOrderPurpose{
+   public enum StandingOrderPurpose{
         TRANSFER,
         BILL
     }
     
-    enum OrderStatus {
+    public enum OrderStatus {
         ACTIVE,       
         COMPLETED,    
         FAILD       
@@ -68,7 +68,7 @@ public class StandingOrder {
         if(this.attempts>=3){
             this.status=OrderStatus.FAILD;
         }else{
-            this.nexTime = this.nexTime.plusDays(next_time_on_faild);
+            this.nexTime = this.nexTime.plusDays(NEXT_TIME_ON_FAILED);
         }
     }
         

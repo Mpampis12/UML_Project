@@ -12,7 +12,7 @@ public class Account {
     private List<Transaction> transactionList;
     private AccountType type;
 
-    enum AccountType{
+   public enum AccountType{
         PERSONAL,
         BUSINESS
     }
