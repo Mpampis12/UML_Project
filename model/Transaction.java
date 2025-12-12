@@ -12,7 +12,7 @@ public class Transaction {
     private Iban target;
     private LocalDateTime timestamp;
 
-    enum TransactionType{
+    public enum TransactionType{
         DEPOSIT,
         WITHDRAWAL,
         TRANSFER,
@@ -113,7 +113,7 @@ public class Transaction {
     }
 
     // Static nested Builder class
-    static class Builder {
+   public static class Builder {
         private String transactionId;
         private double amount;
         private String type;

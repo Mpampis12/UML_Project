@@ -99,5 +99,8 @@ public class Bill {
         this.billStatus = Status.PENDING;  
         this.payerAfm = null;
     }
-
+     public void pay(String payerAfm) {
+        this.billStatus = Status.PAID;
+        this.payerAfm = payerAfm;
+    }
 }
