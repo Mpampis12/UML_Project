@@ -11,6 +11,9 @@ import model.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -18,76 +21,66 @@ import java.util.List;
 
 public class JsonDao {
 
-     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final String FILE_PATH = "DAO/Database.json";  
 
-     private static final Gson gson = new GsonBuilder()
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private static final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
-            .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
-                    new JsonPrimitive(src.format(FORMATTER)))
+             .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
+                    new JsonPrimitive(src.format(DATETIME_FORMATTER)))
             .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) ->
-                    LocalDateTime.parse(json.getAsString(), FORMATTER))
+                    LocalDateTime.parse(json.getAsString(), DATETIME_FORMATTER))
+             .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
+                    new JsonPrimitive(src.format(DATE_FORMATTER)))
+            .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) ->
+                    LocalDate.parse(json.getAsString(), DATE_FORMATTER))
             .create();
 
- 
-     private static <T> void saveList(List<T> list, String filename) {
-        try (Writer writer = new FileWriter(filename)) {
-            gson.toJson(list, writer);
-        } catch (IOException e) {
-            System.out.println("Error saving " + filename + ": " + e.getMessage());
-        }
-    }
-
-     private static <T> List<T> loadList(String filename, Type typeToken) {
-        File file = new File(filename);
-        if (!file.exists()) return new ArrayList<>(); 
-        try (Reader reader = new FileReader(filename)) {
-            return gson.fromJson(reader, typeToken);
-        } catch (IOException e) {
-            System.out.println("Error loading " + filename + ": " + e.getMessage());
-            return new ArrayList<>();
-        }
+    
+    public static class DatabaseData {
+        public List<Customer> customers = new ArrayList<>();
+        public List<Admin> admins = new ArrayList<>();
+        public List<Account> accounts = new ArrayList<>();
+        public List<Bill> bills = new ArrayList<>();
+        public List<StandingOrder> standingOrders = new ArrayList<>();
     }
 
  
-     public void saveCustomers(List<Customer> customers) {
-        saveList(customers, "customers.json");
+    public void saveDatabase(DatabaseData data) {
+        try {
+           
+            File directory = new File("DAO");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            try (Writer writer = new FileWriter(FILE_PATH)) {
+                gson.toJson(data, writer);
+                System.out.println("All data saved to " + FILE_PATH);
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving database: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public List<Customer> loadCustomers() {
-        return loadList("customers.json", new TypeToken<List<Customer>>(){}.getType());
-    }
+  
+    public DatabaseData loadDatabase() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            System.out.println("Database file not found. Creating new empty database.");
+            return new DatabaseData(); 
+        }
 
-     public void saveAdmins(List<Admin> admins) {
-        saveList(admins, "admins.json");
-    }
-
-    public List<Admin> loadAdmins() {
-        return loadList("admins.json", new TypeToken<List<Admin>>(){}.getType());
-    }
-
-     public void saveAccounts(List<Account> accounts) {
-        saveList(accounts, "accounts.json");
-    }
-
-    public List<Account> loadAccounts() {
-        return loadList("accounts.json", new TypeToken<List<Account>>(){}.getType());
-    }
-
-    // 4. BILLS
-    public void saveBills(List<Bill> bills) {
-        saveList(bills, "bills.json");
-    }
-
-    public List<Bill> loadBills() {
-        return loadList("bills.json", new TypeToken<List<Bill>>(){}.getType());
-    }
-
-    // 5. STANDING ORDERS
-    public void saveStandingOrders(List<StandingOrder> orders) {
-        saveList(orders, "standing_orders.json");
-    }
-
-    public List<StandingOrder> loadStandingOrders() {
-        return loadList("standing_orders.json", new TypeToken<List<StandingOrder>>(){}.getType());
+        try (Reader reader = new FileReader(FILE_PATH)) {
+            DatabaseData data = gson.fromJson(reader, DatabaseData.class);
+            if (data == null) return new DatabaseData();
+            return data;
+        } catch (IOException e) {
+            System.out.println("Error loading database: " + e.getMessage());
+            return new DatabaseData();
+        }
     }
 }

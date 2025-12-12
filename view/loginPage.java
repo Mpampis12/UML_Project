@@ -4,81 +4,102 @@ import services.BankSystem;
 import model.User;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginPage extends JPanel {
     
     private JTextField userField;
     private JPasswordField passField;
-    private BankBridge navigation; // Αναφορά στο κεντρικό παράθυρο
+    private BankBridge navigation;
 
-   
     public LoginPage(BankBridge navigation) {
         this.navigation = navigation;
         
-        // Ρυθμίσεις εμφάνισης (Layout)
-        setLayout(new GridBagLayout()); 
+        setLayout(new GridBagLayout());
+        setOpaque(false);  
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Κενά γύρω από τα κουμπιά
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10);
         
-        // Τίτλος
-        JLabel title = new JLabel("Welcome to Bank of TUC");
-        title.setFont(new Font("Arial", Font.BOLD, 24));
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        // --- ΤΙΤΛΟΣ ---
+        JLabel title = new JLabel("Bank of TUC", SwingConstants.CENTER);
+        title.setFont(new Font("Segoe UI", Font.BOLD, 30));
+        title.setForeground(Color.orange); 
+        title.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+        
+        gbc.gridx = 0; gbc.gridy = 0; 
         add(title, gbc);
+
+         userField = new JTextField(15);
+         JPanel userPanel = createRoundedPanel("Username:", userField);
         
-        // Πεδίο Username
-        gbc.gridwidth = 1; gbc.gridy = 1;
-        add(new JLabel("Username:"), gbc);
+        gbc.gridy = 1;
+        add(userPanel, gbc);
         
-        userField = new JTextField(15);
-        gbc.gridx = 1;
-        add(userField, gbc);
+         passField = new JPasswordField(15);
+         JPanel passPanel = createRoundedPanel("Password:", passField);
         
-        // Πεδίο Password
-        gbc.gridx = 0; gbc.gridy = 2;
-        add(new JLabel("Password:"), gbc);
-        
-        passField = new JPasswordField(15);
-        gbc.gridx = 1;
-        add(passField, gbc);
-        
-        // Κουμπί Login
-        JButton loginBtn = new JButton("Login");
+        gbc.gridy = 2;
+        add(passPanel, gbc);
+
+         JButton loginBtn = new JButton("LOGIN");
+        loginBtn.setPreferredSize(new Dimension(150, 40));
         loginBtn.setBackground(new Color(0, 102, 204));
-        loginBtn.setForeground(Color.WHITE);
-        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.NONE; // Να μην πιάσει όλο το πλάτος
+        loginBtn.setForeground(Color.orange);
+        loginBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        loginBtn.setFocusPainted(false);
+        loginBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+        gbc.gridy = 3;
         add(loginBtn, gbc);
         
-        // Λειτουργία Κουμπιού (Action Listener)
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                performLogin();
-            }
-        });
+         loginBtn.addActionListener(e -> performLogin());
     }
     
+  
+    private JPanel createRoundedPanel(String labelText, JTextField inputField) {
+         JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                
+                 g2.setColor(new Color(230, 230, 230)); 
+                
+                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+            }
+        };
+        
+         panel.setOpaque(false);  
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));  
+        panel.setPreferredSize(new Dimension(350, 50));  
+
+         JLabel label = new JLabel(labelText);
+        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        label.setForeground(new Color(50, 50, 50));  
+
+         
+        inputField.setOpaque(false);  
+        inputField.setBorder(null);   
+        inputField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        inputField.setForeground(Color.BLACK);
+
+         panel.add(label);
+        panel.add(inputField);
+
+        return panel;
+    }
+
     private void performLogin() {
         String username = userField.getText();
         char[] password = passField.getPassword();
-        
-        // Καλούμε τον UserManager από το Singleton BankSystem
-        // Προσοχή: Βεβαιώσου ότι έχεις SuperAdmin ή Customer στο σύστημα
         User user = BankSystem.getInstance().getUserManager().login(username, password);
         
         if (user != null) {
-            // Καθαρισμός πεδίων
             userField.setText("");
             passField.setText("");
-            
-            // Επιτυχία! Ζητάμε από το BankView να μας πάει στο Dashboard
             navigation.showDashboard(user);
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid Username or Password!", "Login Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid credentials!");
         }
     }
 }

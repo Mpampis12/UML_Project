@@ -1,0 +1,40 @@
+{
+  "customers": [
+    {
+      "accountIbans": [],
+      "userRoleString": "CUSTOMER",
+      "username": "user1",
+      "password": "83b3adb37c763dcbc23ea9bf8c526a648c308491da6257a28015b4b6757c549f",
+      "firstName": "Mpampis",
+      "lastName": "Mhtsotakis",
+      "afm": "123456789",
+      "email": "giannis@test.gr",
+      "phone": "6900000000"
+    }
+  ],
+  "admins": [
+    {
+      "userRoleString": "Admin",
+      "username": "Mpampis",
+      "password": "83b3adb37c763dcbc23ea9bf8c526a648c308491da6257a28015b4b6757c549f",
+      "firstName": "Mpampis",
+      "lastName": "MhtsotakisAdmin1",
+      "afm": "123456789",
+      "email": "giannis@test.gr",
+      "phone": "6900000000"
+    },
+    {
+      "userRoleString": "Admin",
+      "username": "Mpampis1",
+      "password": "83b3adb37c763dcbc23ea9bf8c526a648c308491da6257a28015b4b6757c549f",
+      "firstName": "Mpampis",
+      "lastName": "MhtsotakisAdmin2",
+      "afm": "123456789",
+      "email": "giannis@test.gr",
+      "phone": "6900000000"
+    }
+  ],
+  "accounts": [],
+  "bills": [],
+  "standingOrders": []
+}

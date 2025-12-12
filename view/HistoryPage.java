@@ -1,5 +1,9 @@
 package view;
 
-public class HistoryPage {
-    
+import javax.swing.*;
+
+public class HistoryPage extends JPanel {
+    public HistoryPage() {
+        add(new JLabel("History Page - Coming Soon"));
+    }
 }
