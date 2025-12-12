@@ -49,4 +49,14 @@ public class BillManager {
         
         System.out.println("Bill " + rfCode + " paid successfully by " + payerAfm);
     }
+
+    public void markAsPaid(String rfCode, String payerAfm) {
+        Bill b = getBillByRf(rfCode);
+        if (b != null) {
+            b.pay(payerAfm);  
+            System.out.println("Bill " + rfCode + " marked as PAID.");
+        }
+    }
+
+    
 }
