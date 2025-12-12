@@ -57,6 +57,8 @@ public class BillManager {
             System.out.println("Bill " + rfCode + " marked as PAID.");
         }
     }
-
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
+    }
     
 }

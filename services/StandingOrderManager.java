@@ -66,4 +66,7 @@ public class StandingOrderManager {
             }
         }
     }
+    public void setOrders(List<StandingOrder> orders) {
+            this.orders = orders;
+    }
 }

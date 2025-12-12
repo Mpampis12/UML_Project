@@ -33,7 +33,11 @@ public class BankSystem {
 
      public void performDailyTasks(LocalDate date) {
          standingOrderManager.executeDailyOrders(date, transactionManager, billManager);
-        
+        accountManager.applyInterests();
+
+         if (date.getDayOfMonth() == 1) {
+            accountManager.chargeBusinessFees();
+        }
         
     }
 
