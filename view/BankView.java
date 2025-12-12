@@ -11,6 +11,7 @@ public class BankView extends JFrame implements BankBridge {
     
      private LoginPage loginPageScreen;  
     private DashboardPage dashboardPageScreen;
+    private RegisterPage registerPageScreen;
     
     public BankView() {
         super("Bank of TUC");
@@ -37,9 +38,10 @@ public class BankView extends JFrame implements BankBridge {
  
         
         loginPageScreen = new LoginPage(this);
-        
+        registerPageScreen= new RegisterPage(this);
         
         mainPanel.add(loginPageScreen, "LOGIN");
+        mainPanel.add(registerPageScreen,"REGISTER");
         
         add(mainPanel);
         setVisible(true);
@@ -62,6 +64,11 @@ public class BankView extends JFrame implements BankBridge {
         
          cardLayout.show(mainPanel, "DASHBOARD");
         setTitle("Bank of TUC - Dashboard: " + user.getUsername());
+    }
+
+        @Override
+    public void showRegister() {
+        cardLayout.show(mainPanel, "REGISTER");
     }
 
     @Override

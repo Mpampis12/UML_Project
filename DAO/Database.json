@@ -10,6 +10,17 @@
       "afm": "123456789",
       "email": "giannis@test.gr",
       "phone": "6900000000"
+    },
+    {
+      "accountIbans": [],
+      "userRoleString": "CUSTOMER",
+      "username": "mpampisUser",
+      "password": "315648aba11c6ac647fb43185d76c845905e142916306de69000e305fef6b293",
+      "firstName": "Mpampis",
+      "lastName": "Kyrkos",
+      "afm": "123456788",
+      "email": "mpampis@tuc.gr",
+      "phone": "6934567891"
     }
   ],
   "admins": [
@@ -20,7 +31,7 @@
       "firstName": "Mpampis",
       "lastName": "MhtsotakisAdmin1",
       "afm": "123456789",
-      "email": "giannis@test.gr",
+      "email": "mpampis@test.gr",
       "phone": "6900000000"
     },
     {
@@ -30,7 +41,7 @@
       "firstName": "Mpampis",
       "lastName": "MhtsotakisAdmin2",
       "afm": "123456789",
-      "email": "giannis@test.gr",
+      "email": "mpampis@test.gr",
       "phone": "6900000000"
     }
   ],

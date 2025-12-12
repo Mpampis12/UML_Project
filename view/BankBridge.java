@@ -7,4 +7,5 @@ public interface BankBridge {
     void showDashboard(User user);
     void showHistory(User user);
     void showTransactions(User user);
+    void showRegister();
 }

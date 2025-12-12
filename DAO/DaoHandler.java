@@ -8,8 +8,15 @@ import java.util.List;
 public class DaoHandler {
 
     private JsonDao jsonDao;
+    private static DaoHandler instance;
 
-    public DaoHandler() {
+    public static DaoHandler getInstance(){
+        if(instance==null){
+            instance = new DaoHandler();
+        }
+        return instance;
+    }
+    private DaoHandler() {
         this.jsonDao = new JsonDao();
     }
 

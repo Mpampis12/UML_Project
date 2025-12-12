@@ -19,7 +19,7 @@ public class LoginPage extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         
-        // --- ΤΙΤΛΟΣ ---
+       
         JLabel title = new JLabel("Bank of TUC", SwingConstants.CENTER);
         title.setFont(new Font("Segoe UI", Font.BOLD, 30));
         title.setForeground(Color.orange); 
@@ -47,6 +47,21 @@ public class LoginPage extends JPanel {
         loginBtn.setFont(new Font("Segoe UI", Font.BOLD, 14));
         loginBtn.setFocusPainted(false);
         loginBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        JLabel registerLink = new JLabel("Don't have an account? Click here to Register");
+        registerLink.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        registerLink.setForeground(Color.WHITE);
+        registerLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
+         registerLink.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                navigation.showRegister();
+            }
+        });
+
+        gbc.gridy = 4;
+        gbc.insets = new Insets(20, 10, 10, 10); 
+        add(registerLink, gbc);
         
         gbc.gridy = 3;
         add(loginBtn, gbc);

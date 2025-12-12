@@ -43,6 +43,7 @@ public class UserManager {
         
        
         this.users.add(newCustomer);
+        DAO.DaoHandler.getInstance().saveAllData();
         System.out.println("Success register costumer: " + username);
     }
 
