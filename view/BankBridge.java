@@ -1,5 +1,10 @@
 package view;
 
-public class BankBridge {
-    
+import model.User;
+
+public interface BankBridge {
+    void showLogin();
+    void showDashboard(User user);
+    void showHistory(User user);
+    void showTransactions(User user);
 }
