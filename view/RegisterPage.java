@@ -66,7 +66,7 @@ public class RegisterPage extends JPanel {
         btnPanel.add(backBtn);
 
         gbc.gridy = row;
-        gbc.insets = new Insets(20, 10, 10, 10); // Λίγο αέρα πάνω από τα κουμπιά
+        gbc.insets = new Insets(20, 10, 10, 10);  
         add(btnPanel, gbc);
     }
 
@@ -82,6 +82,11 @@ public class RegisterPage extends JPanel {
     // --- LOGIC ΕΓΓΡΑΦΗΣ ---
     private void performRegister() {
         try {
+            if(userField.getText().isBlank()||passField.getPassword().toString().isBlank()||firstNameField.getText().isBlank()||lastNameField.getText().isBlank()|| afmField.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Error: " , "Registration Failed", JOptionPane.ERROR_MESSAGE);
+                navigation.showLogin();
+                return;
+            }
             BankSystem.getInstance().getUserManager().registerCustomer(
                 userField.getText(),
                 passField.getPassword(),
@@ -91,6 +96,7 @@ public class RegisterPage extends JPanel {
                 emailField.getText(),
                 phoneField.getText()
             );
+
             JOptionPane.showMessageDialog(this, "Registration Successful! Please Login.");
             navigation.showLogin();
         } catch (Exception e) {
@@ -116,12 +122,12 @@ public class RegisterPage extends JPanel {
         };
         panel.setOpaque(false);
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 8));
-        panel.setPreferredSize(new Dimension(380, 45)); // Λίγο πιο φαρδύ
+        panel.setPreferredSize(new Dimension(380, 45)); 
 
         JLabel label = new JLabel(labelText);
         label.setFont(new Font("Segoe UI", Font.BOLD, 14));
         label.setForeground(new Color(50, 50, 50));
-        label.setPreferredSize(new Dimension(80, 25)); // Σταθερό πλάτος ετικέτας
+        label.setPreferredSize(new Dimension(80, 25));  
 
         inputField.setOpaque(false);
         inputField.setBorder(null);

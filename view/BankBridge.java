@@ -1,5 +1,6 @@
 package view;
 
+import model.Account;
 import model.User;
 
 public interface BankBridge {
@@ -8,4 +9,5 @@ public interface BankBridge {
     void showHistory(User user);
     void showTransactions(User user);
     void showRegister();
+    void showAccountDetails(User user, Account account);
 }

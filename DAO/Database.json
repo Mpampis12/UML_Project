@@ -1,39 +1,20 @@
 {
   "customers": [
     {
-      "accountIbans": [],
+      "accountIbans": [
+        "GR865944320174069897"
+      ],
       "userRoleString": "CUSTOMER",
-      "username": "user1",
-      "password": "83b3adb37c763dcbc23ea9bf8c526a648c308491da6257a28015b4b6757c549f",
+      "username": "mpampis1",
+      "password": "ac6e417abd0df9f473cdfcb6cc57f8bf701387b5ee965e8dfb7a928b3b6c4fa1",
       "firstName": "Mpampis",
-      "lastName": "Mhtsotakis",
-      "afm": "123456789",
-      "email": "giannis@test.gr",
-      "phone": "6900000000"
-    },
-    {
-      "accountIbans": [],
-      "userRoleString": "CUSTOMER",
-      "username": "mpampisUser",
-      "password": "315648aba11c6ac647fb43185d76c845905e142916306de69000e305fef6b293",
-      "firstName": "Mpampis",
-      "lastName": "Kyrkos",
-      "afm": "123456788",
+      "lastName": "Mylos",
+      "afm": "123456777",
       "email": "mpampis@tuc.gr",
-      "phone": "6934567891"
+      "phone": "6944567891"
     }
   ],
   "admins": [
-    {
-      "userRoleString": "Admin",
-      "username": "Mpampis",
-      "password": "83b3adb37c763dcbc23ea9bf8c526a648c308491da6257a28015b4b6757c549f",
-      "firstName": "Mpampis",
-      "lastName": "MhtsotakisAdmin1",
-      "afm": "123456789",
-      "email": "mpampis@test.gr",
-      "phone": "6900000000"
-    },
     {
       "userRoleString": "Admin",
       "username": "Mpampis1",
@@ -45,7 +26,214 @@
       "phone": "6900000000"
     }
   ],
-  "accounts": [],
+  "accounts": [
+    {
+      "iban": {
+        "ibanNumber": "GR865944320174069897"
+      },
+      "balance": 0.0,
+      "creationDate": "16/12/2025 04:57:11",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-BB841B35",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 04:57:33"
+        },
+        {
+          "transactionID": "TX-E37029D6",
+          "amount": 20.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 04:57:47"
+        },
+        {
+          "transactionID": "TX-AF15A6E1",
+          "amount": 5.0E13,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:04:17"
+        },
+        {
+          "transactionID": "TX-D5C44BF1",
+          "amount": 25000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:08:26"
+        },
+        {
+          "transactionID": "TX-2A83B0D5",
+          "amount": 25030.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:09:09"
+        },
+        {
+          "transactionID": "TX-217C6428",
+          "amount": 5.0E13,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:09:23"
+        },
+        {
+          "transactionID": "TX-85151934",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:24:46"
+        },
+        {
+          "transactionID": "TX-D92C848C",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:24:49"
+        },
+        {
+          "transactionID": "TX-8252F81D",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:55:20"
+        },
+        {
+          "transactionID": "TX-271C8C85",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:55:25"
+        },
+        {
+          "transactionID": "TX-CB6CBB10",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:55:37"
+        },
+        {
+          "transactionID": "TX-1C5DF231",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:55:43"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR865944320174069897"
+      },
+      "balance": 0.0,
+      "creationDate": "16/12/2025 04:57:11",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-BB841B35",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 04:57:33"
+        },
+        {
+          "transactionID": "TX-E37029D6",
+          "amount": 20.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 04:57:47"
+        },
+        {
+          "transactionID": "TX-AF15A6E1",
+          "amount": 5.0E13,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:04:17"
+        },
+        {
+          "transactionID": "TX-D5C44BF1",
+          "amount": 25000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:08:26"
+        },
+        {
+          "transactionID": "TX-2A83B0D5",
+          "amount": 25030.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:09:09"
+        },
+        {
+          "transactionID": "TX-217C6428",
+          "amount": 5.0E13,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "16/12/2025 05:09:23"
+        }
+      ],
+      "type": "PERSONAL"
+    }
+  ],
   "bills": [],
   "standingOrders": []
 }

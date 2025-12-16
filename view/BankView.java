@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+
+import model.Account;
 import model.User;
 
 public class BankView extends JFrame implements BankBridge {
@@ -15,7 +17,7 @@ public class BankView extends JFrame implements BankBridge {
     
     public BankView() {
         super("Bank of TUC");
-        setSize(900, 700);
+        setSize(1000, 700);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  
@@ -79,5 +81,17 @@ public class BankView extends JFrame implements BankBridge {
     @Override
     public void showTransactions(User user) {
          JOptionPane.showMessageDialog(this, "Transaction Page under construction");
+    }
+    @Override
+    public void showAccountDetails(User user, Account account) {
+        // Δημιουργούμε τη σελίδα λεπτομερειών
+        AccountDetailsPage detailsScreen = new AccountDetailsPage(this, user, account);
+        
+        // Την προσθέτουμε στο CardLayout
+        mainPanel.add(detailsScreen, "DETAILS");
+        
+        // Την εμφανίζουμε
+        cardLayout.show(mainPanel, "DETAILS");
+        setTitle("Bank of TUC - Account Details: " + account.getIban());
     }
 }

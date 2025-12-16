@@ -50,7 +50,7 @@ public class LoginPage extends JPanel {
 
         JLabel registerLink = new JLabel("Don't have an account? Click here to Register");
         registerLink.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        registerLink.setForeground(Color.WHITE);
+        registerLink.setForeground(Color.orange);
         registerLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
          registerLink.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,7 +78,7 @@ public class LoginPage extends JPanel {
                 Graphics2D g2 = (Graphics2D) g;
                  g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
-                 g2.setColor(new Color(230, 230, 230)); 
+                 g2.setColor(Color.LIGHT_GRAY); 
                 
                  g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
             }

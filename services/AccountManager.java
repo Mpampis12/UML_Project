@@ -13,13 +13,15 @@ public class AccountManager {
         this.accounts = new ArrayList<>();
     }
 
-    public void createAccount(String type, double balance, String ownerAfm) {
+     public Account createAccount(String type, double balance, String ownerAfm) {
         try {
             Account newAccount = AccountFactory.createAccount(type, balance, ownerAfm);
             this.accounts.add(newAccount);
             System.out.println("Account created " + newAccount.getIban());
+            return newAccount;  
         } catch (Exception e) {
             System.out.println("Error on creating account: " + e.getMessage());
+            return null;
         }
     }
     public Account getAccount(String iban) {
