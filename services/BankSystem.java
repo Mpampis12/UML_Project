@@ -16,6 +16,7 @@ public class BankSystem {
     private StandingOrderManager standingOrderManager;
     private TimeSimulator timeSimulator;
     private DaoHandler daoHandler;
+    private BankApiService bankApiService;
     
 
     
@@ -29,8 +30,12 @@ public class BankSystem {
         
         this.transactionManager = new TransactionManager(this.accountManager);
         this.daoHandler= DAO.DaoHandler.getInstance();
+        this.bankApiService = new BankApiService();
     }
     
+    public BankApiService getBankApiService() {  
+        return bankApiService;
+    }   
     
     public static synchronized BankSystem getInstance() {
         if (instance == null) {

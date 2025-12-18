@@ -17,7 +17,7 @@ public class BankView extends JFrame implements BankBridge {
     
     public BankView() {
         super("Bank of TUC");
-        setSize(1000, 700);
+        setSize(1400, 700);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  
@@ -94,4 +94,23 @@ public class BankView extends JFrame implements BankBridge {
         cardLayout.show(mainPanel, "DETAILS");
         setTitle("Bank of TUC - Account Details: " + account.getIban());
     }
+
+
+    @Override
+    public void showCreateAccountConfirmation(User user) {
+        CreateAccountPage createPage = new CreateAccountPage(this, user);
+        mainPanel.add(createPage, "CREATE_ACC_CONFIRM");
+        cardLayout.show(mainPanel, "CREATE_ACC_CONFIRM");
+        setTitle("Bank of TUC - Confirm Account Creation");
+    }
+
+    // Η μέθοδος αυτή καλείται από τα κουμπιά Payment/Standing Order
+    @Override
+    public void showTransactionPage(User user, String initialTab) {
+        TransactionPage transPage = new TransactionPage(this, user, initialTab);
+        mainPanel.add(transPage, "TRANSACTION_PAGE");
+        cardLayout.show(mainPanel, "TRANSACTION_PAGE");
+        
+    }
+
 }
