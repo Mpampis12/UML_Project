@@ -1,6 +1,7 @@
 package services;
  
 import model.User;
+import model.Account;
 import model.Customer;
 import model.SuperAdmin;
 import java.util.ArrayList;
@@ -30,9 +31,9 @@ public class UserManager {
     }
 
  
-    public void registerCustomer(String username, char[] password, String firstName, String lastName, String afm, String email, String phone) throws Exception {
+public void registerCustomer(String username, char[] password, String firstName, String lastName, String afm, String email, String phone) throws Exception {
         
-         if (getUserByAfm(afm) != null) {
+        if (getUserByAfm(afm) != null) {
             throw new Exception("Already user with this afm.");
         }
         if (getUserByUsername(username) != null) {
@@ -41,11 +42,21 @@ public class UserManager {
  
         Customer newCustomer = new Customer(username, password, firstName, lastName, afm, email, phone);
         
-       
+ 
+        Account defAccount = BankSystem.getInstance().getAccountManager().createAccount("PERSONAL", 0.0, afm);
+        
+         if (defAccount != null) {
+            newCustomer.setNewAccountIban(defAccount.getIban());
+            System.out.println("Auto-created account " + defAccount.getIban() + " for user " + username);
+        }
+        // -----------------------------------------------------
+
         this.users.add(newCustomer);
+        
+         BankSystem.getInstance().getDaoHandler().saveAllData();
+        
         System.out.println("Success register costumer: " + username);
     }
-
    
     public User getUserByAfm(String afm) {
         for (User u : users) {

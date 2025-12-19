@@ -129,11 +129,15 @@ public class Transaction {
             this.type = type;
             this.amount = amount;
         }
+           public Builder() {
+ 
+        }
 
         public Builder setTimestamp(LocalDateTime t) { this.timestamp = t; return this; }
         public Builder setDescription(String d) { this.description = d; return this; }
         public Builder setSourceIban(String s) { this.sourceIban = s; return this; }
         public Builder setTargetIban(String t) { this.targetIban = t; return this; }
+        public Builder setAmount(double d ) { this.amount = d; return this; }
 
         public Transaction build() { return new Transaction(this); }
     }

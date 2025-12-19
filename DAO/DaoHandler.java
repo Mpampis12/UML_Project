@@ -8,59 +8,75 @@ import java.util.List;
 public class DaoHandler {
 
     private JsonDao jsonDao;
+    private static DaoHandler instance;
 
-    public DaoHandler() {
+    public static DaoHandler getInstance(){
+        if(instance==null){
+            instance = new DaoHandler();
+        }
+        return instance;
+    }
+    private DaoHandler() {
         this.jsonDao = new JsonDao();
     }
 
     public void saveAllData() {
         BankSystem bank = BankSystem.getInstance();
-
+        
+       
+        JsonDao.DatabaseData dbData = new JsonDao.DatabaseData();
+ 
         List<User> allUsers = bank.getUserManager().getUsers();
-        List<Customer> customers = new ArrayList<>();
-        List<Admin> admins = new ArrayList<>();
-
         for (User u : allUsers) {
             if (u instanceof Customer) {
-                customers.add((Customer) u);
+                dbData.customers.add((Customer) u);
             } else if (u instanceof Admin && !(u instanceof SuperAdmin)) {
-                 admins.add((Admin) u);
+                dbData.admins.add((Admin) u);
             }
         }
+ 
+        dbData.accounts = bank.getAccountManager().getAllAccounts();
+        dbData.bills = bank.getBillManager().getAllBills();
+        dbData.standingOrders = bank.getStandingOrderManager().getOrders();
 
-        jsonDao.saveCustomers(customers);
-        jsonDao.saveAdmins(admins);
-        jsonDao.saveAccounts(bank.getAccountManager().getAllAccounts());
-        jsonDao.saveBills(bank.getBillManager().getAllBills());
-        jsonDao.saveStandingOrders(bank.getStandingOrderManager().getOrders());
-
-        System.out.println("Data saved successfully.");
+       
+        jsonDao.saveDatabase(dbData);
     }
 
     public void loadAllData() {
         BankSystem bank = BankSystem.getInstance();
 
-         List<Customer> customers = jsonDao.loadCustomers();
-        List<Admin> admins = jsonDao.loadAdmins();
-        
+      
+        JsonDao.DatabaseData dbData = jsonDao.loadDatabase();
+
+     
         List<User> allUsers = new ArrayList<>();
-         allUsers.add(SuperAdmin.getInstance());
+        allUsers.add(SuperAdmin.getInstance()); 
         
-        if (customers != null) allUsers.addAll(customers);
-        if (admins != null) allUsers.addAll(admins);
+        if (dbData.customers != null) allUsers.addAll(dbData.customers);
+        if (dbData.admins != null) allUsers.addAll(dbData.admins);
         
         bank.getUserManager().setUsers(allUsers);
 
-         List<Account> accounts = jsonDao.loadAccounts();
-        if (accounts != null) bank.getAccountManager().setAccounts(accounts);
+     
+        if (dbData.accounts != null) {
+            bank.getAccountManager().setAccounts(dbData.accounts);
+        } else {
+            bank.getAccountManager().setAccounts(new ArrayList<>());
+        }
  
-        List<Bill> bills = jsonDao.loadBills();
-        if (bills != null) bank.getBillManager().setBills(bills);  
-
+        if (dbData.bills != null) {
+            bank.getBillManager().setBills(dbData.bills);
+        } else {
+            bank.getBillManager().setBills(new ArrayList<>());
+        }
  
-        List<StandingOrder> orders = jsonDao.loadStandingOrders();
-        if (orders != null) bank.getStandingOrderManager().setOrders(orders);  
+        if (dbData.standingOrders != null) {
+            bank.getStandingOrderManager().setOrders(dbData.standingOrders);
+        } else {
+            bank.getStandingOrderManager().setOrders(new ArrayList<>());
+        }
 
-        System.out.println("Data loaded successfully.");
+        System.out.println("Data loaded successfully from DAO/Database.json.");
     }
 }

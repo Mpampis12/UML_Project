@@ -3,7 +3,11 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.DaoHandler;
+
+import java.time.LocalDateTime;
 import model.Account;
+import model.Transaction;
 
 public class AccountManager {
     
@@ -13,13 +17,15 @@ public class AccountManager {
         this.accounts = new ArrayList<>();
     }
 
-    public void createAccount(String type, double balance, String ownerAfm) {
+     public Account createAccount(String type, double balance, String ownerAfm) {
         try {
             Account newAccount = AccountFactory.createAccount(type, balance, ownerAfm);
             this.accounts.add(newAccount);
             System.out.println("Account created " + newAccount.getIban());
+            return newAccount;  
         } catch (Exception e) {
             System.out.println("Error on creating account: " + e.getMessage());
+            return null;
         }
     }
     public Account getAccount(String iban) {
@@ -79,4 +85,52 @@ public class AccountManager {
         this.accounts = accounts;
     }
 
+
+        public void applyEndOfMonthPolicy() {
+        System.out.println("--- Εφαρμογή Πολιτικής (Τιμές από Config) ---");
+
+        // Ανάγνωση τιμών από το αρχείο
+        ConfigManager config = ConfigManager.getInstance();
+        double annualRate = config.getPropertyAsDouble("interest.rate.annual");
+        double monthlyFee = config.getPropertyAsDouble("maintenance.fee.monthly");
+        double monthlyRate = annualRate / 12.0;
+
+        for (Account acc : accounts) {
+            double currentBalance = acc.getBalance();
+
+            // 1. Υπολογισμός Τόκων (Δυναμικά από το config)
+            if (currentBalance > 0) {
+                double interest = currentBalance * monthlyRate;
+                // Στρογγυλοποίηση σε 2 δεκαδικά
+                interest = Math.round(interest * 100.0) / 100.0;
+                
+                acc.setBalance(acc.getBalance() + interest);
+
+                Transaction interestTx = new Transaction.Builder()
+                        .setSourceIban(acc.getIban().toString())
+                        .setTargetIban(acc.getIban().toString())
+                        .setAmount(interest)
+                        .setDescription("INTEREST: " + (annualRate*100) + "%)")
+                        .setTimestamp(LocalDateTime.now())
+                        .build();
+                
+                //TransactionManager.getInstance().addTransaction(interestTx);
+            }
+
+            // 2. Χρέωση Τέλους Συντήρησης (Δυναμικά από το config)
+            acc.setBalance(acc.getBalance() - monthlyFee);
+
+            Transaction feeTx = new Transaction.Builder()
+                    .setSourceIban(acc.getIban().toString())
+                    .setTargetIban("BANK_TREASURY")
+                    .setAmount(monthlyFee)
+                    .setDescription("Μηνιαίο Κόστος")
+                    .setTimestamp(LocalDateTime.now())
+                    .build();
+            
+            //TransactionManager.getInstance().addTransaction(feeTx);
+        }
+        
+        DaoHandler.getInstance().saveAllData();
+    }
 }

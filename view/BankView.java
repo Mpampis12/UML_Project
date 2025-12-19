@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+
+import model.Account;
 import model.User;
 
 public class BankView extends JFrame implements BankBridge {
@@ -9,33 +11,46 @@ public class BankView extends JFrame implements BankBridge {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     
-    // Οι σελίδες μας (τις κρατάμε ως Components)
-    private LoginPage loginPageScreen; // Άλλαξα το όνομα για να μην μπερδεύεται με την κλάση
+     private LoginPage loginPageScreen;  
     private DashboardPage dashboardPageScreen;
+    private RegisterPage registerPageScreen;
     
     public BankView() {
         super("Bank of TUC");
-        setSize(900, 700);
+        setSize(1400, 700);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Κέντρο της οθόνης
+        setLocationRelativeTo(null);  
         
-        // Setup CardLayout
+        
+        
         cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
+        Image bgImage = new ImageIcon("services/background2.jpg").getImage();
+
         
-        // 1. Αρχικοποίηση Login Page
-        // Περνάμε το 'this' (BankBridge) για να μπορεί να καλέσει το showDashboard
+        
+        mainPanel = new JPanel(cardLayout) {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        
+ 
+        
         loginPageScreen = new LoginPage(this);
+        registerPageScreen= new RegisterPage(this);
         
-        // Προσθήκη στο Panel με όνομα "LOGIN"
         mainPanel.add(loginPageScreen, "LOGIN");
+        mainPanel.add(registerPageScreen,"REGISTER");
         
         add(mainPanel);
         setVisible(true);
         
-        // Ξεκινάμε δείχνοντας το Login
         showLogin();
     }
+
 
     @Override
     public void showLogin() {
@@ -44,27 +59,58 @@ public class BankView extends JFrame implements BankBridge {
 
     @Override
     public void showDashboard(User user) {
-        // Δημιουργούμε το Dashboard δυναμικά κάθε φορά που μπαίνει ο χρήστης
-        // ώστε να έχει τα φρέσκα δεδομένα του συγκεκριμένου User
+        
         dashboardPageScreen = new DashboardPage(this, user);
         
-        // Το προσθέτουμε στο mainPanel
-        mainPanel.add(dashboardPageScreen, "DASHBOARD");
+         mainPanel.add(dashboardPageScreen, "DASHBOARD");
         
-        // Το δείχνουμε
-        cardLayout.show(mainPanel, "DASHBOARD");
+         cardLayout.show(mainPanel, "DASHBOARD");
         setTitle("Bank of TUC - Dashboard: " + user.getUsername());
+    }
+
+        @Override
+    public void showRegister() {
+        cardLayout.show(mainPanel, "REGISTER");
     }
 
     @Override
     public void showHistory(User user) {
-        // Θα υλοποιηθεί στο επόμενο βήμα
-        JOptionPane.showMessageDialog(this, "History Page under construction");
+         JOptionPane.showMessageDialog(this, "History Page under construction");
     }
 
     @Override
     public void showTransactions(User user) {
-        // Θα υλοποιηθεί στο επόμενο βήμα
-        JOptionPane.showMessageDialog(this, "Transaction Page under construction");
+         JOptionPane.showMessageDialog(this, "Transaction Page under construction");
     }
+    @Override
+    public void showAccountDetails(User user, Account account) {
+        // Δημιουργούμε τη σελίδα λεπτομερειών
+        AccountDetailsPage detailsScreen = new AccountDetailsPage(this, user, account);
+        
+        // Την προσθέτουμε στο CardLayout
+        mainPanel.add(detailsScreen, "DETAILS");
+        
+        // Την εμφανίζουμε
+        cardLayout.show(mainPanel, "DETAILS");
+        setTitle("Bank of TUC - Account Details: " + account.getIban());
+    }
+
+
+    @Override
+    public void showCreateAccountConfirmation(User user) {
+        CreateAccountPage createPage = new CreateAccountPage(this, user);
+        mainPanel.add(createPage, "CREATE_ACC_CONFIRM");
+        cardLayout.show(mainPanel, "CREATE_ACC_CONFIRM");
+        setTitle("Bank of TUC - Confirm Account Creation");
+    }
+
+    // Η μέθοδος αυτή καλείται από τα κουμπιά Payment/Standing Order
+    @Override
+    public void showTransactionPage(User user, String initialTab) {
+        TransactionPage transPage = new TransactionPage(this, user, initialTab);
+        mainPanel.add(transPage, "TRANSACTION_PAGE");
+        cardLayout.show(mainPanel, "TRANSACTION_PAGE");
+        
+    }
+
 }
