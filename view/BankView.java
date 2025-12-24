@@ -78,6 +78,7 @@ public class BankView extends JFrame implements BankBridge {
     @Override
     public void showLogin() {
         cardLayout.show(mainPanel, "LOGIN");
+            
     }
 
     @Override

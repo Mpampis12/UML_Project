@@ -26,8 +26,7 @@ public class BankController {
         BankSystem.getInstance().getUserManager().registerCustomer(username, password, firstName, lastName, afm, email, phone);
     }
 
-    // --- 2. DATA FETCHING (Εδώ είναι η μέθοδος που έλειπε!) ---
-
+ 
     public List<Account> getAccountsForUser(User user) {
         return BankSystem.getInstance().getAccountManager().getAccountsByOwner(user.getAfm());
     }
@@ -36,8 +35,7 @@ public class BankController {
         return BankSystem.getInstance().getUserManager().getUserByAfm(afm);
     }
 
-    // --- 3. COMMANDS (Transactions) ---
-    
+     
     public void handleDeposit(String iban, double amount) throws Exception {
         BankCommandPattern deposit = new DepositCommand(transactionManager, iban, amount, "Deposit via App");
         deposit.execute();
