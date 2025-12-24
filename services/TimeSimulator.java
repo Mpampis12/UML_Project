@@ -1,35 +1,53 @@
 package services;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.function.Consumer;
 
-public class TimeSimulator {
+public class TimeSimulator implements Runnable {
 
-    private LocalDate currentSystemDate;
+    private LocalDate currentDate;
+    private boolean running;
+    private int simulationSpeedMs = 5000; //5 sec is one mera
+    
+ 
+    private Consumer<LocalDate> dateChangeListener;
 
     public TimeSimulator() {
-        this.currentSystemDate = LocalDate.now(); // Ξεκινάμε από σήμερα
+         this.currentDate = LocalDate.now(); 
+        this.running = true;
     }
 
     public LocalDate getCurrentDate() {
-        return currentSystemDate;
+        return currentDate;
+    }
+    
+     public void setDateChangeListener(Consumer<LocalDate> listener) {
+        this.dateChangeListener = listener;
     }
 
-    /**
-     * Προχωράει τον χρόνο κατά 'days' ημέρες.
-     * Για κάθε μέρα που περνάει, ειδοποιεί το BankSystem να κάνει τις δουλειές του.
-     */
-    public void advanceTime(int days) {
-        System.out.println("\n*** STARTING SIMULATION FOR " + days + " DAYS ***");
-        
-        for (int i = 0; i < days; i++) {
-            // Προχωράμε μία μέρα
-            currentSystemDate = currentSystemDate.plusDays(1);
-            System.out.println("\n[Date: " + currentSystemDate + "]");
-            
-            // Καλούμε το BankSystem να τρέξει τις καθημερινές εργασίες
-            BankSystem.getInstance().performDailyTasks(currentSystemDate);
+    public void stop() {
+        this.running = false;
+    }
+
+    @Override
+    public void run() {
+        while (running) {
+            try {
+                 Thread.sleep(simulationSpeedMs);
+
+                 currentDate = currentDate.plusDays(1);
+                
+                 if (dateChangeListener != null) {
+                    dateChangeListener.accept(currentDate);
+                }
+
+                System.out.println("New Day: " + currentDate);
+
+            } catch (InterruptedException e) {
+                System.out.println("Time Simulator Interrupted");
+                running = false;
+            }
         }
-        
-        System.out.println("*** SIMULATION COMPLETED ***\n");
     }
 }

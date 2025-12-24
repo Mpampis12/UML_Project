@@ -2,15 +2,20 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.format.DateTimeFormatter;
 
 import model.Account;
 import model.User;
+import services.BankSystem;
+import services.TimeSimulator;
 
 public class BankView extends JFrame implements BankBridge {
     
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    
+    private JLabel dateLabel; 
+
+
      private LoginPage loginPageScreen;  
     private DashboardPage dashboardPageScreen;
     private RegisterPage registerPageScreen;
@@ -37,6 +42,23 @@ public class BankView extends JFrame implements BankBridge {
             }
         };
         
+        JPanel topBar = new JPanel(new BorderLayout());
+        topBar.setBackground(new Color(40, 40, 40)); // Dark Gray Header
+        topBar.setPreferredSize(new Dimension(1100, 30));
+
+        JLabel appNameLabel = new JLabel("  Bank of TUC System");
+        appNameLabel.setForeground(Color.WHITE);
+        appNameLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
+
+        dateLabel = new JLabel("Loading Date...  ");
+        dateLabel.setForeground(new Color(255, 200, 0)); // Yellow text
+        dateLabel.setFont(new Font("Monospaced", Font.BOLD, 14));
+        dateLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        topBar.add(appNameLabel, BorderLayout.WEST);
+        topBar.add(dateLabel, BorderLayout.EAST);
+
+        add(topBar, BorderLayout.NORTH); // Προσθήκη πάνω-πάνω στο Frame
  
         
         loginPageScreen = new LoginPage(this);
@@ -47,7 +69,8 @@ public class BankView extends JFrame implements BankBridge {
         
         add(mainPanel);
         setVisible(true);
-        
+
+        initTimeSimulator();
         showLogin();
     }
 
@@ -95,6 +118,23 @@ public class BankView extends JFrame implements BankBridge {
         setTitle("Bank of TUC - Account Details: " + account.getIban());
     }
 
+    private void initTimeSimulator() {
+        TimeSimulator timer = BankSystem.getInstance().getTimeSimulator();
+        
+        updateDateLabel(timer.getCurrentDate());
+        timer.setDateChangeListener(newDate -> {
+            SwingUtilities.invokeLater(() -> updateDateLabel(newDate));
+        });
+
+        Thread timeThread = new Thread(timer);
+        timeThread.start();
+    }
+
+    private void updateDateLabel(java.time.LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy");
+        dateLabel.setText(date.format(formatter) + "  ");
+    }
+
 
     @Override
     public void showCreateAccountConfirmation(User user) {
@@ -104,13 +144,5 @@ public class BankView extends JFrame implements BankBridge {
         setTitle("Bank of TUC - Confirm Account Creation");
     }
 
-    // Η μέθοδος αυτή καλείται από τα κουμπιά Payment/Standing Order
-    @Override
-    public void showTransactionPage(User user, String initialTab) {
-        TransactionPage transPage = new TransactionPage(this, user, initialTab);
-        mainPanel.add(transPage, "TRANSACTION_PAGE");
-        cardLayout.show(mainPanel, "TRANSACTION_PAGE");
-        
-    }
-
+ 
 }

@@ -46,7 +46,7 @@ public class AccountDetailsPage extends JPanel {
         headerPanel.setPreferredSize(new Dimension(1000, 250));
         headerPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
 
-        JLabel welcomeLabel = new JLabel("Welcome " + user.getFirstName(), SwingConstants.CENTER) {
+        JLabel welcomeLabel = new JLabel(  user.getFirstName()+ user.getLastName(), SwingConstants.CENTER) {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;

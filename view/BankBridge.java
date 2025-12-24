@@ -11,5 +11,4 @@ public interface BankBridge {
     void showRegister();
     void showAccountDetails(User user, Account account);
     void showCreateAccountConfirmation(User user);
-    void showTransactionPage(User user, String initialTab);
-}
+  }

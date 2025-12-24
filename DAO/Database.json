@@ -31,7 +31,7 @@
       "iban": {
         "ibanNumber": "GR865944320174069897"
       },
-      "balance": 0.9899999999906868,
+      "balance": 5.000050099E7,
       "creationDate": "16/11/2025 04:57:11",
       "owners": [
         "123456777",
@@ -206,6 +206,49 @@
             "ibanNumber": "GR865944320174069897"
           },
           "timestamp": "18/12/2025 04:51:37"
+        },
+        {
+          "transactionID": "TX-3DDD5D4C",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "20/12/2025 10:08:18"
+        },
+        {
+          "transactionID": "TX-DFD59C13",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "20/12/2025 10:08:23"
+        },
+        {
+          "transactionID": "TX-37F1E9F9",
+          "amount": 500.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR865944320174069888"
+          },
+          "target": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "20/12/2025 10:08:53"
+        },
+        {
+          "transactionID": "TX-24271D27",
+          "amount": 5.0E7,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "22/12/2025 14:38:17"
         }
       ],
       "type": "PERSONAL"
@@ -214,7 +257,7 @@
       "iban": {
         "ibanNumber": "GR865944320174069888"
       },
-      "balance": 394560.0,
+      "balance": 1.00394055E8,
       "creationDate": "16/12/2025 04:57:11",
       "owners": [
         "123456777"
@@ -278,6 +321,49 @@
             "ibanNumber": "GR865944320174069888"
           },
           "timestamp": "18/12/2025 05:16:43"
+        },
+        {
+          "transactionID": "TX-66FDE534",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR865944320174069888"
+          },
+          "timestamp": "19/12/2025 08:50:44"
+        },
+        {
+          "transactionID": "TX-37F1E9F9",
+          "amount": 500.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR865944320174069888"
+          },
+          "target": {
+            "ibanNumber": "GR865944320174069897"
+          },
+          "timestamp": "20/12/2025 10:08:53"
+        },
+        {
+          "transactionID": "TX-68A59321",
+          "amount": 5.0E7,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069888"
+          },
+          "timestamp": "22/12/2025 14:38:08"
+        },
+        {
+          "transactionID": "TX-93BFD58A",
+          "amount": 5.0E7,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR865944320174069888"
+          },
+          "timestamp": "22/12/2025 14:38:11"
         }
       ],
       "type": "PERSONAL"
@@ -286,7 +372,7 @@
       "iban": {
         "ibanNumber": "GR86594432017406999"
       },
-      "balance": 55565.0,
+      "balance": 1.00055565E8,
       "creationDate": "16/12/2025 04:57:11",
       "owners": [
         "123456777"
@@ -453,6 +539,82 @@
       "freq": 30,
       "nexTime": "17/01/2026 05:17:33",
       "expiredDay": "18/12/2026 05:17:33",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "6159758",
+      "amount": 12.0,
+      "description": "Monthly",
+      "source": {
+        "ibanNumber": "GR865944320174069866"
+      },
+      "target": {
+        "ibanNumber": "GR865944320174069897"
+      },
+      "targetRfCode": "-",
+      "freq": 30,
+      "nexTime": "21/01/2026 14:36:12",
+      "expiredDay": "22/12/2026 14:36:12",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "bf174f1",
+      "amount": 12.0,
+      "description": "Monthly",
+      "source": {
+        "ibanNumber": "GR865944320174069866"
+      },
+      "target": {
+        "ibanNumber": "GR865944320174069897"
+      },
+      "targetRfCode": "-",
+      "freq": 30,
+      "nexTime": "21/01/2026 14:36:16",
+      "expiredDay": "22/12/2026 14:36:16",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "d01c778",
+      "amount": 12.0,
+      "description": "Monthly",
+      "source": {
+        "ibanNumber": "GR865944320174069888"
+      },
+      "target": {
+        "ibanNumber": "GR865944320174069866"
+      },
+      "targetRfCode": "-",
+      "freq": 30,
+      "nexTime": "21/01/2026 14:36:44",
+      "expiredDay": "22/12/2026 14:36:44",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "96928b6",
+      "amount": 12555.0,
+      "description": "Monthly",
+      "source": {
+        "ibanNumber": "GR865944320174069888"
+      },
+      "target": {
+        "ibanNumber": "GR865944320174069866"
+      },
+      "targetRfCode": "-",
+      "freq": 30,
+      "nexTime": "21/01/2026 14:36:51",
+      "expiredDay": "22/12/2026 14:36:51",
       "type": "TRANSFER",
       "status": "ACTIVE",
       "attempts": 0,

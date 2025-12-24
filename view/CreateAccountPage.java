@@ -22,8 +22,7 @@ public class CreateAccountPage extends JPanel {
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
 
         JLabel lblMsg = new JLabel("Do you really want to open a new account?", SwingConstants.CENTER);
-        
-        // Επιλογή τύπου (Προαιρετικό, αλλιώς default Personal)
+         
         String[] types = {"PERSONAL", "BUSINESS"};
         JComboBox<String> typeCombo = new JComboBox<>(types);
 
@@ -43,15 +42,9 @@ public class CreateAccountPage extends JPanel {
         btnConfirm.addActionListener(e -> {
             try {
                 String selectedType = (String) typeCombo.getSelectedItem();
-                // Κλήση στο Service/Factory
-                services.AccountFactory.createAccount(selectedType, 0.0, user.getAfm()); 
-                // Εδώ κανονικά πρέπει να καλέσεις τον AccountManager για να το προσθέσει στη λίστα!
-                // π.χ. Account newAcc = AccountFactory...; 
-                // BankSystem.getInstance().getAccountManager().addAccount(newAcc);
-                // Αλλά ας υποθέσουμε ότι το κάνει ο Controller ή το Factory (ανάλογα την υλοποίηση σου).
-                // ΣΗΜΑΝΤΙΚΟ: Σώσε τα δεδομένα
+                 services.AccountFactory.createAccount(selectedType, 0.0, user.getAfm()); 
                 BankSystem.getInstance().getDaoHandler().saveAllData();
-                
+
                 JOptionPane.showMessageDialog(this, "Account Created Successfully!");
                 view.showDashboard(user);
             } catch (Exception ex) {
