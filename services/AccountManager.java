@@ -51,7 +51,6 @@ public class AccountManager {
         double interestRate = 0.001 / 365; 
         
         for (Account acc : accounts) {
-            // Υπολογισμός τόκου
             double interest = acc.getBalance() * interestRate;
             try {
                  acc.setBalance(acc.getBalance() + interest);

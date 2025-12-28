@@ -25,6 +25,21 @@ public class BankController {
     public void registerUser(String username, char[] password, String firstName, String lastName, String afm, String email, String phone) throws Exception {
         BankSystem.getInstance().getUserManager().registerCustomer(username, password, firstName, lastName, afm, email, phone);
     }
+    public void createAdmin(String username, char[] password, String fName, String lName, String email) throws Exception {
+        BankSystem.getInstance().getUserManager().registerAdmin(username, password, fName, lName, email);
+    }
+
+     
+ 
+    public void createCustomerByType(String username, char[] password, String fName, String lName, String afm, String email, String phone, String type) throws Exception {
+        if(type.equals("BUSINESS")) {
+            BankSystem.getInstance().getUserManager().registerCustomerBuisness(username, password, fName, lName, afm, email, phone);
+            return;
+        }
+        else{
+        BankSystem.getInstance().getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
+        }
+    }
 
  
     public List<Account> getAccountsForUser(User user) {

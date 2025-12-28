@@ -1,128 +1,144 @@
 package view;
 
-import model.User;
+import model.*;
 import services.BankSystem;
-import view.StyleHelpers.RoundedTextField;
-
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseMotionAdapter;
 
 public class DashboardPage extends JPanel {
 
     private BankBridge navigation;
     private User user;
-    
     private JPanel mainContentPanel; 
     private CardLayout cardLayout;   
 
     public DashboardPage(BankBridge navigation, User user) {
         this.navigation = navigation;
         this.user = user;
-
         setLayout(new BorderLayout());
 
-        // --- HEADER ---
+        // --- HEADER (Standard) ---
         JPanel headerPanel = new JPanel(new BorderLayout()) {
             Image bg = new ImageIcon("services/background.jpg").getImage();
             @Override protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (bg != null) g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+                if(bg!=null) g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        headerPanel.setPreferredSize(new Dimension(1000, 250));
-        headerPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
+        headerPanel.setPreferredSize(new Dimension(1000, 150));
+        headerPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 
+        // Welcome Box
+        JPanel welcomeBox = new StyleHelpers.RoundedPanel(20, StyleHelpers.BUTTON_YELLOW);
+        welcomeBox.add(new JLabel("Welcome, " + user.getFirstName() + " (" + user.getRole() + ")"));
         
-        JPanel welcomeWraper = new JPanel(new FlowLayout(FlowLayout.LEFT,0,10));
-        welcomeWraper.setOpaque(false);
+        JButton logoutBtn = StyleHelpers.createRoundedButton("Log Out");
+        logoutBtn.addActionListener(e -> navigation.showLogin());
 
-        StyleHelpers.RoundedPanel box = new StyleHelpers.RoundedPanel(30, StyleHelpers.BUTTON_YELLOW);
-        box.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
-        
-        
-        JButton welcomeButton = StyleHelpers.createRoundedButton(user.getFirstName()+" "+user.getLastName());
-        JPopupMenu exitMenu = new JPopupMenu("Popup");
-        JMenuItem exItem = new JMenuItem("Log Out"){
-            @Override protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(getBackground());
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-                g2.dispose();
-                super.paintComponent(g);
-            };};
+        JPanel leftHeader = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+        leftHeader.setOpaque(false);
+        leftHeader.add(welcomeBox);
+        leftHeader.add(logoutBtn);
 
-        exItem.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        exItem.setBackground(new Color(255, 180, 0));
-        exItem.setFocusPainted(false);
-        exItem.setContentAreaFilled(false);
-        exItem.setBorderPainted(false);
-        exItem.setBorder(new EmptyBorder(8, 20, 8, 20));
-        exItem.setCursor(new Cursor(Cursor.HAND_CURSOR));
-         
-        exitMenu.add(exItem);
-
-        box.add(welcomeButton);
-        welcomeWraper.add(box);
+        // --- NAVIGATION BUTTONS (DYNAMIC) ---
         JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         navPanel.setOpaque(false);
 
-
-        
-        JButton homeBtn = StyleHelpers.createRoundedButton("Home");
-        JButton historyBtn = StyleHelpers.createRoundedButton("History");
-        JButton transferBtn = StyleHelpers.createRoundedButton("Transfer");
-        JButton payBtn = StyleHelpers.createRoundedButton("Payment");
-        JButton soBtn = StyleHelpers.createRoundedButton("Standing Orders");
-        JButton wdBtn = StyleHelpers.createRoundedButton("Withdraw");
-        JButton depBtn = StyleHelpers.createRoundedButton("Deposit");
-
-        navPanel.add(homeBtn); navPanel.add(payBtn); navPanel.add(soBtn); 
-        navPanel.add(historyBtn); navPanel.add(transferBtn); navPanel.add(wdBtn); navPanel.add(depBtn);
-
-
-
-        headerPanel.add(welcomeWraper, BorderLayout.WEST);
-        headerPanel.add(navPanel, BorderLayout.EAST);
-        add(headerPanel, BorderLayout.NORTH);
-
-        // --- CONTENT ---
+        // --- CONTENT PANEL ---
         cardLayout = new CardLayout();
         mainContentPanel = new JPanel(cardLayout);
         mainContentPanel.setBackground(StyleHelpers.MUSTARD_BG);
+
+        // --- ROLE BASED UI CONSTRUCTION ---
         
+        if (user instanceof SuperAdmin) {
+            // === SUPER ADMIN ===
+            JButton manageAdminsBtn = StyleHelpers.createRoundedButton("Manage Admins");
+            JButton createAdminBtn = StyleHelpers.createRoundedButton("Create Admin");
+            
+            navPanel.add(manageAdminsBtn);
+            navPanel.add(createAdminBtn);
+            
+            // Panels
+            List<User> admins = BankSystem.getInstance().getUserManager().getAdmins();
+            mainContentPanel.add(new UserManagementPanel(admins), "MANAGE_ADMINS");
+            mainContentPanel.add(new EmbeddedRegisterPanel("ADMIN"), "CREATE_ADMIN"); // Χρειάζεται μικρή προσαρμογή στο Embedded για Admin πεδία αν διαφέρουν
+
+            manageAdminsBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_ADMINS"));
+            createAdminBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "CREATE_ADMIN"));
+            
+            manageAdminsBtn.doClick();
+
+        } else if (user instanceof Admin) {
+            // === ADMIN ===
+            JButton manageCustBtn = StyleHelpers.createRoundedButton("Manage Customers");
+            JButton newIndivBtn = StyleHelpers.createRoundedButton("New Individual");
+            JButton newBizBtn = StyleHelpers.createRoundedButton("New Business");
+            JButton depositBtn = StyleHelpers.createRoundedButton("Deposit Cash");
+
+            navPanel.add(manageCustBtn);
+            navPanel.add(newIndivBtn);
+            navPanel.add(newBizBtn);
+            navPanel.add(depositBtn);
+
+            // Panels
+            List<User> customers = BankSystem.getInstance().getUserManager().getCustomers();
+            mainContentPanel.add(new UserManagementPanel(customers), "MANAGE_CUST");
+            mainContentPanel.add(new EmbeddedRegisterPanel("PERSONAL"), "NEW_INDIV");
+            mainContentPanel.add(new EmbeddedRegisterPanel("BUSINESS"), "NEW_BIZ");
+            mainContentPanel.add(new DepositPanel(), "DEPOSIT");
+
+            manageCustBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_CUST"));
+            newIndivBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_INDIV"));
+            newBizBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_BIZ"));
+            depositBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "DEPOSIT"));
+            
+            manageCustBtn.doClick();
+
+        } else if (user instanceof Customer) {
+            // === CUSTOMER ===
+            JButton homeBtn = StyleHelpers.createRoundedButton("Home");
+            JButton transferBtn = StyleHelpers.createRoundedButton("Transfer");
+            JButton payBtn = StyleHelpers.createRoundedButton("Payment");
+            JButton soBtn = StyleHelpers.createRoundedButton("Standing Orders");
+            JButton myAccBtn = StyleHelpers.createRoundedButton("New Account"); // Embedded Create Account
+            
+            navPanel.add(homeBtn);
+            navPanel.add(transferBtn);
+            navPanel.add(payBtn);
+            navPanel.add(soBtn);
+            navPanel.add(myAccBtn);
+
+            // Business Only Feature
+            if (user.getRole().contains("BUSINESS") || user instanceof model.Customer && /* check business logic */ false) { 
+                // Ελέγξτε αν έχετε διαχωρίσει το Business ως class ή ως AccountType. 
+                // Αν ο χρήστης έχει Business account:
+                JButton billBtn = StyleHelpers.createRoundedButton("Create Bill");
+                navPanel.add(billBtn);
+                mainContentPanel.add(new CreateBillPanel(user), "CREATE_BILL");
+                billBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "CREATE_BILL"));
+            }
+
+            // Panels
+            mainContentPanel.add(new HomePanel(user, navigation), "HOME");
+            mainContentPanel.add(new TransferPanel(user, "TRANSFER"), "TRANSFER");
+            mainContentPanel.add(new TransferPanel(user, "PAYMENT"), "PAYMENT");
+            mainContentPanel.add(new StandingOrderPanel(user), "SO");
+            mainContentPanel.add(new CreateAccountPanel(user), "NEW_ACC"); // Χρησιμοποιούμε Panel αντί για Frame
+
+            homeBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "HOME"));
+            transferBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "TRANSFER"));
+            payBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "PAYMENT"));
+            soBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "SO"));
+            myAccBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_ACC"));
+            
+            homeBtn.doClick();
+        }
+
+        headerPanel.add(leftHeader, BorderLayout.WEST);
+        headerPanel.add(navPanel, BorderLayout.EAST);
+        add(headerPanel, BorderLayout.NORTH);
         add(mainContentPanel, BorderLayout.CENTER);
-
-        // --- ACTIONS ---
-        // Κάθε φορά φτιάχνουμε νέο Panel για να έχουμε φρέσκα δεδομένα
-        homeBtn.addActionListener(e -> loadPanel("HOME", new HomePanel(user, navigation)));
-        historyBtn.addActionListener(e -> loadPanel("HISTORY", new HistoryPanel(user)));
-        transferBtn.addActionListener(e -> loadPanel("TRANSFER", new TransferPanel(user, "TRANSFER")));
-        payBtn.addActionListener(e -> loadPanel("PAYMENT", new TransferPanel(user, "PAYMENT")));
-        wdBtn.addActionListener(e -> loadPanel("WITHDRAW", new TransferPanel(user, "WITHDRAW")));
-        depBtn.addActionListener(e -> loadPanel("DEPOSIT", new TransferPanel(user, "DEPOSIT")));
-        soBtn.addActionListener(e -> loadPanel("SO", new StandingOrderPanel(user)));
-        welcomeButton.addActionListener(e->showExit(exitMenu,mainContentPanel));
-        exItem.addActionListener(e->navigation.showLogin());
-         // Start at Home
-        homeBtn.doClick();
     }
-
-    
-    private void loadPanel(String name, JPanel panel) {
-        mainContentPanel.removeAll();
-        mainContentPanel.add(panel, name);
-        cardLayout.show(mainContentPanel, name);
-        mainContentPanel.revalidate();
-        mainContentPanel.repaint();
-    }
-    private void showExit(JPopupMenu menu,JPanel panel){
-        Point cursorPos = MouseInfo.getPointerInfo().getLocation();
-         SwingUtilities.convertPointFromScreen(cursorPos, panel);
-        menu.show(panel, cursorPos.x, cursorPos.y);
-        menu.setVisible(true);       
-    }
-
 }

@@ -139,7 +139,7 @@ public class BankView extends JFrame implements BankBridge {
 
     @Override
     public void showCreateAccountConfirmation(User user) {
-        CreateAccountPage createPage = new CreateAccountPage(this, user);
+        CreateAccountPanel createPage = new CreateAccountPanel(user);
         mainPanel.add(createPage, "CREATE_ACC_CONFIRM");
         cardLayout.show(mainPanel, "CREATE_ACC_CONFIRM");
         setTitle("Bank of TUC - Confirm Account Creation");

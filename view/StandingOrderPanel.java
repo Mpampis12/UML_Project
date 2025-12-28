@@ -10,6 +10,7 @@ import view.StyleHelpers.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList; // Χρειάζεται για τη λίστα καρτών
 import java.util.List;
 
 public class StandingOrderPanel extends JPanel {
@@ -26,14 +27,19 @@ public class StandingOrderPanel extends JPanel {
         setBorder(new EmptyBorder(20, 40, 20, 40));
 
         // LEFT: List
-        JPanel left = new JPanel(new BorderLayout()); left.setOpaque(false);
-        JLabel title = new JLabel("Orders"); title.setFont(StyleHelpers.FONT_TITLE);
+        JPanel left = new JPanel(new BorderLayout()); 
+        left.setOpaque(false);
+        JLabel title = new JLabel("Orders"); 
+        title.setFont(StyleHelpers.FONT_TITLE);
         left.add(title, BorderLayout.NORTH);
 
-        JPanel list = new JPanel(); list.setLayout(new BoxLayout(list, BoxLayout.Y_AXIS)); list.setOpaque(false);
+        JPanel listPanel = new JPanel(); 
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS)); 
+        listPanel.setOpaque(false);
+        
         List<StandingOrder> orders = controller.getStandingOrdersForUser(user);
 
-        // RIGHT: Form
+        // RIGHT: Form Components
         RoundedPanel formBox = new RoundedPanel(30, StyleHelpers.BOX_COLOR);
         formBox.setLayout(new GridBagLayout());
         JTextField fTarget = new RoundedTextField(15);
@@ -43,30 +49,42 @@ public class StandingOrderPanel extends JPanel {
         for(Account a : accounts) accBox.addItem(a.getIban());
         JButton saveBtn = StyleHelpers.createRoundedButton("Create New");
 
+        List<StandingOrderCard> cardList = new ArrayList<>();
+
         for(StandingOrder so : orders) {
-            RoundedPanel card = new RoundedPanel(20, StyleHelpers.CARD_COLOR);
-            card.setLayout(new BorderLayout()); card.setBorder(new EmptyBorder(10,10,10,10));
-            card.setMaximumSize(new Dimension(400, 60)); card.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            
-            card.add(new JLabel("<html><b>"+so.getDescription()+"</b><br>"+so.getAmount()+"€</html>"), BorderLayout.CENTER);
-            card.addMouseListener(new java.awt.event.MouseAdapter(){
-                public void mouseClicked(java.awt.event.MouseEvent e){
-                    fTarget.setText(so.getTarget().toString());
-                    fAmount.setText(String.valueOf(so.getAmount()));
-                    saveBtn.setText("Update");
+            StandingOrderCard card = new StandingOrderCard(so, selectedOrder -> {
+                // 1. Ενημέρωση της φόρμας δεξιά
+                fTarget.setText(selectedOrder.getTarget().toString());
+                fAmount.setText(String.valueOf(selectedOrder.getAmount()));
+                saveBtn.setText("Update");
+
+                // 2. Highlight Logic (Mutual Exclusion)
+                for (StandingOrderCard c : cardList) {
+                    if (c.getStandingOrder().equals(selectedOrder)) {
+                        c.setSelected(true);
+                    } else {
+                        c.setSelected(false);
+                    }
                 }
             });
-            list.add(card); list.add(Box.createVerticalStrut(10));
+            
+            cardList.add(card);
+            listPanel.add(card);
+            listPanel.add(Box.createVerticalStrut(10));
         }
+        // ---------------------------------------------
         
-        JScrollPane scroll = new JScrollPane(list);
-        scroll.getViewport().setOpaque(false); scroll.setOpaque(false); scroll.setBorder(null);
+        JScrollPane scroll = new JScrollPane(listPanel);
+        scroll.getViewport().setOpaque(false); 
+        scroll.setOpaque(false); 
+        scroll.setBorder(null);
         scroll.getVerticalScrollBar().setUI(new StyleHelpers.MyScrollBarUI());
         left.add(scroll, BorderLayout.CENTER);
 
-        // Build Right
+        // Build Right Form Layout
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets=new Insets(10,5,10,5); gbc.gridx=0; gbc.gridy=0;
+        gbc.insets=new Insets(10,5,10,5); 
+        gbc.gridx=0; gbc.gridy=0;
         formBox.add(StyleHelpers.createLabel("Source:"), gbc);
         gbc.gridx=1; formBox.add(accBox, gbc);
         gbc.gridx=0; gbc.gridy++; formBox.add(StyleHelpers.createLabel("Target:"), gbc);
@@ -82,10 +100,12 @@ public class StandingOrderPanel extends JPanel {
                         Double.parseDouble(fAmount.getText()), "Monthly", StandingOrder.StandingOrderPurpose.TRANSFER);
                controller.createStandingOrder(so);
                JOptionPane.showMessageDialog(this, "Saved!");
+               // Εδώ ιδανικά θα έπρεπε να κάνεις refresh τη λίστα αριστερά
             } catch(Exception ex) { JOptionPane.showMessageDialog(this, "Error"); }
         });
 
-        JPanel rightWrap = new JPanel(new GridBagLayout()); rightWrap.setOpaque(false);
+        JPanel rightWrap = new JPanel(new GridBagLayout()); 
+        rightWrap.setOpaque(false);
         rightWrap.add(formBox);
         
         add(left); add(rightWrap);

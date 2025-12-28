@@ -49,6 +49,10 @@ public class HomePanel extends JPanel {
         JPanel accountsContainer = new JPanel();
         accountsContainer.setLayout(new BoxLayout(accountsContainer, BoxLayout.Y_AXIS));
         accountsContainer.setOpaque(false);
+        JButton addAccountBtn = StyleHelpers.createRoundedButton("Add Account");
+        addAccountBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addAccountBtn.addActionListener(e -> navigation.showCreateAccountConfirmation(user));
+        accountsContainer.add(addAccountBtn);
         
         for (Account acc : accounts) {
             accountsContainer.add(new AccountCard(acc));
@@ -119,7 +123,7 @@ public class HomePanel extends JPanel {
             add(top, BorderLayout.NORTH);
 
             JButton copyBtn = StyleHelpers.createRoundedButton("Copy");
-            copyBtn.setPreferredSize(new Dimension(60, 25));
+            copyBtn.setPreferredSize(new Dimension(80, 25));
             copyBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
             copyBtn.addActionListener(e -> {
                  Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(acc.getIban()), null);
