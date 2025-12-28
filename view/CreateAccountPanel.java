@@ -6,6 +6,7 @@ import services.BankSystem;
 import model.User;
 import model.Account;
 import model.Customer;
+import model.Individual;
 
 public class CreateAccountPanel extends JPanel {
 
@@ -24,34 +25,30 @@ public class CreateAccountPanel extends JPanel {
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 22));
         lblTitle.setForeground(new Color(50, 50, 50));
 
-        JLabel lblMsg = new JLabel("Select Account Type:", SwingConstants.CENTER);
-        lblMsg.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-
-        // Επιλογή Τύπου
-        String[] types = {"PERSONAL", "BUSINESS"};
-        JComboBox<String> typeCombo = new JComboBox<>(types);
-        typeCombo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        typeCombo.setBackground(Color.WHITE);
-
+ 
+        
         // Κουμπί Επιβεβαίωσης
         JButton btnConfirm = StyleHelpers.createRoundedButton("Confirm & Create");
         
         // --- LOGIC ---
         btnConfirm.addActionListener(e -> {
             try {
-                String selectedType = (String) typeCombo.getSelectedItem();
-                String afm = user.getAfm();
+                String selectedType ;
+                if(user instanceof Individual){
+                      selectedType = "PERSONAL";
+                }
+                else{
+                      selectedType =  "BUSINESS";
+                }
+               String afm = user.getAfm();
 
-                // 1. Δημιουργία μέσω του AccountManager (που το αποθηκεύει στη λίστα του)
-                Account newAcc = BankSystem.getInstance().getAccountManager().createAccount(selectedType, 0.0, afm);
+                 Account newAcc = BankSystem.getInstance().getAccountManager().createAccount(selectedType, 0.0, afm);
 
-                // 2. Σύνδεση του λογαριασμού με τον Customer (ενημέρωση λίστας IBANs πελάτη)
-                if (user instanceof Customer) {
+                 if (user instanceof Customer) {
                     ((Customer) user).setNewAccountIban(newAcc.getIban());
                 }
 
-                // 3. Αποθήκευση στη βάση (JSON)
-                BankSystem.getInstance().getDaoHandler().saveAllData();
+                 BankSystem.getInstance().getDaoHandler().saveAllData();
 
                 JOptionPane.showMessageDialog(this, "Account Created Successfully!\nIBAN: " + newAcc.getIban());
                 
@@ -62,9 +59,7 @@ public class CreateAccountPanel extends JPanel {
 
         // Προσθήκη στο Card
         card.add(lblTitle);
-        card.add(lblMsg);
-        card.add(typeCombo);
-        card.add(new JLabel("")); // Spacer
+ 
         card.add(btnConfirm);
 
         add(card);

@@ -49,10 +49,10 @@ public class HomePanel extends JPanel {
         JPanel accountsContainer = new JPanel();
         accountsContainer.setLayout(new BoxLayout(accountsContainer, BoxLayout.Y_AXIS));
         accountsContainer.setOpaque(false);
-        JButton addAccountBtn = StyleHelpers.createRoundedButton("Add Account");
-        addAccountBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-        addAccountBtn.addActionListener(e -> navigation.showCreateAccountConfirmation(user));
-        accountsContainer.add(addAccountBtn);
+        // JButton addAccountBtn = StyleHelpers.createRoundedButton("Add Account");
+        // addAccountBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // addAccountBtn.addActionListener(e -> navigation.showCreateAccountConfirmation(user));
+        //accountsContainer.add(addAccountBtn);
         
         for (Account acc : accounts) {
             accountsContainer.add(new AccountCard(acc));

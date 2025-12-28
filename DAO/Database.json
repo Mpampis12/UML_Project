@@ -2,7 +2,12 @@
   "customers": [
     {
       "accountIbans": [
-        "GR423142219033336878"
+        "GR423142219033336878",
+        "GR557057717482482995",
+        "GR911239856551205807",
+        "GR257626675863269306",
+        "GR418046750118576479",
+        "GR093383416201542096"
       ],
       "username": "mpampis2",
       "password": "70fe24eac2f571b6ffa5ef274c26e0943bc2d55b100f9b01df3f161232065ba3",
@@ -10,7 +15,21 @@
       "lastName": "mpa",
       "afm": "123456777",
       "email": "s",
-      "phone": "s"
+      "phone": "s",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR476776530535762555"
+      ],
+      "username": "bus",
+      "password": "04e027e4990a203f4899f7e87c2d5ff6b9019e9565795619a59ce06c099560d4",
+      "firstName": "bus",
+      "lastName": "bus",
+      "afm": "bus",
+      "email": "bus",
+      "phone": "bus",
+      "type": "BUSINESS"
     }
   ],
   "admins": [
@@ -40,8 +59,118 @@
       "iban": {
         "ibanNumber": "GR423142219033336878"
       },
-      "balance": 0.0,
+      "balance": 4995.0,
       "creationDate": "28/12/2025 03:35:44",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-323AE4DE",
+          "amount": 5000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "timestamp": "28/12/2025 03:56:01"
+        },
+        {
+          "transactionID": "TX-5B99FEF5",
+          "amount": 5.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "28/12/2025 03:56:51"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR557057717482482995"
+      },
+      "balance": 5.0,
+      "creationDate": "28/12/2025 03:53:45",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-5B99FEF5",
+          "amount": 5.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "28/12/2025 03:56:51"
+        }
+      ],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR476776530535762555"
+      },
+      "balance": 0.0,
+      "creationDate": "28/12/2025 03:54:36",
+      "owners": [
+        "bus"
+      ],
+      "transactionList": [],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR911239856551205807"
+      },
+      "balance": 0.0,
+      "creationDate": "28/12/2025 04:03:55",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR257626675863269306"
+      },
+      "balance": 0.0,
+      "creationDate": "28/12/2025 04:03:56",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR418046750118576479"
+      },
+      "balance": 0.0,
+      "creationDate": "28/12/2025 04:03:57",
+      "owners": [
+        "123456777"
+      ],
+      "transactionList": [],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR093383416201542096"
+      },
+      "balance": 0.0,
+      "creationDate": "28/12/2025 04:03:58",
       "owners": [
         "123456777"
       ],
