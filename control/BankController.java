@@ -4,8 +4,12 @@ import services.BankSystem;
 import services.TransactionManager;
 import model.User;
 import model.Account;
+import model.Bill;
 import model.StandingOrder;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public class BankController {
 
@@ -69,14 +73,31 @@ public class BankController {
         saveData();
     }
 
-    // --- 4. BILL PAYMENTS ---
+ public void deleteStandingOrder(StandingOrder order) {
+        BankSystem.getInstance().getStandingOrderManager().deleteOrder(order);
+        saveData();
+    }
+public String createBill(String targetIban, String businessAfm, double amount, String description, String payerAfm) {
+        // Δημιουργία τυχαίου RF Code
+        String rfCode = "RF" + Math.abs(UUID.randomUUID().getMostSignificantBits());
+        rfCode = rfCode.substring(0, 12); 
+
+        LocalDate expireDate = LocalDate.now().plusDays(30);
+
+        // Περνάμε το targetIban στον Constructor
+        Bill newBill = new Bill(rfCode, targetIban, amount, description, businessAfm, expireDate);
+        
+        if (payerAfm != null && !payerAfm.isEmpty()) {
+            newBill.setPayerAfm(payerAfm); 
+        }
+
+        BankSystem.getInstance().getBillManager().addBill(newBill);
+        saveData(); // Αποθήκευση στη βάση
+        return rfCode;
+    }
+
     public void payBill(String rfCode, String payerIban, String payerAfm) throws Exception {
-        BankSystem.getInstance().getBillManager().payBill(
-            rfCode, 
-            payerIban, 
-            payerAfm, 
-            transactionManager
-        );
+        BankSystem.getInstance().getBillManager().payBill(rfCode, payerIban, payerAfm, transactionManager);
         saveData();
     }
 
@@ -87,7 +108,7 @@ public class BankController {
     }
 
     // --- UTILS ---
-    private void saveData() {
+    public void saveData() {
         try {
              BankSystem.getInstance().getDaoHandler().saveAllData();
         } catch (Exception e) {

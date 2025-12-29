@@ -69,4 +69,7 @@ public class StandingOrderManager {
     public void setOrders(List<StandingOrder> orders) {
             this.orders = orders;
     }
+    public void deleteOrder(StandingOrder order) {
+        orders.remove(order);
+     }
 }

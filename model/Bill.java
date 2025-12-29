@@ -9,7 +9,7 @@ public class Bill {
     private String description;
     private LocalDate dateOfIssue;
     private LocalDate expireDate;
-
+    private String targetIban;
     private String buisinessAfm;
     private String payerAfm;
     private Status billStatus;
@@ -89,7 +89,7 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(String rfCode, double amount, String description, String buisinessAfm, LocalDate expireDate) {
+    public Bill(String rfCode, String targetIban, double amount, String description, String buisinessAfm, LocalDate expireDate) {
         this.rfCode = rfCode;
         this.amount = amount;
         this.description = description;
@@ -98,9 +98,12 @@ public class Bill {
         this.expireDate = expireDate;
         this.billStatus = Status.PENDING;  
         this.payerAfm = null;
+        this.targetIban = targetIban;
     }
      public void pay(String payerAfm) {
         this.billStatus = Status.PAID;
         this.payerAfm = payerAfm;
     }
+    public String getTargetIban() { return targetIban; }  
+    public void setTargetIban(String targetIban) { this.targetIban = targetIban; }
 }

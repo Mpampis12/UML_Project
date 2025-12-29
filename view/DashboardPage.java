@@ -76,11 +76,13 @@ public class DashboardPage extends JPanel {
             JButton newIndivBtn = StyleHelpers.createRoundedButton("New Individual");
             JButton newBizBtn = StyleHelpers.createRoundedButton("New Business");
             JButton depositBtn = StyleHelpers.createRoundedButton("Deposit Cash");
+            JButton withdrawBtn = StyleHelpers.createRoundedButton("Withdraw Cash");
 
             navPanel.add(manageCustBtn);
             navPanel.add(newIndivBtn);
             navPanel.add(newBizBtn);
             navPanel.add(depositBtn);
+            navPanel.add(withdrawBtn);
 
             // Panels
             List<User> customers = BankSystem.getInstance().getUserManager().getCustomers();
@@ -88,11 +90,13 @@ public class DashboardPage extends JPanel {
             mainContentPanel.add(new EmbeddedRegisterPanel("PERSONAL"), "NEW_INDIV");
             mainContentPanel.add(new EmbeddedRegisterPanel("BUSINESS"), "NEW_BIZ");
             mainContentPanel.add(new DepositPanel(), "DEPOSIT");
+            mainContentPanel.add(new WithdrawPanel(), "WITHDRAW");
 
             manageCustBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_CUST"));
             newIndivBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_INDIV"));
             newBizBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_BIZ"));
             depositBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "DEPOSIT"));
+            withdrawBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "WITHDRAW"));
             
             manageCustBtn.doClick();
 

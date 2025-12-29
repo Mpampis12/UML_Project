@@ -27,7 +27,11 @@ public class BankSystem {
         this.billManager = new BillManager();
         this.standingOrderManager = new StandingOrderManager();
         this.timeSimulator = new TimeSimulator();
-        
+        this.timeSimulator.setDateChangeListener(newDate -> {
+             standingOrderManager.executeDailyOrders(newDate, transactionManager, billManager);
+            
+             daoHandler.saveAllData(); 
+        });
         this.transactionManager = new TransactionManager(this.accountManager);
         this.daoHandler= DAO.DaoHandler.getInstance();
         this.bankApiService = new BankApiService();

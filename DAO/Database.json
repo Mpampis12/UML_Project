@@ -30,6 +30,45 @@
       "email": "bus",
       "phone": "bus",
       "type": "BUSINESS"
+    },
+    {
+      "accountIbans": [
+        "GR676290463373826128"
+      ],
+      "username": "mpampis3",
+      "password": "70fe24eac2f571b6ffa5ef274c26e0943bc2d55b100f9b01df3f161232065ba3",
+      "firstName": "mpampis3",
+      "lastName": "mpampis3",
+      "afm": "mpampis3",
+      "email": "mpampis3",
+      "phone": "mpampis3",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR811288288767840753"
+      ],
+      "username": "",
+      "password": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "firstName": "",
+      "lastName": "",
+      "afm": "",
+      "email": "",
+      "phone": "",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR824223436936928208"
+      ],
+      "username": "11",
+      "password": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+      "firstName": "",
+      "lastName": "",
+      "afm": "1111111111111111",
+      "email": "",
+      "phone": "",
+      "type": "INDIVIDUAL"
     }
   ],
   "admins": [
@@ -59,7 +98,7 @@
       "iban": {
         "ibanNumber": "GR423142219033336878"
       },
-      "balance": 4995.0,
+      "balance": 4040.0,
       "creationDate": "28/12/2025 03:35:44",
       "owners": [
         "123456777"
@@ -87,6 +126,42 @@
             "ibanNumber": "GR557057717482482995"
           },
           "timestamp": "28/12/2025 03:56:51"
+        },
+        {
+          "transactionID": "TX-89797CC3",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Payment of Bill RF: RF7135087448",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "timestamp": "28/12/2025 04:24:08"
+        },
+        {
+          "transactionID": "TX-1863B220",
+          "amount": 900.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "29/12/2025 01:47:57"
+        },
+        {
+          "transactionID": "TX-C70D0C71",
+          "amount": 5.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "29/12/2025 02:10:14"
         }
       ],
       "type": "PERSONAL"
@@ -95,7 +170,7 @@
       "iban": {
         "ibanNumber": "GR557057717482482995"
       },
-      "balance": 5.0,
+      "balance": 405.0,
       "creationDate": "28/12/2025 03:53:45",
       "owners": [
         "123456777"
@@ -113,6 +188,55 @@
             "ibanNumber": "GR557057717482482995"
           },
           "timestamp": "28/12/2025 03:56:51"
+        },
+        {
+          "transactionID": "TX-81FAFD16",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Withdrawal via App",
+          "source": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "28/12/2025 06:39:08"
+        },
+        {
+          "transactionID": "TX-1863B220",
+          "amount": 900.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "29/12/2025 01:47:57"
+        },
+        {
+          "transactionID": "TX-842BB6EE",
+          "amount": 500.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "target": {
+            "ibanNumber": "GR676290463373826128"
+          },
+          "timestamp": "29/12/2025 01:49:58"
+        },
+        {
+          "transactionID": "TX-C70D0C71",
+          "amount": 5.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR423142219033336878"
+          },
+          "target": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "timestamp": "29/12/2025 02:10:14"
         }
       ],
       "type": "BUSINESS"
@@ -121,12 +245,23 @@
       "iban": {
         "ibanNumber": "GR476776530535762555"
       },
-      "balance": 0.0,
+      "balance": 50.0,
       "creationDate": "28/12/2025 03:54:36",
       "owners": [
         "bus"
       ],
-      "transactionList": [],
+      "transactionList": [
+        {
+          "transactionID": "TX-10BEA9E1",
+          "amount": 50.0,
+          "type": "DEPOSIT",
+          "description": "Bill Payment Received RF: RF7135087448 from 123456777",
+          "source": {
+            "ibanNumber": "GR476776530535762555"
+          },
+          "timestamp": "28/12/2025 04:24:08"
+        }
+      ],
       "type": "BUSINESS"
     },
     {
@@ -176,8 +311,111 @@
       ],
       "transactionList": [],
       "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR676290463373826128"
+      },
+      "balance": 500.0,
+      "creationDate": "29/12/2025 01:49:16",
+      "owners": [
+        "mpampis3"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-842BB6EE",
+          "amount": 500.0,
+          "type": "TRANSFER",
+          "description": "Transfer via App",
+          "source": {
+            "ibanNumber": "GR557057717482482995"
+          },
+          "target": {
+            "ibanNumber": "GR676290463373826128"
+          },
+          "timestamp": "29/12/2025 01:49:58"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR811288288767840753"
+      },
+      "balance": 0.0,
+      "creationDate": "29/12/2025 02:53:02",
+      "owners": [
+        ""
+      ],
+      "transactionList": [],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR824223436936928208"
+      },
+      "balance": 0.0,
+      "creationDate": "29/12/2025 03:03:19",
+      "owners": [
+        "1111111111111111"
+      ],
+      "transactionList": [],
+      "type": "PERSONAL"
     }
   ],
-  "bills": [],
-  "standingOrders": []
+  "bills": [
+    {
+      "rfCode": "RF7135087448",
+      "amount": 50.0,
+      "description": "dd",
+      "dateOfIssue": "28/12/2025",
+      "expireDate": "05/01/2026",
+      "targetIban": "GR476776530535762555",
+      "buisinessAfm": "bus",
+      "payerAfm": "123456777",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF7135087449",
+      "amount": 50.0,
+      "description": "dd",
+      "dateOfIssue": "25/12/2025",
+      "expireDate": "06/01/2026",
+      "targetIban": "GR476776530535762555",
+      "buisinessAfm": "bus",
+      "payerAfm": "123456777",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF1704593844",
+      "amount": 1.0,
+      "description": "",
+      "dateOfIssue": "28/12/2025",
+      "expireDate": "27/01/2026",
+      "targetIban": "GR476776530535762555",
+      "buisinessAfm": "bus",
+      "billStatus": "PENDING"
+    }
+  ],
+  "standingOrders": [
+    {
+      "standinID": "6a7a2c5",
+      "amount": 90.0,
+      "description": "Monthly Transfer",
+      "source": {
+        "ibanNumber": "GR423142219033336878"
+      },
+      "target": {
+        "ibanNumber": "GR476776530535762555"
+      },
+      "targetRfCode": "-",
+      "dayOfMonth": 1,
+      "nexTime": "01/01/2026 03:41:32",
+      "expiredDay": "28/12/2026 06:56:21",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    }
+  ]
 }

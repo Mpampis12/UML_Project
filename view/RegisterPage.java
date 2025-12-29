@@ -1,153 +1,94 @@
 package view;
 
 import services.BankSystem;
+import control.BankController;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import view.StyleHelpers.*;
 
 public class RegisterPage extends JPanel {
 
-    private JTextField userField, firstNameField, lastNameField, afmField, emailField, phoneField;
-    private JPasswordField passField;
     private BankBridge navigation;
-    private Image backgroundImage;
+    private BankController controller;
 
     public RegisterPage(BankBridge navigation) {
         this.navigation = navigation;
+        this.controller = new BankController();
 
-        // 1. ΦΟΡΤΩΣΗ ΕΙΚΟΝΑΣ (ίδια με το Login)
-        try {
-            backgroundImage = new ImageIcon("services/background.jpg").getImage();
-        } catch (Exception e) {
-            System.out.println("Background image not found!");
-        }
+        setLayout(new BorderLayout());
 
-        setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 10, 5, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // --- ΤΙΤΛΟΣ ---
-        JLabel title = new JLabel("Create Account", SwingConstants.CENTER);
-        title.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        title.setForeground(Color.WHITE);
-        // Σκιά γύρω από τα γράμματα (Hack για να διαβάζεται στο φόντο)
-        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
-        
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
-        add(title, gbc);
-
-        // --- ΠΕΔΙΑ ---
-        gbc.gridwidth = 1;
-        int row = 1;
-        
-        // Χρησιμοποιούμε τη μέθοδο για τα γκρι χάπια
-        add(createRoundedPanel("Name:", firstNameField = new JTextField()), gbc, 0, row++);
-        add(createRoundedPanel("Surname:", lastNameField = new JTextField()), gbc, 0, row++);
-        add(createRoundedPanel("AFM:", afmField = new JTextField()), gbc, 0, row++);
-        add(createRoundedPanel("Email:", emailField = new JTextField()), gbc, 0, row++);
-        add(createRoundedPanel("Phone:", phoneField = new JTextField()), gbc, 0, row++);
-        add(createRoundedPanel("Username:", userField = new JTextField()), gbc, 0, row++);
-        
-        passField = new JPasswordField();
-        add(createRoundedPanel("Password:", passField), gbc, 0, row++);
-
-        // --- ΚΟΥΜΠΙΑ ---
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
-        btnPanel.setOpaque(false); // Διάφανο για να φαίνεται η εικόνα
-
-        JButton registerBtn = createButton("Register", new Color(0, 102, 204));
-        registerBtn.addActionListener(e -> performRegister());
-
-        JButton backBtn = createButton("Back", new Color(100, 100, 100));
-        backBtn.addActionListener(e -> navigation.showLogin());
-
-        btnPanel.add(registerBtn);
-        btnPanel.add(backBtn);
-
-        gbc.gridy = row;
-        gbc.insets = new Insets(20, 10, 10, 10);  
-        add(btnPanel, gbc);
-    }
-
-    // --- ΖΩΓΡΑΦΙΣΜΑ ΦΟΝΤΟΥ ---
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (backgroundImage != null) {
-            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        }
-    }
-
-    // --- LOGIC ΕΓΓΡΑΦΗΣ ---
-    private void performRegister() {
-        try {
-            if(userField.getText().isBlank()||passField.getPassword().toString().isBlank()||firstNameField.getText().isBlank()||lastNameField.getText().isBlank()|| afmField.getText().isBlank()){
-                JOptionPane.showMessageDialog(this, "Error: " , "Registration Failed", JOptionPane.ERROR_MESSAGE);
-                navigation.showLogin();
-                return;
-            }
-            BankSystem.getInstance().getUserManager().registerCustomer(
-                userField.getText(),
-                passField.getPassword(),
-                firstNameField.getText(),
-                lastNameField.getText(),
-                afmField.getText(),
-                emailField.getText(),
-                phoneField.getText()
-            );
-
-            JOptionPane.showMessageDialog(this, "Registration Successful! Please Login.");
-            navigation.showLogin();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Registration Failed", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    // --- ΒΟΗΘΗΤΙΚΕΣ ΜΕΘΟΔΟΙ (ΙΔΙΕΣ ΜΕ LOGIN) ---
-    private void add(Component comp, GridBagConstraints gbc, int x, int y) {
-        gbc.gridx = x; gbc.gridy = y;
-        add(comp, gbc);
-    }
-
-    private JPanel createRoundedPanel(String labelText, JTextField inputField) {
-        JPanel panel = new JPanel() {
+        JPanel bgPanel = new JPanel(new GridBagLayout()) { 
+            Image bg = new ImageIcon("services/background.jpg").getImage();
             @Override
             protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(new Color(230, 230, 230)); 
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+                super.paintComponent(g);
+                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        panel.setOpaque(false);
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 8));
-        panel.setPreferredSize(new Dimension(380, 45)); 
+        add(bgPanel, BorderLayout.CENTER);
 
-        JLabel label = new JLabel(labelText);
-        label.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        label.setForeground(new Color(50, 50, 50));
-        label.setPreferredSize(new Dimension(80, 25));  
+        RoundedPanel regBox = new RoundedPanel(40, new Color(255, 255, 255, 230));
+        regBox.setLayout(new BorderLayout(0, 20)); // BorderLayout για δομή
+        regBox.setBorder(new EmptyBorder(30, 40, 30, 40));
+        
+        // Title
+        JLabel title = new JLabel("Create Account");
+        title.setFont(StyleHelpers.FONT_TITLE);
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        regBox.add(title, BorderLayout.NORTH);
 
-        inputField.setOpaque(false);
-        inputField.setBorder(null);
-        inputField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        inputField.setForeground(Color.BLACK);
-        inputField.setPreferredSize(new Dimension(250, 25));
+        // Form Panel (ΑΛΛΑΓΗ ΣΕ GridLayout)
+        JPanel formPanel = new JPanel(new GridLayout(0, 2, 15, 15)); // 2 στήλες, κενά ανάμεσα
+        formPanel.setOpaque(false);
 
-        panel.add(label);
-        panel.add(inputField);
-        return panel;
-    }
+        JTextField fUser = new RoundedTextField(15);
+        JTextField fPass = new RoundedTextField(15);
+        
+        JTextField fName = new RoundedTextField(15);
+        JTextField fLast = new RoundedTextField(15);
+        JTextField fAfm = new RoundedTextField(15);
+        JTextField fEmail = new RoundedTextField(15);
+        JTextField fPhone = new RoundedTextField(15);
 
-    private JButton createButton(String text, Color color) {
-        JButton btn = new JButton(text);
-        btn.setPreferredSize(new Dimension(130, 40));
-        btn.setBackground(color);
-        btn.setForeground(Color.WHITE);
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btn.setFocusPainted(false);
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return btn;
+        formPanel.add(StyleHelpers.createLabel("Username:")); formPanel.add(fUser);
+        formPanel.add(StyleHelpers.createLabel("Password:")); formPanel.add(fPass);
+        formPanel.add(StyleHelpers.createLabel("First Name:")); formPanel.add(fName);
+        formPanel.add(StyleHelpers.createLabel("Last Name:")); formPanel.add(fLast);
+        formPanel.add(StyleHelpers.createLabel("AFM:")); formPanel.add(fAfm);
+        formPanel.add(StyleHelpers.createLabel("Email:")); formPanel.add(fEmail);
+        formPanel.add(StyleHelpers.createLabel("Phone:")); formPanel.add(fPhone);
+
+        regBox.add(formPanel, BorderLayout.CENTER);
+
+        // Buttons Panel
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        btnPanel.setOpaque(false);
+        
+        JButton submitBtn = StyleHelpers.createRoundedButton("Register");
+        JButton backBtn =  StyleHelpers.createRoundedButton("Back to Login");
+
+        btnPanel.add(submitBtn);
+        btnPanel.add(backBtn);
+
+        regBox.add(btnPanel, BorderLayout.SOUTH);
+        bgPanel.add(regBox);
+
+        // Logic
+        submitBtn.addActionListener(e -> {
+            try {
+                controller.registerUser(
+                    fUser.getText(), fPass.getText().toCharArray(),
+                    fName.getText(), fLast.getText(),
+                    fAfm.getText(), fEmail.getText(), fPhone.getText()
+                );
+                JOptionPane.showMessageDialog(this, "Registration Successful!");
+                navigation.showLogin();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            }
+        });
+
+        backBtn.addActionListener(e -> navigation.showLogin());
     }
 }
