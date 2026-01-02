@@ -1,7 +1,7 @@
 package services;
 
 import model.Bill;
-import model.Bill.Status; // Σιγουρέψου ότι το Status είναι public στο Bill
+import model.Bill.Status;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,38 +27,43 @@ public class BillManager {
         return null;
     }
 
-    public List<Bill> getAllBills() {
-        return bills;
-    }
+    public List<Bill> getAllBills() { return bills; }
+    public void setBills(List<Bill> bills) { this.bills = bills; }
  
     public void payBill(String rfCode, String payerIban, String payerAfm, TransactionManager tm) throws Exception {
         
-         Bill bill = getBillByRf(rfCode);
+        Bill bill = getBillByRf(rfCode);
         
         if (bill == null) {
             throw new Exception("Bill RF " + rfCode + " not found.");
         }
 
-         if (bill.getBillStatus() == Status.PAID) {
-            throw new Exception("bill already paid");
+        if (bill.getBillStatus() == Status.PAID) {
+            throw new Exception("Bill already paid");
         }
+         
+         
+        tm.withdraw(payerIban, bill.getAmount(), "Payment of Bill RF: " + rfCode,BankSystem.getInstance().getTimeSimulator().getCurrentDate());
  
-        tm.withdraw(payerIban, bill.getAmount(), "Payment of Bill RF: " + rfCode);
+        tm.deposit(bill.getTargetIban(), bill.getAmount(), "Bill Payment Received RF: " + rfCode + " from " + payerAfm,BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
 
-         bill.pay(payerAfm);
+      
+        bill.pay(payerAfm);
+        markAsPaid(rfCode,payerAfm);
         
         System.out.println("Bill " + rfCode + " paid successfully by " + payerAfm);
     }
-
-    public void markAsPaid(String rfCode, String payerAfm) {
-        Bill b = getBillByRf(rfCode);
-        if (b != null) {
-            b.pay(payerAfm);  
-            System.out.println("Bill " + rfCode + " marked as PAID.");
+    public void markAsPaid(String targetRfCode, String payerAfm) {
+        // 1. Βρες τον λογαριασμό στη λίστα
+        Bill bill = getBillByRf(targetRfCode);
+        
+        // 2. Αν υπάρχει, άλλαξε την κατάστασή του
+        if (bill != null) {
+            bill.pay(payerAfm); // Θέτει status = PAID και αποθηκεύει το payerAfm
+            System.out.println("Bill " + targetRfCode + " marked as PAID manually.");
+        } else {
+            System.err.println("Bill with RF " + targetRfCode + " not found.");
         }
-    }
-    public void setBills(List<Bill> bills) {
-        this.bills = bills;
     }
     
 }

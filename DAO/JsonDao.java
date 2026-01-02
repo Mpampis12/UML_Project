@@ -1,12 +1,6 @@
 package DAO;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializer;
-import com.google.gson.reflect.TypeToken;
-
+import com.google.gson.*;
 import model.*;
 
 import java.io.*;
@@ -26,16 +20,54 @@ public class JsonDao {
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    // --- CUSTOM ADAPTER ΓΙΑ ΤΟΝ CUSTOMER ---
+    // Αυτό επιτρέπει στο GSON να καταλαβαίνει πότε να φτιάχνει Individual και πότε Business
+    private static final JsonSerializer<Customer> customerSerializer = (src, typeOfSrc, context) -> {
+        JsonObject jsonObject = context.serialize(src, src.getClass()).getAsJsonObject();
+        // Προσθέτουμε ένα πεδίο "type" για να ξέρουμε τι είναι όταν το ξαναδιαβάσουμε
+        jsonObject.addProperty("type", src instanceof Business ? "BUSINESS" : "INDIVIDUAL");
+        return jsonObject;
+    };
+
+    private static final JsonDeserializer<Customer> customerDeserializer = (json, typeOfT, context) -> {
+        JsonObject jsonObject = json.getAsJsonObject();
+        String type = "INDIVIDUAL"; // Default για συμβατότητα με τα παλιά δεδομένα
+
+        // 1. Έλεγχος για το νέο πεδίο "type"
+        if (jsonObject.has("type")) {
+            type = jsonObject.get("type").getAsString();
+        } 
+        // 2. Έλεγχος για το παλιό πεδίο "userRoleString" (Legacy Support)
+        else if (jsonObject.has("userRoleString")) {
+            String role = jsonObject.get("userRoleString").getAsString();
+            if ("BUSINESS".equals(role)) type = "BUSINESS";
+        }
+
+        // Δημιουργία της σωστής κλάσης
+        if ("BUSINESS".equals(type)) {
+            return context.deserialize(json, Business.class);
+        } else {
+            return context.deserialize(json, Individual.class);
+        }
+    };
+    // ----------------------------------------
+
     private static final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
-             .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
+            // Εγγραφή των adapters για ημερομηνίες
+            .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
                     new JsonPrimitive(src.format(DATETIME_FORMATTER)))
             .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>) (json, typeOfT, context) ->
                     LocalDateTime.parse(json.getAsString(), DATETIME_FORMATTER))
-             .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
+            .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
                     new JsonPrimitive(src.format(DATE_FORMATTER)))
             .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>) (json, typeOfT, context) ->
                     LocalDate.parse(json.getAsString(), DATE_FORMATTER))
+            
+            // Εγγραφή των adapters για τον Πολυμορφισμό του Customer
+            .registerTypeAdapter(Customer.class, customerSerializer)
+            .registerTypeAdapter(Customer.class, customerDeserializer)
+            
             .create();
 
     
@@ -50,7 +82,6 @@ public class JsonDao {
  
     public void saveDatabase(DatabaseData data) {
         try {
-           
             File directory = new File("DAO");
             if (!directory.exists()) {
                 directory.mkdir();
@@ -80,7 +111,8 @@ public class JsonDao {
             return data;
         } catch (IOException e) {
             System.out.println("Error loading database: " + e.getMessage());
-            return new DatabaseData();
+            e.printStackTrace();
+            return new DatabaseData(); // Επιστροφή άδειας βάσης σε περίπτωση λάθους
         }
     }
 }

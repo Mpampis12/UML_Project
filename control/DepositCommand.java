@@ -1,5 +1,6 @@
 package control;
 
+import services.BankSystem;
 import services.TransactionManager;
 
 public class DepositCommand implements BankCommandPattern {
@@ -19,6 +20,6 @@ public class DepositCommand implements BankCommandPattern {
     @Override
     public void execute() throws Exception {
         // Καλεί την πραγματική λογική από το Service layer
-        transactionManager.deposit(iban, amount, description);
+        transactionManager.deposit(iban, amount, description,BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
     }
 }

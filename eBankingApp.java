@@ -1,5 +1,6 @@
 import view.BankView;
 import services.BankSystem;
+import services.TimeSimulator;
 import DAO.DaoHandler;
 
 public class eBankingApp {
@@ -10,7 +11,9 @@ public class eBankingApp {
         javax.swing.SwingUtilities.invokeLater(() -> {
             new BankView();
             DaoHandler.getInstance().saveAllData();
+           
         });
+
         
     }
 }

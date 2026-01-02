@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import services.BankSystem;
+
 public class Account {
     private Iban iban;
     private double balance;
@@ -29,7 +31,7 @@ public class Account {
     public Account() {
             this.transactionList = new ArrayList<>();
             this.owners = new ArrayList<>();
-            this.creationDate =LocalDateTime.now();
+            this.creationDate = BankSystem.getInstance().getTimeSimulator().getCurrentDate();
 
     }
 
@@ -75,6 +77,12 @@ public class Account {
             owners.add(afmString);
         }
     }
+    public void setprimaryOwner(String afmString) {
+        if (!owners.contains(afmString)) {
+            owners.remove(0);
+            owners.add(0,afmString);
+        }
+    }
 
 
     public void addTransaction(Transaction t) {
@@ -94,6 +102,10 @@ public class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    public void setOwners(List<String> owners) {
+        this.owners = owners;
     }
 
     public void setBalance(double balance) {

@@ -1,15 +1,18 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import services.BankSystem;
 
 public class Bill {
 
     private String rfCode;
     private double amount;
     private String description;
-    private LocalDate dateOfIssue;
-    private LocalDate expireDate;
-
+    private LocalDateTime dateOfIssue;
+    private LocalDateTime expireDate;
+    private String targetIban;
     private String buisinessAfm;
     private String payerAfm;
     private Status billStatus;
@@ -41,19 +44,19 @@ public class Bill {
         this.description = description;
     }
 
-    public LocalDate getDateOfIssue() {
+    public LocalDateTime getDateOfIssue() {
         return dateOfIssue;
     }
 
-    public void setDateOfIssue(LocalDate dateOfIssue) {
+    public void setDateOfIssue(LocalDateTime dateOfIssue) {
         this.dateOfIssue = dateOfIssue;
     }
 
-    public LocalDate getExpireDate() {
+    public LocalDateTime getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(LocalDate expireDate) {
+    public void setExpireDate(LocalDateTime expireDate) {
         this.expireDate = expireDate;
     }
 
@@ -89,18 +92,21 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(String rfCode, double amount, String description, String buisinessAfm, LocalDate expireDate) {
+    public Bill(String rfCode, String targetIban, double amount, String description, String buisinessAfm, LocalDateTime expireDate) {
         this.rfCode = rfCode;
         this.amount = amount;
         this.description = description;
         this.buisinessAfm = buisinessAfm;
-        this.dateOfIssue = LocalDate.now();
+        this.dateOfIssue = BankSystem.getInstance().getTimeSimulator().getCurrentDate();
         this.expireDate = expireDate;
         this.billStatus = Status.PENDING;  
         this.payerAfm = null;
+        this.targetIban = targetIban;
     }
      public void pay(String payerAfm) {
         this.billStatus = Status.PAID;
         this.payerAfm = payerAfm;
     }
+    public String getTargetIban() { return targetIban; }  
+    public void setTargetIban(String targetIban) { this.targetIban = targetIban; }
 }

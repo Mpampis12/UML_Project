@@ -1,6 +1,7 @@
 package services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import DAO.DaoHandler;
 
@@ -27,7 +28,7 @@ public class BankSystem {
         this.billManager = new BillManager();
         this.standingOrderManager = new StandingOrderManager();
         this.timeSimulator = new TimeSimulator();
-        
+    
         this.transactionManager = new TransactionManager(this.accountManager);
         this.daoHandler= DAO.DaoHandler.getInstance();
         this.bankApiService = new BankApiService();
@@ -47,17 +48,19 @@ public class BankSystem {
     public DaoHandler getDaoHandler() {
        return daoHandler;
    }
-     public void performDailyTasks(LocalDate date) {
+     public void performDailyTasks(LocalDateTime date) {
+          System.out.println("--- Standing Orders ---");
          standingOrderManager.executeDailyOrders(date, transactionManager, billManager);
-        accountManager.applyInterests();
-
+           System.out.println("--- Εφαρμογή Πολιτικής (Config) ---");
          if (date.getDayOfMonth() == 1) {
             accountManager.chargeBusinessFees();
+            
         }
+        
         
     }
 
-     public UserManager getUserManager() { return userManager; }
+    public UserManager getUserManager() { return userManager; }
     public AccountManager getAccountManager() { return accountManager; }
     public TransactionManager getTransactionManager() { return transactionManager; }
     public BillManager getBillManager() { return billManager; }

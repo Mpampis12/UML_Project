@@ -141,4 +141,8 @@ public class Transaction {
 
         public Transaction build() { return new Transaction(this); }
     }
+
+   public LocalDateTime getTimestamp() {
+    return timestamp;
+   }
 }
