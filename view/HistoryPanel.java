@@ -60,7 +60,7 @@ public class HistoryPanel extends JPanel {
         for (Transaction t : allTrans) {
             String src = (t.getSource() != null) ? t.getSource().toString() : "-";
             String trg = (t.getTarget() != null) ? t.getTarget().toString() : "-";
-            String date = (t.getTransactionID() != null) ? "Date info" : "-";
+            String date = (t.getTransactionID() != null) ? t.getTimestamp().toString() : "-";
             model.addRow(new Object[]{date, t.getType(), t.getDescription(), String.format("%.2f€", t.getAmount()), src, trg});
         }
 

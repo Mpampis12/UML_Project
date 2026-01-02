@@ -1,28 +1,28 @@
 package services;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Consumer;
 
 public class TimeSimulator implements Runnable {
 
-    private LocalDate currentDate;
+    private LocalDateTime currentDate;
     private boolean running;
-    private int simulationSpeedMs = 5000; //5 sec is one mera
+    private int simulationSpeedMs = 5000; //1 sec is one mera
     
  
-    private Consumer<LocalDate> dateChangeListener;
+    private Consumer<LocalDateTime> dateChangeListener;
 
     public TimeSimulator() {
-         this.currentDate = LocalDate.now(); 
+         this.currentDate = LocalDateTime.now().minusDays(2); 
         this.running = true;
     }
 
-    public LocalDate getCurrentDate() {
+    public LocalDateTime getCurrentDate() {
         return currentDate;
     }
     
-     public void setDateChangeListener(Consumer<LocalDate> listener) {
+     public void setDateChangeListener(Consumer<LocalDateTime> listener) {
         this.dateChangeListener = listener;
     }
 

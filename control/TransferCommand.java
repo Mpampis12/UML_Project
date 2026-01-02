@@ -1,5 +1,6 @@
 package control;
 
+import services.BankSystem;
 import services.TransactionManager;
 
 public class TransferCommand implements BankCommandPattern {
@@ -20,6 +21,6 @@ public class TransferCommand implements BankCommandPattern {
 
     @Override
     public void execute() throws Exception {
-        transactionManager.transfer(sourceIban, targetIban, amount, description);
+        transactionManager.transfer(sourceIban, targetIban, amount, description,BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
     }
 }

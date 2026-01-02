@@ -2,7 +2,10 @@ package view;
 
 import model.User;
 import model.Account;
+import model.Admin;       // Import για έλεγχο ρόλου
+import model.SuperAdmin;  // Import για έλεγχο ρόλου
 import model.Transaction;
+import control.BankController; // Import για το addOwner logic
 import services.BankSystem;
 
 import javax.swing.*;
@@ -34,56 +37,90 @@ public class AccountDetailsPage extends JPanel {
 
         setLayout(new BorderLayout());
 
-        // --- 1. HEADER ---
-        JPanel headerPanel = new JPanel(new BorderLayout()) {
-            Image bg = new ImageIcon("services/background.jpg").getImage();
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                if (bg != null) g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+        // Ελέγχουμε αν ο χρήστης είναι Admin
+        boolean isAdmin = (user instanceof Admin || user instanceof SuperAdmin);
+
+        // --- 1. HEADER LOGIC ---
+        if (isAdmin) {
+            // === ADMIN HEADER (Compact) ===
+            // Αν είναι Admin, βάζουμε μόνο ένα μικρό toolbar για να μην πέφτει πάνω στο Dashboard header
+            JPanel adminHeader = new JPanel(new BorderLayout());
+            adminHeader.setBackground(MUSTARD_BG); // Ίδιο χρώμα με το background
+            adminHeader.setBorder(new EmptyBorder(10, 30, 0, 30));
+
+            JButton backBtn = createHeaderButton("← Back to List");
+            backBtn.addActionListener(e -> {
+                // Επιστροφή στο Dashboard (που θα δείξει ξανά τη λίστα ή το αρχικό μενού)
+                // Εναλλακτικά, αν θέλεις να κρατάει το state, θα χρειαζόταν άλλη διαχείριση,
+                // αλλά το showDashboard είναι ασφαλές.
+                navigation.showDashboard(user); 
+            });
+
+            JLabel titleLbl = new JLabel("Managing Account: " + account.getIban());
+            titleLbl.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            titleLbl.setForeground(Color.DARK_GRAY);
+            titleLbl.setBorder(new EmptyBorder(0, 20, 0, 0));
+
+            JPanel leftGroup = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+            leftGroup.setOpaque(false);
+            leftGroup.add(backBtn);
+            leftGroup.add(titleLbl);
+
+            adminHeader.add(leftGroup, BorderLayout.WEST);
+            add(adminHeader, BorderLayout.NORTH);
+
+        } else {
+            // === CUSTOMER HEADER (Full/Standard) ===
+            // Το κλασικό μεγάλο header με την εικόνα
+            JPanel headerPanel = new JPanel(new BorderLayout()) {
+                Image bg = new ImageIcon("services/background.jpg").getImage();
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    if (bg != null) g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+                }
+            };
+            headerPanel.setPreferredSize(new Dimension(1000, 250));
+            headerPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
+
+            JLabel welcomeLabel = new JLabel(user.getFirstName() + " " + user.getLastName(), SwingConstants.CENTER) {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2.setColor(BUTTON_YELLOW);
+                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
+                    super.paintComponent(g);
+                }
+            };
+            welcomeLabel.setOpaque(false);
+            welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
+            welcomeLabel.setForeground(Color.BLACK);
+            welcomeLabel.setBorder(new EmptyBorder(10, 20, 10, 20));
+
+            JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
+            navPanel.setOpaque(false);
+            
+            JButton backBtn = createHeaderButton("Back / Dashboard");
+            backBtn.addActionListener(e -> navigation.showDashboard(user));
+
+            try {
+                ImageIcon icon = new ImageIcon(new ImageIcon("logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+                JLabel avatar = new JLabel(icon);
+                navPanel.add(backBtn);
+                navPanel.add(avatar);
+            } catch (Exception e) { 
+                navPanel.add(backBtn); 
             }
-        };
-        headerPanel.setPreferredSize(new Dimension(1000, 250));
-        headerPanel.setBorder(new EmptyBorder(20, 30, 20, 30));
 
-        JLabel welcomeLabel = new JLabel(  user.getFirstName()+ user.getLastName(), SwingConstants.CENTER) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(BUTTON_YELLOW);
-                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 30, 30);
-                super.paintComponent(g);
-            }
-        };
-        welcomeLabel.setOpaque(false);
-        welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 22));
-        welcomeLabel.setForeground(Color.BLACK);
-        welcomeLabel.setBorder(new EmptyBorder(10, 20, 10, 20));
-
-        JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
-        navPanel.setOpaque(false);
-        
-        JButton backBtn = createHeaderButton("Back / Dashboard");
-        backBtn.addActionListener(e -> navigation.showDashboard(user));
-
-        try {
-            ImageIcon icon = new ImageIcon(new ImageIcon("logo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-            JLabel avatar = new JLabel(icon);
-            navPanel.add(backBtn);
-            navPanel.add(avatar);
-        } catch (Exception e) { 
-            navPanel.add(backBtn); 
+            JPanel topRow = new JPanel(new BorderLayout());
+            topRow.setOpaque(false);
+            topRow.add(welcomeLabel, BorderLayout.WEST);
+            topRow.add(navPanel, BorderLayout.EAST);
+            
+            headerPanel.add(topRow, BorderLayout.NORTH);
+            add(headerPanel, BorderLayout.NORTH);
         }
-
-        JPanel topRow = new JPanel(new BorderLayout());
-        topRow.setOpaque(false);
-        topRow.add(welcomeLabel, BorderLayout.WEST);
-        topRow.add(navPanel, BorderLayout.EAST);
-        
-        headerPanel.add(topRow, BorderLayout.NORTH);
-        add(headerPanel, BorderLayout.NORTH);
-
 
         // --- 2. MAIN BODY ---
         JPanel mainBody = new JPanel();
@@ -117,15 +154,44 @@ public class AccountDetailsPage extends JPanel {
         leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
 
         if (account.getOwners().size() > 1) {
-            String secAfm = account.getOwners().get(1);
-            User secUser = BankSystem.getInstance().getUserManager().getUserByAfm(secAfm);
-            String secName = (secUser != null) ? secUser.getFirstName() + " " + secUser.getLastName() : secAfm;
-            leftCol.add(createInfoBubble("SECONDARY OWNER", secName));
-            leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
+            for (int i = 1; i < account.getOwners().size(); i++) {
+                String secAfm = account.getOwners().get(i);
+                User secUser = BankSystem.getInstance().getUserManager().getUserByAfm(secAfm);
+                String secName = (secUser != null) ? secUser.getFirstName() + " " + secUser.getLastName() : secAfm;
+                leftCol.add(createInfoBubble("CO-OWNER", secName));
+                leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
+            }
         }
 
         String dateStr = account.getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         leftCol.add(createInfoBubble("Date of Create", dateStr));
+
+        // --- ADMIN BUTTON: Add Co-Owner ---
+        if (isAdmin) {
+            leftCol.add(Box.createRigidArea(new Dimension(0, 20)));
+            JButton addOwnerBtn = createHeaderButton("+ Add Co-Owner");
+            addOwnerBtn.setBackground(new Color(34, 139, 34)); // Forest Green
+            addOwnerBtn.setForeground(Color.WHITE);
+            addOwnerBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+            addOwnerBtn.setMaximumSize(new Dimension(340, 45));
+
+            addOwnerBtn.addActionListener(e -> {
+                String newAfm = JOptionPane.showInputDialog(this, "Enter User AFM to add as Co-Owner:");
+                if (newAfm != null && !newAfm.trim().isEmpty()) {
+                    try {
+                        BankController ctrl = new BankController();
+                        ctrl.add OwnerToAccount(account.getIban(), newAfm.trim());
+                        JOptionPane.showMessageDialog(this, "Co-Owner Added Successfully!");
+                   
+                         navigation.showDashboard(user); 
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+                    }
+                }
+            });
+            leftCol.add(addOwnerBtn);
+        }
+        // ----------------------------------
         
         leftCol.add(Box.createVerticalGlue());
 
@@ -211,10 +277,7 @@ public class AccountDetailsPage extends JPanel {
         inner.add(tLabel);
         inner.add(vLabel);
         
-
-        
         bubble.add(inner, BorderLayout.CENTER);
-        
         return bubble;
     }
 
@@ -229,7 +292,7 @@ public class AccountDetailsPage extends JPanel {
                 super.paintComponent(g);
             }
         };
-        card.setPreferredSize(new Dimension(340, 130)); // Λίγο πιο ψηλό για να χωρέσει το κουμπί
+        card.setPreferredSize(new Dimension(340, 130)); 
         card.setMaximumSize(new Dimension(340, 130));
         card.setOpaque(false);
         card.setBorder(new EmptyBorder(15, 15, 15, 15));
@@ -241,7 +304,7 @@ public class AccountDetailsPage extends JPanel {
         balLbl.setFont(new Font("Segoe UI", Font.BOLD, 22));
         balLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        // --- NEW: Panel για IBAN + Copy Button ---
+        // --- IBAN + Copy Button ---
         JPanel ibanPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         ibanPanel.setOpaque(false);
         
@@ -249,16 +312,14 @@ public class AccountDetailsPage extends JPanel {
         ibanLbl.setFont(new Font("Monospaced", Font.BOLD, 16));
         ibanLbl.setForeground(new Color(50, 50, 50));
         
-        // Μικρό κουμπί Copy
         JButton copyBtn = createHeaderButton("Copy");
         copyBtn.setFont(new Font("Segoe UI", Font.PLAIN, 11));
         copyBtn.setBackground(BUTTON_YELLOW);
         copyBtn.setForeground(Color.BLACK);
         copyBtn.setFocusPainted(false);
         copyBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        copyBtn.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8)); // Μικρό padding
+        copyBtn.setBorder(BorderFactory.createEmptyBorder(2, 8, 2, 8)); 
         
-        // Λογική Αντιγραφής
         copyBtn.addActionListener(e -> {
             StringSelection stringSelection = new StringSelection(acc.getIban());
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -268,7 +329,6 @@ public class AccountDetailsPage extends JPanel {
 
         ibanPanel.add(ibanLbl);
         ibanPanel.add(copyBtn);
-        // -----------------------------------------
 
         JPanel top = new JPanel(new BorderLayout());
         top.setOpaque(false);
@@ -276,9 +336,7 @@ public class AccountDetailsPage extends JPanel {
         top.add(balLbl, BorderLayout.EAST);
 
         card.add(top, BorderLayout.NORTH);
-        card.add(ibanPanel, BorderLayout.SOUTH); // Προσθήκη του panel αντί για σκέτο label
-        
- 
+        card.add(ibanPanel, BorderLayout.SOUTH);
 
         return card;
     }

@@ -73,7 +73,6 @@ public class StandingOrder {
 
     public StandingOrder() {}
 
-    // ΝΕΟΣ ΠΛΗΡΗΣ CONSTRUCTOR
     public StandingOrder(Iban source, String targetIdentifier, double amount, String description, int dayOfMonth, StandingOrderPurpose type) {
         this.standinID = UUID.randomUUID().toString().substring(0, 8);
         this.source = source;
@@ -89,7 +88,7 @@ public class StandingOrder {
             this.target = new Iban(targetIdentifier);
             this.targetRfCode = "-";
         } else {
-            this.target = null; // ή κάποιο dummy
+            this.target = null; 
             this.targetRfCode = targetIdentifier;
         }
         
@@ -98,8 +97,7 @@ public class StandingOrder {
 
     private void calculateNextTime() {
         LocalDateTime now = LocalDateTime.now();
-        // Αν η σημερινή μέρα είναι πριν τη μέρα εκτέλεσης, εκτέλεσε τον τρέχοντα μήνα
-        // Αλλιώς τον επόμενο.
+        
         if (now.getDayOfMonth() < dayOfMonth) {
              this.nexTime = now.withDayOfMonth(Math.min(dayOfMonth, now.toLocalDate().lengthOfMonth()));
         } else {
@@ -117,7 +115,7 @@ public class StandingOrder {
         } else {
             this.targetRfCode = targetIdentifier;
         }
-        calculateNextTime(); // Recalculate execution
+        calculateNextTime(); 
     }
 
     // Getters
@@ -134,8 +132,7 @@ public class StandingOrder {
     
     // Setters (για GSON & Logic)
     public void updateNextTime(){
-        this.nexTime = this.nexTime.plusMonths(1); // Προσθέτει ένα μήνα
-        // Διόρθωση ημέρας (π.χ. αν είναι 30 και ο μήνας έχει 28)
+        this.nexTime = this.nexTime.plusMonths(1); 
         int maxDay = this.nexTime.toLocalDate().lengthOfMonth();
         if (this.dayOfMonth > maxDay) {
             this.nexTime = this.nexTime.withDayOfMonth(maxDay);

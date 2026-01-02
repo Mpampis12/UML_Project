@@ -1,5 +1,6 @@
 package control;
 
+import services.BankSystem;
 import services.TransactionManager;
 
 public class WithDrawCommand implements BankCommandPattern {
@@ -18,6 +19,6 @@ public class WithDrawCommand implements BankCommandPattern {
 
     @Override
     public void execute() throws Exception {
-        transactionManager.withdraw(iban, amount, description);
+        transactionManager.withdraw(iban, amount, description,BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
     }
 }

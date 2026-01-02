@@ -12,13 +12,13 @@ public class DashboardPage extends JPanel {
     private BankBridge navigation;
     private User user;
     private JPanel mainContentPanel; 
+    private Runnable onTransactionSuccess ;
     private CardLayout cardLayout;   
 
     public DashboardPage(BankBridge navigation, User user) {
         this.navigation = navigation;
         this.user = user;
         setLayout(new BorderLayout());
-
         // --- HEADER (Standard) ---
         JPanel headerPanel = new JPanel(new BorderLayout()) {
             Image bg = new ImageIcon("services/background.jpg").getImage();
@@ -77,13 +77,17 @@ public class DashboardPage extends JPanel {
             JButton newBizBtn = StyleHelpers.createRoundedButton("New Business");
             JButton depositBtn = StyleHelpers.createRoundedButton("Deposit Cash");
             JButton withdrawBtn = StyleHelpers.createRoundedButton("Withdraw Cash");
+            JButton accountsBtn = StyleHelpers.createRoundedButton("Manage Accounts");
+
+            navPanel.add(manageCustBtn);
+            navPanel.add(accountsBtn); // Προσθήκη στο μενού
 
             navPanel.add(manageCustBtn);
             navPanel.add(newIndivBtn);
             navPanel.add(newBizBtn);
             navPanel.add(depositBtn);
             navPanel.add(withdrawBtn);
-
+            
             // Panels
             List<User> customers = BankSystem.getInstance().getUserManager().getCustomers();
             mainContentPanel.add(new UserManagementPanel(customers), "MANAGE_CUST");
@@ -92,6 +96,19 @@ public class DashboardPage extends JPanel {
             mainContentPanel.add(new DepositPanel(), "DEPOSIT");
             mainContentPanel.add(new WithdrawPanel(), "WITHDRAW");
 
+            AdminAccountsPanel searchPanel = new AdminAccountsPanel(user, selectedAccount -> {
+                 AccountDetailsPage detailsPage = new AccountDetailsPage(navigation, user, selectedAccount);
+                mainContentPanel.add(detailsPage, "ACC_DETAILS_DYN"); // DYN = Dynamic
+                cardLayout.show(mainContentPanel, "ACC_DETAILS_DYN");
+            });
+            
+            mainContentPanel.add(searchPanel, "MANAGE_ACCOUNTS");
+
+            // Listeners
+            manageCustBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_CUST"));
+            
+            // Listener για το νέο κουμπί
+            accountsBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_ACCOUNTS"));
             manageCustBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_CUST"));
             newIndivBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_INDIV"));
             newBizBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_BIZ"));
@@ -107,11 +124,14 @@ public class DashboardPage extends JPanel {
             JButton payBtn = StyleHelpers.createRoundedButton("Payment");
             JButton soBtn = StyleHelpers.createRoundedButton("Standing Orders");
             JButton myAccBtn = StyleHelpers.createRoundedButton("New Account"); // Embedded Create Account
-            
+            JButton withdrawBtn = StyleHelpers.createRoundedButton("Withdraw Cash");
+            JButton historyBtn = StyleHelpers.createRoundedButton("History");
+
             navPanel.add(homeBtn);
             navPanel.add(transferBtn);
             navPanel.add(payBtn);
             navPanel.add(soBtn);
+            navPanel.add(historyBtn);
             navPanel.add(myAccBtn);
 
             // Business Only Feature
@@ -123,20 +143,25 @@ public class DashboardPage extends JPanel {
                 mainContentPanel.add(new CreateBillPanel(user), "CREATE_BILL");
                 billBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "CREATE_BILL"));
             }
-
+            
+            onTransactionSuccess = () -> {homeBtn.doClick();};
             // Panels
             mainContentPanel.add(new HomePanel(user, navigation), "HOME");
-            mainContentPanel.add(new TransferPanel(user, "TRANSFER"), "TRANSFER");
-            mainContentPanel.add(new TransferPanel(user, "PAYMENT"), "PAYMENT");
+            mainContentPanel.add(new TransferPanel(user, "TRANSFER",onTransactionSuccess), "TRANSFER");
+            mainContentPanel.add(new TransferPanel(user, "PAYMENT",onTransactionSuccess), "PAYMENT");
             mainContentPanel.add(new StandingOrderPanel(user), "SO");
-            mainContentPanel.add(new CreateAccountPanel(user), "NEW_ACC"); // Χρησιμοποιούμε Panel αντί για Frame
-
+            mainContentPanel.add(new CreateAccountPanel(user), "NEW_ACC");  
+            mainContentPanel.add(new HistoryPanel(user), "HISS"); 
+            
             homeBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "HOME"));
             transferBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "TRANSFER"));
             payBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "PAYMENT"));
             soBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "SO"));
             myAccBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "NEW_ACC"));
+            historyBtn.addActionListener(e ->  cardLayout.show(mainContentPanel, "HISS"));
             
+
+           
             homeBtn.doClick();
         }
 
@@ -145,4 +170,5 @@ public class DashboardPage extends JPanel {
         add(headerPanel, BorderLayout.NORTH);
         add(mainContentPanel, BorderLayout.CENTER);
     }
+    
 }

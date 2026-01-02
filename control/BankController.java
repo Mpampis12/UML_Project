@@ -5,9 +5,12 @@ import services.TransactionManager;
 import model.User;
 import model.Account;
 import model.Bill;
+import model.Customer;
 import model.StandingOrder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,7 +58,7 @@ public class BankController {
     }
 
      
-    public void handleDeposit(String iban, double amount) throws Exception {
+    public void handleDeposit(String iban, double amount ) throws Exception {
         BankCommandPattern deposit = new DepositCommand(transactionManager, iban, amount, "Deposit via App");
         deposit.execute();
         saveData();
@@ -82,7 +85,7 @@ public String createBill(String targetIban, String businessAfm, double amount, S
         String rfCode = "RF" + Math.abs(UUID.randomUUID().getMostSignificantBits());
         rfCode = rfCode.substring(0, 12); 
 
-        LocalDate expireDate = LocalDate.now().plusDays(30);
+        LocalDateTime expireDate = BankSystem.getInstance().getTimeSimulator().getCurrentDate().plusDays(30);
 
         // Περνάμε το targetIban στον Constructor
         Bill newBill = new Bill(rfCode, targetIban, amount, description, businessAfm, expireDate);
@@ -95,8 +98,19 @@ public String createBill(String targetIban, String businessAfm, double amount, S
         saveData(); // Αποθήκευση στη βάση
         return rfCode;
     }
+    public  Bill getBillByRF(String rf) throws Exception {
+      Bill bill = services.BankSystem.getInstance().getBillManager().getBillByRf(rf);
+    if (bill == null) {
+        throw new Exception("Bill with RF " + rf + " not found.");
+    }
+    if (bill.getBillStatus().equals("PAID")) {
+        throw new Exception("This bill is already paid.");
+    }
+    return bill;
+}
 
     public void payBill(String rfCode, String payerIban, String payerAfm) throws Exception {
+        
         BankSystem.getInstance().getBillManager().payBill(rfCode, payerIban, payerAfm, transactionManager);
         saveData();
     }
@@ -130,15 +144,66 @@ public String createBill(String targetIban, String businessAfm, double amount, S
                 response = api.sendSwiftTransfer(amount, name, targetIban, bic, bankName, address, country);
             }
 
-            // 2. Αν πέτυχε το API, αφαιρούμε τα λεφτά από τον δικό μας λογαριασμό
-            // Χρησιμοποιούμε το withdraw του transactionManager
-            transactionManager.withdraw(sourceIban, amount, type + " Transfer to " + name + " (ID: " + response.transaction_id + ")");
+           
+            transactionManager.withdraw(sourceIban, amount, type + " Transfer to " + name + " (ID: " + response.transaction_id + ")",BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
             
             System.out.println("External Transfer Success: " + response.message);
             saveData();
         }
         public List<StandingOrder> getStandingOrdersForUser(User user) {
- 
-            return BankSystem.getInstance().getStandingOrderManager().getOrders(); 
+         List<StandingOrder> allOrders = BankSystem.getInstance().getStandingOrderManager().getOrders();
+        
+         List<Account> userAccounts = getAccountsForUser(user);
+        
+         List<StandingOrder> myOrders = new  ArrayList<>();  
+
+        for (StandingOrder so : allOrders) {
+             for (Account acc : userAccounts) {
+                if (acc.getIban().equals(so.getSource().toString())) {
+                    
+                    myOrders.add(so);
+                    break;  
+            }
+        }
+    }
+        return myOrders; 
+    }
+    public java.util.List<Account> searchAccounts(String query) {
+        java.util.List<Account> foundAccounts = new java.util.ArrayList<>();
+        java.util.List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers(); // Υποθέτουμε ότι υπάρχει getCustomers/getUsers
+        
+        // 1. Βρες χρήστες που ταιριάζουν
+        for (User u : allUsers) {
+            String fullName = (u.getFirstName() + " " + u.getLastName()).toLowerCase();
+            if (u.getAfm().equals(query) || fullName.contains(query.toLowerCase())) {
+                // 2. Πάρε τους λογαριασμούς τους
+                foundAccounts.addAll(getAccountsForUser(u));
+            }
+        }
+        return foundAccounts;
+    }
+
+    // Προσθήκη Συνδικαιούχου
+    public void addOwnerToAccount(String iban, String newOwnerAfm) throws Exception {
+        Account acc = BankSystem.getInstance().getAccountManager().getAccount(iban);
+        if (acc == null) throw new Exception("Account not found");
+
+        User newOwner = BankSystem.getInstance().getUserManager().getUserByAfm(newOwnerAfm);
+        if (newOwner == null) throw new Exception("User with AFM " + newOwnerAfm + " not found.");
+
+        if (acc.getOwners().contains(newOwnerAfm)) {
+            throw new Exception("User is already an owner of this account.");
+        }
+        BankController ctrl = new BankController();
+        Customer seconOwnUserer = (Customer) ctrl.getOwner(newOwnerAfm);
+        if (seconOwnUserer == null) {
+            throw new Exception("No user found with AFM: " + newOwnerAfm);
+        } else {
+        seconOwnUserer.setNewAccountIban(iban);
+
+        acc.addOwner(newOwnerAfm);
+        saveData();
     }
     }
+}
+    

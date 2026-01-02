@@ -65,7 +65,8 @@ public class StandingOrderPanel extends JPanel {
         
         accBox = new JComboBox<>();
         List<Account> accounts = controller.getAccountsForUser(user);
-        for(Account a : accounts) accBox.addItem(a.getIban());
+        for(Account a : accounts) 
+            accBox.addItem(a.getIban());
         accBox.setBackground(Color.WHITE);
 
         fTarget = new RoundedTextField(15);
@@ -80,48 +81,56 @@ public class StandingOrderPanel extends JPanel {
         clearBtn = StyleHelpers.createRoundedButton("Clear Form");
         clearBtn.addActionListener(e -> clearForm());
 
-         formBox.add(StyleHelpers.createLabel("From Account:")); formBox.add(accBox);
-        formBox.add(StyleHelpers.createLabel("Target (IBAN/RF):")); formBox.add(fTarget);
-        formBox.add(StyleHelpers.createLabel("Amount (€):")); formBox.add(fAmount);
-        formBox.add(StyleHelpers.createLabel("Execution Day:")); formBox.add(dayBox);
-        formBox.add(StyleHelpers.createLabel("Details (Opt):")); formBox.add(fDetails);
+         formBox.add(StyleHelpers.createLabel("From Account:")); 
+         formBox.add(accBox);
+        formBox.add(StyleHelpers.createLabel("Target (IBAN/RF):")); 
+        formBox.add(fTarget);
+        formBox.add(StyleHelpers.createLabel("Amount (€):")); 
+        formBox.add(fAmount);
+        formBox.add(StyleHelpers.createLabel("Execution Day:")); 
+        formBox.add(dayBox);
+        formBox.add(StyleHelpers.createLabel("Details (Opt):")); 
+        formBox.add(fDetails);
         
         
          JPanel mainRight = new JPanel(new BorderLayout(0, 20));
         mainRight.setOpaque(false);
+     
         
-        // Το Grid Panel για τα πεδία
         JPanel fieldsPanel = new JPanel(new GridLayout(0, 2, 10, 20));
         fieldsPanel.setOpaque(false);
-        fieldsPanel.add(StyleHelpers.createLabel("From Account:")); fieldsPanel.add(accBox);
-        fieldsPanel.add(StyleHelpers.createLabel("Target (IBAN/RF):")); fieldsPanel.add(fTarget);
-        fieldsPanel.add(StyleHelpers.createLabel("Amount (€):")); fieldsPanel.add(fAmount);
-        fieldsPanel.add(StyleHelpers.createLabel("Execution Day:")); fieldsPanel.add(dayBox);
-        fieldsPanel.add(StyleHelpers.createLabel("Details (Opt):")); fieldsPanel.add(fDetails);
+        fieldsPanel.add(StyleHelpers.createLabel("From Account:")); 
+        fieldsPanel.add(accBox);
+        fieldsPanel.add(StyleHelpers.createLabel("Target (IBAN/RF):")); 
+        fieldsPanel.add(fTarget);
+        fieldsPanel.add(StyleHelpers.createLabel("Amount (€):")); 
+        fieldsPanel.add(fAmount);
+        fieldsPanel.add(StyleHelpers.createLabel("Execution Day:")); 
+        fieldsPanel.add(dayBox);
+        fieldsPanel.add(StyleHelpers.createLabel("Details (Opt):")); 
+        fieldsPanel.add(fDetails);
 
-        // Το Panel για τα κουμπιά
+       
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnPanel.setOpaque(false);
         btnPanel.add(saveBtn); 
         btnPanel.add(clearBtn);
 
-        formBox.setLayout(new BorderLayout()); // Reset layout του RoundedPanel
+        formBox.setLayout(new BorderLayout());  
         formBox.add(fieldsPanel, BorderLayout.CENTER);
         formBox.add(btnPanel, BorderLayout.SOUTH);
 
         saveBtn.addActionListener(e -> handleSave());
 
-        // Wrapper για να μην πιάνει όλο το ύψος
-        JPanel rightWrap = new JPanel(new BorderLayout());
+         JPanel rightWrap = new JPanel(new BorderLayout());
         rightWrap.setOpaque(false);
-        rightWrap.add(formBox, BorderLayout.NORTH); // Βάζουμε το formBox πάνω
+        rightWrap.add(formBox, BorderLayout.NORTH);  
         
         add(left); add(rightWrap);
         refreshList();
     }
     
-    // ... (Οι μέθοδοι handleSave, clearForm, refreshList παραμένουν ΙΔΙΕΣ με πριν) ...
-    // Αντίγραψε τες από την προηγούμενη απάντηση μου για να είναι πλήρες το αρχείο.
+   
     private void handleSave() {
         try {
             if (accBox.getSelectedItem() == null) throw new Exception("Select Source Account");
@@ -175,9 +184,11 @@ public class StandingOrderPanel extends JPanel {
     private void refreshList() {
         listPanel.removeAll(); 
         cardList.clear();      
-        java.util.List<StandingOrder> orders = controller.getStandingOrdersForUser(user);
+         List<StandingOrder> orders = controller.getStandingOrdersForUser(user);
 
         for(StandingOrder so : orders) {
+            if(so.getStatus() == StandingOrder.OrderStatus.COMPLETED|| (so.getStatus() == StandingOrder.OrderStatus.FAILD ) )
+                continue;
             StandingOrderCard card = new StandingOrderCard(so, 
                 selectedOrder -> {
                     currentEditingOrder = selectedOrder;

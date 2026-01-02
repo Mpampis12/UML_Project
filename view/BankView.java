@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import model.Account;
@@ -125,13 +126,15 @@ public class BankView extends JFrame implements BankBridge {
         updateDateLabel(timer.getCurrentDate());
         timer.setDateChangeListener(newDate -> {
             SwingUtilities.invokeLater(() -> updateDateLabel(newDate));
+
+            BankSystem.getInstance().performDailyTasks(newDate);
         });
 
         Thread timeThread = new Thread(timer);
         timeThread.start();
     }
 
-    private void updateDateLabel(java.time.LocalDate date) {
+    private void updateDateLabel(LocalDateTime date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy");
         dateLabel.setText(date.format(formatter) + "  ");
     }

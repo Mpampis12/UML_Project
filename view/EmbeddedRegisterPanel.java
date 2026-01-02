@@ -9,7 +9,7 @@ public class EmbeddedRegisterPanel extends JPanel {
         setBackground(StyleHelpers.MUSTARD_BG);
 
         JPanel form = new StyleHelpers.RoundedPanel(30, Color.WHITE);
-        form.setLayout(new GridLayout(8, 2, 10, 10));
+        form.setLayout(new GridLayout(9, 2, 10, 10));
         form.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JLabel title = new JLabel("New " + type + " Customer");
@@ -23,16 +23,26 @@ public class EmbeddedRegisterPanel extends JPanel {
         JTextField emailTxt = new JTextField();
         JTextField phoneTxt = new JTextField();
         
+        
         JButton regBtn = StyleHelpers.createRoundedButton("Register User");
-
-        form.add(new JLabel("Username:")); form.add(userTxt);
-        form.add(new JLabel("Password:")); form.add(passTxt);
-        form.add(new JLabel("First Name:")); form.add(nameTxt);
-        form.add(new JLabel("Last Name:")); form.add(lastTxt);
-        form.add(new JLabel("AFM:")); form.add(afmTxt);
-        form.add(new JLabel("Email:")); form.add(emailTxt);
-        form.add(new JLabel("Phone:")); form.add(phoneTxt);
-        form.add(new JLabel("")); form.add(regBtn);
+        form.add(title);
+         form.add(new JLabel("")); 
+        form.add(new JLabel("Username:")); 
+        form.add(userTxt);
+        form.add(new JLabel("Password:")); 
+        form.add(passTxt);
+        form.add(new JLabel("First Name:")); 
+        form.add(nameTxt);
+        form.add(new JLabel("Last Name:")); 
+        form.add(lastTxt);
+        form.add(new JLabel("AFM:")); 
+        form.add(afmTxt);
+        form.add(new JLabel("Email:")); 
+        form.add(emailTxt);
+        form.add(new JLabel("Phone:")); 
+        form.add(phoneTxt);
+        form.add(new JLabel("")); 
+        form.add(regBtn);
 
         regBtn.addActionListener(e -> {
             try {
@@ -64,8 +74,8 @@ public class EmbeddedRegisterPanel extends JPanel {
             
         });
 
-         add(title );
+          
         
-        add(form );
+        add(form);
     }
 }

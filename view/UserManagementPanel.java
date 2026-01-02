@@ -25,7 +25,7 @@ public class UserManagementPanel extends JPanel {
         topPanel.setOpaque(false);
         searchField = new StyleHelpers.RoundedTextField(20);
         searchField.setPreferredSize(new Dimension(200, 30));
-        JButton searchBtn = StyleHelpers.createRoundedButton("Search (AFM/Name)");
+        JButton searchBtn = StyleHelpers.createRoundedButton("Search (AFM)");
         
         searchBtn.addActionListener(e -> filterList(searchField.getText()));
         
@@ -54,7 +54,12 @@ public class UserManagementPanel extends JPanel {
             if (row != -1) {
                 String username = (String) model.getValueAt(row, 0);
                 User selected = findUser(username);
-                if (selected != null) showEditDialog(selected);
+                if (selected != null)
+                    try {
+                        showEditDialog(selected);
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
             }
         });
 
@@ -88,22 +93,30 @@ public class UserManagementPanel extends JPanel {
         return sourceList.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(null);
     }
 
-    private void showEditDialog(User user) {
+    private void showEditDialog(User user) throws Exception {
         JTextField fName = new JTextField(user.getFirstName());
         JTextField lName = new JTextField(user.getLastName());
         JTextField email = new JTextField(user.getEmail());
         JTextField phone = new JTextField(user.getPhone());
+        JTextField afm = new JTextField(user.getAfm());
+        JTextField username = new JTextField(user.getUsername());
+        JTextField password = new JTextField("-"); // Placeholder
 
         Object[] message = {
             "First Name:", fName,
             "Last Name:", lName,
             "Email:", email,
-            "Phone:", phone
+            "Phone:", phone,
+            "AFM: " , afm,
+            "Username: " , username,
+            "Password: " , password
+
         };
 
         int option = JOptionPane.showConfirmDialog(this, message, "Edit User: " + user.getUsername(), JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            BankSystem.getInstance().getUserManager().updateUser(user, fName.getText(), lName.getText(), email.getText(), phone.getText());
+            BankSystem.getInstance().getUserManager().updateUser(user, fName.getText(), lName.getText(), email.getText(), phone.getText(),username.getText(),password.getText(),afm.getText());
+            
             refreshTable(sourceList); // Update UI
         }
     }

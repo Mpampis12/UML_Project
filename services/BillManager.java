@@ -41,11 +41,11 @@ public class BillManager {
         if (bill.getBillStatus() == Status.PAID) {
             throw new Exception("Bill already paid");
         }
+         
+         
+        tm.withdraw(payerIban, bill.getAmount(), "Payment of Bill RF: " + rfCode,BankSystem.getInstance().getTimeSimulator().getCurrentDate());
  
-        // 1. Ανάληψη από τον Πληρωτή (Payer)
-        tm.withdraw(payerIban, bill.getAmount(), "Payment of Bill RF: " + rfCode);
- 
-        tm.deposit(bill.getTargetIban(), bill.getAmount(), "Bill Payment Received RF: " + rfCode + " from " + payerAfm);
+        tm.deposit(bill.getTargetIban(), bill.getAmount(), "Bill Payment Received RF: " + rfCode + " from " + payerAfm,BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
 
       
         bill.pay(payerAfm);
