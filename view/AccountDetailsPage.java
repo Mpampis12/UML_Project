@@ -180,7 +180,7 @@ public class AccountDetailsPage extends JPanel {
                 if (newAfm != null && !newAfm.trim().isEmpty()) {
                     try {
                         BankController ctrl = new BankController();
-                        ctrl.add OwnerToAccount(account.getIban(), newAfm.trim());
+                        ctrl.addOwnerToAccount(account.getIban(), newAfm.trim());
                         JOptionPane.showMessageDialog(this, "Co-Owner Added Successfully!");
                    
                          navigation.showDashboard(user); 
