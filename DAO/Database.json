@@ -2,7 +2,7 @@
   "customers": [
     {
       "accountIbans": [
-        "GR473048011759419352"
+        "GR100202503111546001"
       ],
       "username": "ngioldasis",
       "password": "5678f0dfca01f1ce580be471dc4bb47d0851ed18b3eddf22c77d1ccd0d76932e",
@@ -15,7 +15,7 @@
     },
     {
       "accountIbans": [
-        "GR216920553014463304"
+        "GR100202503111546002"
       ],
       "username": "pappas",
       "password": "9b67124c644af6f778fdbc3f2644e1d0794a11a53aa5cb4b50629ac119ba8ca8",
@@ -146,7 +146,7 @@
   "accounts": [
     {
       "iban": {
-        "ibanNumber": "GR473048011759419352"
+        "ibanNumber": "GR100202503111546001"
       },
       "balance": 0.0,
       "creationDate": "09/03/2026 17:10:32",
@@ -158,7 +158,7 @@
     },
     {
       "iban": {
-        "ibanNumber": "GR216920553014463304"
+        "ibanNumber": "GR100202503111546002"
       },
       "balance": 0.0,
       "creationDate": "20/03/2026 17:10:32",
