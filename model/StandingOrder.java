@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import services.BankSystem;
+
 public class StandingOrder {
     
     private String standinID;
@@ -96,7 +98,7 @@ public class StandingOrder {
     }
 
     private void calculateNextTime() {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = BankSystem.getInstance().getTimeSimulator().getCurrentDate();
         
         if (now.getDayOfMonth() < dayOfMonth) {
              this.nexTime = now.withDayOfMonth(Math.min(dayOfMonth, now.toLocalDate().lengthOfMonth()));

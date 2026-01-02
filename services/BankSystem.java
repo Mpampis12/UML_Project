@@ -51,7 +51,7 @@ public class BankSystem {
      public void performDailyTasks(LocalDateTime date) {
           System.out.println("--- Standing Orders ---");
          standingOrderManager.executeDailyOrders(date, transactionManager, billManager);
-           System.out.println("--- Εφαρμογή Πολιτικής (Config) ---");
+           System.out.println("--- Efarmogi bank Policy (Config) ---");
          if (date.getDayOfMonth() == 1) {
             accountManager.chargeBusinessFees();
             
