@@ -47,7 +47,7 @@ public class EmbeddedRegisterPanel extends JPanel {
         regBtn.addActionListener(e -> {
             try {
                 if (type.equals("ADMIN")) {
-                    new BankController().createAdmin(
+                    BankController.getInstance().createAdmin(
                         userTxt.getText(), passTxt.getPassword(),
                         nameTxt.getText(), lastTxt.getText(),
                         emailTxt.getText()
@@ -58,7 +58,7 @@ public class EmbeddedRegisterPanel extends JPanel {
                     return;
                 }
                 else {
-                new BankController().createCustomerByType(
+                BankController.getInstance().createCustomerByType(
                     userTxt.getText(), passTxt.getPassword(),
                     nameTxt.getText(), lastTxt.getText(),
                     afmTxt.getText(), emailTxt.getText(), phoneTxt.getText(),

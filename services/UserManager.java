@@ -14,7 +14,7 @@ import control.BankController;
 public class UserManager {
 
     private List<User> users;
-
+    private BankController controller;
     // Regex Patterns για ασφάλεια
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
     private static final String PHONE_REGEX = "^\\d{10}$"; // Μόνο 10 ψηφία
@@ -24,6 +24,7 @@ public class UserManager {
     public UserManager() {
         this.users = new ArrayList<>();
         this.users.add(SuperAdmin.getInstance());
+        // this.controller =  BankController.getInstance();
     }
 
     public User login(String username, char[] password) {
@@ -63,13 +64,15 @@ public class UserManager {
 
          Individual newCustomer = new Individual(username, password, firstName, lastName, afm, email, phone);
         
-        Account defAccount = BankSystem.getInstance().getAccountManager().createAccount("PERSONAL", 0.0, afm);
+         Account defAccount =BankController.getInstance().createAccountForUser(newCustomer, "PERSONAL", 0, afm);
         if (defAccount != null) {
             newCustomer.setNewAccountIban(defAccount.getIban());
         }
 
         this.users.add(newCustomer);
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        
+        controller.saveData();
+        
         System.out.println("Success register Individual: " + username);
     }
 
@@ -83,13 +86,13 @@ public class UserManager {
 
          Business newCustomer = new Business(username, password, firstName, lastName, afm, email, phone);
         
-        Account defAccount = BankSystem.getInstance().getAccountManager().createAccount("BUSINESS", 0.0, afm);
+         Account defAccount =BankController.getInstance().createAccountForUser(newCustomer, "BUSINESS", 0, afm);
         if (defAccount != null) {
             newCustomer.setNewAccountIban(defAccount.getIban());
         }
 
         this.users.add(newCustomer);
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        controller.saveData();
         System.out.println("Success register Business: " + username);
     }
 
@@ -100,7 +103,7 @@ public class UserManager {
         // Οι admins παίρνουν dummy AFM/Phone με βάση τον κώδικά σου, οπότε δεν ελέγχουμε AFM εδώ.
         model.Admin newAdmin = new model.Admin(username, password, firstName, lastName, "000000000", email, "0000000000");
         this.users.add(newAdmin);
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        controller.saveData();
         System.out.println("Success register Admin: " + username);
     }
    
@@ -127,11 +130,11 @@ public class UserManager {
         if (phone == null || !phone.matches(PHONE_REGEX)) throw new Exception("Invalid Phone.");
         if (AFM == null || !AFM.matches(AFM_REGEX)) throw new Exception("Invalid AFM.");
         if(AFM != user.getAfm()){
-             for(Account acc : BankSystem.getInstance().getAccountManager().getAccountsByOwner(user.getAfm())){
+             for(Account acc : BankController.getInstance().getAccountsByOwner(user.getAfm())){
                  acc.setprimaryOwner(AFM); 
              }
             }
-
+             
         user.setFirstName(fName);
         user.setLastName(lName);
         user.setEmail(email);
@@ -139,9 +142,10 @@ public class UserManager {
         user.setUsername(userName);
         if((password!=null && password.length()>0&&!password.equals("-")))
             BankSystem.getInstance().getUserManager().getUserByUsername(userName).setPassword(User.hashPassword(password.toCharArray()));
+            
         user.setAfm(AFM);   
     
-    BankSystem.getInstance().getDaoHandler().saveAllData();
+    controller.saveData();
     }
     
      public List<User> getUsers() { return users; }

@@ -14,7 +14,7 @@ public class RegisterPage extends JPanel {
 
     public RegisterPage(BankBridge navigation) {
         this.navigation = navigation;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
 
         setLayout(new BorderLayout());
 

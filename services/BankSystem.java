@@ -38,7 +38,7 @@ public class BankSystem {
         return bankApiService;
     }   
     
-    public static synchronized BankSystem getInstance() {
+    public static   BankSystem getInstance() {
         if (instance == null) {
             instance = new BankSystem();
         }

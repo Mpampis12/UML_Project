@@ -4,21 +4,22 @@ import model.Account;
 import model.Transaction;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.UUID; 
+import java.util.UUID;
+
+import control.BankController; 
 
 public class TransactionManager {
 
-    // Αφαιρούμε τα πεδία που ήταν null
-    // private AccountManager accountManager;
-    // private BankSystem bankSystem;
+    private BankController controller;
 
     public TransactionManager() {
-        // Ο Constructor παραμένει κενός ή μπορεί να κάνει άλλα init
+     // controller = BankController.getInstance();
     }
 
     public void deposit(String iban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ: Παίρνουμε τον AccountManager μέσω του Singleton BankSystem
-        Account account = BankSystem.getInstance().getAccountManager().getAccount(iban);
+        
+        Account account = BankController.getInstance().getAccount(iban);
         
         if (account == null) {
             throw new Exception("Account with IBAN " + iban + " not found.");
@@ -38,12 +39,13 @@ public class TransactionManager {
         account.addTransaction(transaction);
         
         System.out.println("Successful Deposit " + amount + "€ to " + iban);
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        controller.saveData();
+        
     }
 
     public void withdraw(String iban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ
-        Account account = BankSystem.getInstance().getAccountManager().getAccount(iban);
+       Account account = BankController.getInstance().getAccount(iban);
         
         if (account == null) {
             throw new Exception("Account not found.");
@@ -60,15 +62,15 @@ public class TransactionManager {
                 .build();
 
         account.addTransaction(transaction);
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        controller.saveData();
         System.out.println("Successful withdrawal " + amount + "€ from " + iban);
     }
 
     public void transfer(String sourceIban, String targetIban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ
-        AccountManager acm = BankSystem.getInstance().getAccountManager();
-        Account sourceAcc = acm.getAccount(sourceIban);
-        Account targetAcc = acm.getAccount(targetIban);
+        
+        Account sourceAcc = BankController.getInstance().getAccount(sourceIban);
+        Account targetAcc = BankController.getInstance().getAccount(targetIban);
          
         if (sourceAcc == null) throw new Exception("Source Account not found.");
         if (targetAcc == null) throw new Exception("Target Account not found.");
@@ -98,7 +100,7 @@ public class TransactionManager {
                 .build();
         targetAcc.addTransaction(tIn); 
 
-        BankSystem.getInstance().getDaoHandler().saveAllData();
+        controller.saveData();
         System.out.println("Successful Transfer " + amount + "€ from " + sourceIban + " to " + targetIban);
     }
 
@@ -108,8 +110,9 @@ public class TransactionManager {
 
     public ArrayList<Transaction> getTransactionByAfm(String afm) {
         ArrayList<Transaction> transactions = new ArrayList<>();
-        // ΔΙΟΡΘΩΣΗ
-        for (Account acc : BankSystem.getInstance().getAccountManager().getAccountsByOwner(afm)) {
+        
+        
+        for (Account acc : BankController.getInstance().getAccountsByOwner(afm)) {
             transactions.addAll(acc.getTransaction());
         }
         return transactions;

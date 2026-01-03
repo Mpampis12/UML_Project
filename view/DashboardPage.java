@@ -5,6 +5,9 @@ import services.BankSystem;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import control.BankController;
+
 import java.awt.*;
 
 public class DashboardPage extends JPanel {
@@ -13,11 +16,13 @@ public class DashboardPage extends JPanel {
     private User user;
     private JPanel mainContentPanel; 
     private Runnable onTransactionSuccess ;
-    private CardLayout cardLayout;   
+    private CardLayout cardLayout;
+    private BankController controller  ;   
 
     public DashboardPage(BankBridge navigation, User user) {
         this.navigation = navigation;
         this.user = user;
+        this.controller = BankController.getInstance();
         setLayout(new BorderLayout());
         // --- HEADER (Standard) ---
         JPanel headerPanel = new JPanel(new BorderLayout()) {
@@ -61,8 +66,8 @@ public class DashboardPage extends JPanel {
             navPanel.add(createAdminBtn);
             
             // Panels
-            List<User> admins = BankSystem.getInstance().getUserManager().getAdmins();
-            mainContentPanel.add(new UserManagementPanel(admins), "MANAGE_ADMINS");
+            List<User> admins = controller.getAdmins();
+             mainContentPanel.add(new UserManagementPanel(admins), "MANAGE_ADMINS");
             mainContentPanel.add(new EmbeddedRegisterPanel("ADMIN"), "CREATE_ADMIN"); // Χρειάζεται μικρή προσαρμογή στο Embedded για Admin πεδία αν διαφέρουν
 
             manageAdminsBtn.addActionListener(e -> cardLayout.show(mainContentPanel, "MANAGE_ADMINS"));
@@ -89,7 +94,7 @@ public class DashboardPage extends JPanel {
             navPanel.add(withdrawBtn);
             
             // Panels
-            List<User> customers = BankSystem.getInstance().getUserManager().getCustomers();
+            List<User> customers = controller.getCustomers();
             mainContentPanel.add(new UserManagementPanel(customers), "MANAGE_CUST");
             mainContentPanel.add(new EmbeddedRegisterPanel("PERSONAL"), "NEW_INDIV");
             mainContentPanel.add(new EmbeddedRegisterPanel("BUSINESS"), "NEW_BIZ");

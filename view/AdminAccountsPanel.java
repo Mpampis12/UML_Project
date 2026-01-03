@@ -20,7 +20,7 @@ public class AdminAccountsPanel extends JPanel {
     private Consumer<Account> onAccountSelected; // Callback όταν πατηθεί ένας λογαριασμός
 
     public AdminAccountsPanel(User adminUser, Consumer<Account> onAccountSelected) {
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         this.onAccountSelected = onAccountSelected;
 
         setLayout(new BorderLayout(0, 20));

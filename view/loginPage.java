@@ -3,6 +3,9 @@ package view;
 import services.BankSystem;
 import model.User;
 import javax.swing.*;
+
+import control.BankController;
+
 import java.awt.*;
 
 public class LoginPage extends JPanel {
@@ -10,9 +13,11 @@ public class LoginPage extends JPanel {
     private JTextField userField;
     private JPasswordField passField;
     private BankBridge navigation;
+    private BankController controller;
 
     public LoginPage(BankBridge navigation) {
         this.navigation = navigation;
+        this.controller = BankController.getInstance();
         
         setLayout(new GridBagLayout());
         setOpaque(false);  
@@ -107,7 +112,8 @@ public class LoginPage extends JPanel {
     private void performLogin() {
         String username = userField.getText();
         char[] password = passField.getPassword();
-        User user = BankSystem.getInstance().getUserManager().login(username, password);
+         
+        User user = controller.login(username, password);
         
         if (user != null) {
             userField.setText("");

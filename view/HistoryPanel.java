@@ -23,7 +23,7 @@ public class HistoryPanel extends JPanel {
 
     public HistoryPanel(User user) {
         this.user = user;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         
         setLayout(new BorderLayout());
         setBackground(StyleHelpers.MUSTARD_BG);

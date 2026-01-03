@@ -11,7 +11,7 @@ public class WithdrawPanel extends JPanel{
 
         setLayout(new GridBagLayout());
         setBackground(StyleHelpers.MUSTARD_BG);
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
 
         JPanel card = new StyleHelpers.RoundedPanel(20, Color.WHITE);
         card.setLayout(new GridLayout(7, 2, 10, 10));
@@ -46,18 +46,19 @@ public class WithdrawPanel extends JPanel{
                  String fName = firstNamTextField.getText();
                     String lName = lastNameField.getText();
                  ArrayList<String> accOwners = new ArrayList<String>();
-                accOwners= (ArrayList<String>) BankSystem.getInstance().getAccountManager().getAccount(iban).getOwners() ;
+                 accOwners=  controller.getOwnersByIban(iban);
                     for (String ownerAfm : accOwners) {
-                        String ownerFName = BankSystem.getInstance().getUserManager().getUserByAfm(ownerAfm).getFirstName();
-                        String ownerLName = BankSystem.getInstance().getUserManager().getUserByAfm(ownerAfm).getLastName();
+                        String ownerFName = controller.getOwner(ownerAfm).getFirstName();
+                        String ownerLName = controller.getOwner(ownerAfm).getLastName();
                         if (ownerFName.equals(fName) && ownerLName.equals(lName)) {
                              
-                            BankSystem.getInstance().getTransactionManager().withdraw(
-                                ibanField.getText(),
-                                amt,
-                                "Withdraw via Bank Branch",
-                                java.time.LocalDateTime.now()
-                            );
+                            controller.handleWithdraw(iban, amt,"Withdraw via Bank Branch");
+                            // BankSystem.getInstance().getTransactionManager().withdraw(
+                            //     ibanField.getText(),
+                            //     amt,
+                            //     "Withdraw via Bank Branch",
+                            //     java.time.LocalDateTime.now()
+                            // );
                             JOptionPane.showMessageDialog(this, "Deposit Successful!");
                             return; // Exit after successful deposit
                         }

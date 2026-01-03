@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.DaoHandler;
+import control.BankController;
 import control.DepositCommand;
 
 import java.time.LocalDateTime;
@@ -58,11 +59,12 @@ public class AccountManager {
              if(interest<=0) 
                 continue;
             try {
-                BankSystem.getInstance().getTransactionManager().deposit(
-                    acc.getIban().toString(), 
-                    interest, 
-                    "Yearly INTEREST",LocalDateTime.now()
-                );
+                BankController.getInstance().handleDeposit(acc.getIban().toString(), fee, "Yearly INTEREST");
+                // BankSystem.getInstance().getTransactionManager().deposit(
+                //     acc.getIban().toString(), 
+                //     interest, 
+                //     "Yearly INTEREST",LocalDateTime.now()
+                // );
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -81,11 +83,12 @@ public class AccountManager {
         for (Account acc : accounts) {
             if (acc.getAccountType() == model.Account.AccountType.BUSINESS) {
                 try {
-                    BankSystem.getInstance().getTransactionManager().withdraw(
-                        acc.getIban().toString(), 
-                        monthlyFee, 
-                        "Monthly Business Account Fee",LocalDateTime.now()
-                    );
+                    BankController.getInstance().handleWithdraw(acc.getIban().toString(), monthlyFee, "Monthly Business Account Fee");
+                    // BankSystem.getInstance().getTransactionManager().withdraw(
+                    //     acc.getIban().toString(), 
+                    //     monthlyFee, 
+                    //     "Monthly Business Account Fee",LocalDateTime.now()
+                    // );
                    System.out.println("Charged fee to Business Account: " + acc.getIban());
                 } catch (Exception e) {
                     System.out.println("Could not charge fee to " + acc.getIban() + ": " + e.getMessage());

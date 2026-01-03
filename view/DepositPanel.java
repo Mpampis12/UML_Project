@@ -10,7 +10,7 @@ public class DepositPanel extends JPanel {
     public DepositPanel() {
         setLayout(new GridBagLayout());
         setBackground(StyleHelpers.MUSTARD_BG);
-        
+        BankController controller = BankController.getInstance();
         JPanel card = new StyleHelpers.RoundedPanel(20, Color.WHITE);
         card.setLayout(new GridLayout(7, 2, 10, 10));
         card.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
@@ -44,18 +44,21 @@ public class DepositPanel extends JPanel {
                  String fName = firstNamTextField.getText();
                     String lName = lastNameField.getText();
                  ArrayList<String> accOwners = new ArrayList<String>();
-                accOwners= (ArrayList<String>) BankSystem.getInstance().getAccountManager().getAccount(iban).getOwners() ;
+                
+                accOwners= (ArrayList<String>) controller.getOwnersByIban(iban);
                     for (String ownerAfm : accOwners) {
-                        String ownerFName = BankSystem.getInstance().getUserManager().getUserByAfm(ownerAfm).getFirstName();
-                        String ownerLName = BankSystem.getInstance().getUserManager().getUserByAfm(ownerAfm).getLastName();
-                        if (ownerFName.equals(fName) && ownerLName.equals(lName)) {
-                             
-                            BankSystem.getInstance().getTransactionManager().deposit(
-                                ibanField.getText(),
-                                amt,
-                                "Deposit via Bank Branch",
-                                java.time.LocalDateTime.now()
-                            );
+
+                         String ownerFName = controller.getOwner(ownerAfm).getFirstName();
+                        String ownerLName = controller.getOwner(ownerAfm).getLastName();
+
+                         if (ownerFName.equals(fName) && ownerLName.equals(lName)) {
+                             controller.handleDeposit(iban, amt, "Deposit via Bank Branch" );
+                            // BankSystem.getInstance().getTransactionManager().deposit(
+                            //     ibanField.getText(),
+                            //     amt,
+                            //     "Deposit via Bank Branch",
+                            //     java.time.LocalDateTime.now()
+                            // );
                             JOptionPane.showMessageDialog(this, "Deposit Successful!");
                             return; // Exit after successful deposit
                         }

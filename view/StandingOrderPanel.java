@@ -29,7 +29,7 @@ public class StandingOrderPanel extends JPanel {
 
     public StandingOrderPanel(User user) {
         this.user = user;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
 
         setLayout(new GridLayout(1, 2, 20, 0)); // Split View
         setBackground(StyleHelpers.MUSTARD_BG);

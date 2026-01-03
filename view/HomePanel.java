@@ -30,7 +30,7 @@ public class HomePanel extends JPanel {
     public HomePanel(User user, BankBridge navigation) {
         this.user = user;
         this.navigation = navigation;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         
         setLayout(new GridLayout(1, 2, 20, 0));
         setBackground(StyleHelpers.MUSTARD_BG);

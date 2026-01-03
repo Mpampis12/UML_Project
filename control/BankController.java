@@ -5,20 +5,32 @@ import services.ConfigManager;
 import services.TransactionManager;
 import services.transfer.*; // Import για το Bridge Pattern
 import services.StandingOrderFactory; // Import για το Factory Pattern
+import services.TimeSimulator;
 import model.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class BankController {
-    
+    private BankSystem bankSystem;
     private TransactionManager transactionManager;
+    
+    private static BankController instance;
+    public static BankController getInstance(){
+        if(instance==null){
+            instance = new BankController();
+        }
+        return instance;
+    }
 
-    public BankController() {
-        this.transactionManager = BankSystem.getInstance().getTransactionManager();
+
+    private BankController() {
+        this.bankSystem = BankSystem.getInstance();
+        //this.transactionManager = bankSystem.getTransactionManager();
     }
 
     // ============================================================
@@ -26,35 +38,35 @@ public class BankController {
     // ============================================================
     
     public User login(String username, char[] password) {
-        return BankSystem.getInstance().getUserManager().login(username, password);
+        return bankSystem.getUserManager().login(username, password);
     }
 
     public void registerUser(String username, char[] password, String fName, String lName, String afm, String email, String phone) throws Exception {
-        BankSystem.getInstance().getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
+        bankSystem.getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
     }
 
     public void createAdmin(String username, char[] password, String fName, String lName, String email) throws Exception {
-        BankSystem.getInstance().getUserManager().registerAdmin(username, password, fName, lName, email);
+        bankSystem.getUserManager().registerAdmin(username, password, fName, lName, email);
     }
 
     public void createCustomerByType(String username, char[] password, String fName, String lName, String afm, String email, String phone, String type) throws Exception {
         if(type.equals("BUSINESS")) {
-            BankSystem.getInstance().getUserManager().registerCustomerBuisness(username, password, fName, lName, afm, email, phone);
+            bankSystem.getUserManager().registerCustomerBuisness(username, password, fName, lName, afm, email, phone);
         } else {
-            BankSystem.getInstance().getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
+            bankSystem.getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
         }
     }
 
     public List<User> getAdmins() {
-        return BankSystem.getInstance().getUserManager().getAdmins();
+        return bankSystem.getUserManager().getAdmins();
     }
 
     public List<User> getCustomers() {
-        return BankSystem.getInstance().getUserManager().getCustomers();
+        return bankSystem.getUserManager().getCustomers();
     }
 
     public User getOwner(String afm) {
-        return BankSystem.getInstance().getUserManager().getUserByAfm(afm);
+        return bankSystem.getUserManager().getUserByAfm(afm);
     }
 
     // ============================================================
@@ -62,12 +74,12 @@ public class BankController {
     // ============================================================
 
     public List<Account> getAccountsForUser(User user) {
-        return BankSystem.getInstance().getAccountManager().getAccountsByOwner(user.getAfm());
+        return bankSystem.getAccountManager().getAccountsByOwner(user.getAfm());
     }
 
     public List<Account> searchAccounts(String query) {
         List<Account> foundAccounts = new ArrayList<>();
-        List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers();
+        List<User> allUsers = bankSystem.getUserManager().getUsers();
         
         for (User u : allUsers) {
             String fullName = (u.getFirstName() + " " + u.getLastName()).toLowerCase();
@@ -79,7 +91,7 @@ public class BankController {
     }
 
     public void addOwnerToAccount(String iban, String newOwnerAfm) throws Exception {
-        Account acc = BankSystem.getInstance().getAccountManager().getAccount(iban);
+        Account acc = bankSystem.getAccountManager().getAccount(iban);
         if (acc == null) throw new Exception("Account not found");
 
         User newOwner = getOwner(newOwnerAfm);
@@ -102,15 +114,29 @@ public class BankController {
     // 3. TRANSACTIONS (FACTORY & COMMAND PATTERNS)
     // ============================================================
 
-    public void handleDeposit(String iban, double amount) throws Exception {
+    public void handleDeposit(String iban, double amount,String description) throws Exception {
         // Pattern: Factory (CommandFactory)
-        BankCommandPattern deposit = CommandFactory.createCommand("DEPOSIT", transactionManager, iban, null, amount, "Deposit via App");
+        BankCommandPattern deposit;
+        if(description.isBlank()){
+              deposit = CommandFactory.createCommand("DEPOSIT", transactionManager, iban, null, amount, "Deposit via App");
+        }else{
+               deposit = CommandFactory.createCommand("DEPOSIT", transactionManager, iban, null, amount, description);
+        
+        }
         deposit.execute(); // Pattern: Command
         saveData();
     }
+    public void handleWithdraw(String iban, double amount,String description) throws Exception {
+        BankCommandPattern withdraw;
+        
+        if(description.isEmpty())
 
-    public void handleWithdraw(String iban, double amount) throws Exception {
-        BankCommandPattern withdraw = CommandFactory.createCommand("WITHDRAW", transactionManager, iban, null, amount, "Withdrawal via App");
+             withdraw = CommandFactory.createCommand("WITHDRAW", transactionManager, iban, null, amount, "Withdrawal via App");
+
+        else
+            {
+            withdraw = CommandFactory.createCommand("WITHDRAW", transactionManager, iban, null, amount, description);
+        }
         withdraw.execute();
         saveData();
     }
@@ -134,7 +160,7 @@ public class BankController {
         double commPercent = (commStr != null) ? Double.parseDouble(commStr) : 5.0; // Default 5%
         
         double commissionFee = amount * (commPercent / 100.0);
-        Account sourceAcc = BankSystem.getInstance().getAccountManager().getAccount(sourceIban);
+        Account sourceAcc = bankSystem.getAccountManager().getAccount(sourceIban);
         
         if (sourceAcc.getBalance() < (amount + commissionFee)) {
             throw new Exception("Insufficient balance for transfer + fee.");
@@ -181,7 +207,7 @@ public class BankController {
             throw new Exception("Invalid Date Format. Please use dd/MM/yyyy");
         }
 
-        if (expireDate.isBefore(BankSystem.getInstance().getTimeSimulator().getCurrentDate().toLocalDate())) {
+        if (expireDate.isBefore(bankSystem.getTimeSimulator().getCurrentDate().toLocalDate())) {
             throw new Exception("Expiration date cannot be in the past.");
         }
 
@@ -190,24 +216,24 @@ public class BankController {
             newBill.setPayerAfm(payerAfm); 
         }
 
-        BankSystem.getInstance().getBillManager().addBill(newBill);
+        bankSystem.getBillManager().addBill(newBill);
         saveData(); 
         return rfCode;
     }
 
     public Bill getBillByRF(String rf) throws Exception {
-        Bill bill = BankSystem.getInstance().getBillManager().getBillByRf(rf);
+        Bill bill = bankSystem.getBillManager().getBillByRf(rf);
         if (bill == null) throw new Exception("Bill with RF " + rf + " not found.");
         return bill;
     }
 
     public void payBill(String rfCode, String payerIban, String payerAfm) throws Exception {
-        BankSystem.getInstance().getBillManager().payBill(rfCode, payerIban, payerAfm, transactionManager);
+        bankSystem.getBillManager().payBill(rfCode, payerIban, payerAfm, transactionManager);
         saveData();
     }
 
     public List<Bill> getBillsByBusiness(String businessAfm) {
-        List<Bill> allBills = BankSystem.getInstance().getBillManager().getAllBills();
+        List<Bill> allBills = bankSystem.getBillManager().getAllBills();
         List<Bill> myBills = new ArrayList<>();
         for (Bill b : allBills) {
             if (b.getBuisinessAfm().equals(businessAfm)) {
@@ -218,7 +244,7 @@ public class BankController {
     }
 
     public void deleteBill(String rfCode) {
-        List<Bill> bills = BankSystem.getInstance().getBillManager().getAllBills();
+        List<Bill> bills = bankSystem.getBillManager().getAllBills();
         bills.removeIf(b -> b.getRfCode().equals(rfCode));
         saveData();
     }
@@ -250,17 +276,17 @@ public class BankController {
             so = StandingOrderFactory.createTransferOrder(source, target, amount, desc, day, expireDate);
         }
 
-        BankSystem.getInstance().getStandingOrderManager().addOrder(so);
+        bankSystem.getStandingOrderManager().addOrder(so);
         saveData();
     }
 
     public void deleteStandingOrder(StandingOrder order) {
-        BankSystem.getInstance().getStandingOrderManager().deleteOrder(order);
+        bankSystem.getStandingOrderManager().deleteOrder(order);
         saveData();
     }
 
     public List<StandingOrder> getStandingOrdersForUser(User user) {
-        List<StandingOrder> allOrders = BankSystem.getInstance().getStandingOrderManager().getOrders();
+        List<StandingOrder> allOrders = bankSystem.getStandingOrderManager().getOrders();
         List<Account> userAccounts = getAccountsForUser(user);
         List<StandingOrder> myOrders = new ArrayList<>();  
 
@@ -285,5 +311,47 @@ public class BankController {
         } catch (Exception e) {
             System.out.println("Error autosaving data: " + e.getMessage());
         }
+    }
+
+    public void handleDateChange(LocalDateTime newDate) {
+        bankSystem.performDailyTasks(newDate);
+    }
+
+    public TimeSimulator getTimeSimulator() {
+      return bankSystem.getTimeSimulator();
+    }
+
+    public Account createAccountForUser(User user, String selectedType, double d, String afm) throws Exception {
+        
+       Account newAcc = bankSystem.getAccountManager().createAccount(selectedType, 0.0, afm);
+       return newAcc;
+    }
+
+    public ArrayList<String> getOwnersByIban(String iban) {
+          return  (ArrayList<String>)bankSystem.getAccountManager().getAccount(iban).getOwners() ;
+    }
+
+    public void updateUser(User user,String fName ,String lName ,String email ,String phone ,String username ,String password ,String afm ) {
+        try {
+            bankSystem.getUserManager().updateUser(user, fName , lName , email , phone ,username ,password ,afm );
+        } catch (Exception e) {
+             
+            e.printStackTrace();
+        }
+    }
+
+    public List<User> getUsers() {
+        return bankSystem.getUserManager().getUsers();
+
+    }
+
+
+    public Account getAccount(String iban) {
+        return BankSystem.getInstance().getAccountManager().getAccount(iban);
+    }
+
+
+    public List<Account> getAccountsByOwner(String afm) {
+       return BankSystem.getInstance().getAccountManager().getAccountsByOwner(afm);
     }
 }

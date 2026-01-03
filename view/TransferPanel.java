@@ -33,7 +33,7 @@ public class TransferPanel extends JPanel {
     public TransferPanel(User user, String type, Runnable onSuccess) {
         this.user = user;
         this.type = type;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         this.onTransactionSuccess = onSuccess;
 
         setLayout(new BorderLayout());
@@ -130,8 +130,8 @@ public class TransferPanel extends JPanel {
             if(type.equals("WITHDRAW") || type.equals("DEPOSIT")) {
                 try {
                     double am = Double.parseDouble(fAmount.getText());
-                    if(type.equals("WITHDRAW")) controller.handleWithdraw(src, am);
-                    else controller.handleDeposit(src, am);
+                    if(type.equals("WITHDRAW")) controller.handleWithdraw(src, am,"");
+                    else controller.handleDeposit(src, am,"");
                     JOptionPane.showMessageDialog(this, "Success!");
                     onTransactionSuccess.run();
                 } catch(Exception ex) { JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage()); }
