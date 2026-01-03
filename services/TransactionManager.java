@@ -39,7 +39,7 @@ public class TransactionManager {
         account.addTransaction(transaction);
         
         System.out.println("Successful Deposit " + amount + "€ to " + iban);
-        controller.saveData();
+        BankController.getInstance().saveData();
         
     }
 
@@ -62,7 +62,7 @@ public class TransactionManager {
                 .build();
 
         account.addTransaction(transaction);
-        controller.saveData();
+        BankController.getInstance().saveData();
         System.out.println("Successful withdrawal " + amount + "€ from " + iban);
     }
 
@@ -100,7 +100,7 @@ public class TransactionManager {
                 .build();
         targetAcc.addTransaction(tIn); 
 
-        controller.saveData();
+        BankController.getInstance().saveData();
         System.out.println("Successful Transfer " + amount + "€ from " + sourceIban + " to " + targetIban);
     }
 

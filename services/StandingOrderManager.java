@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.BankController;
+
 public class StandingOrderManager {
 
     private List<StandingOrder> orders;
@@ -54,7 +56,7 @@ public class StandingOrderManager {
                             "Bill Payment RF: " + order.getTargetRfCode(),BankSystem.getInstance().getTimeSimulator().getCurrentDate() 
                         );
                         
-                         bm.markAsPaid(order.getTargetRfCode(), "AUTO-PAYMENT");
+                        bm.markAsPaid(order.getTargetRfCode(), "AUTO-PAYMENT FROM" + BankController.getInstance().getOwnersByIban(order.getSource().toString()).getFirst());
                     }
 
                      order.updateNextTime();

@@ -123,7 +123,7 @@ public class Transaction {
         private double amount;
         private String type;
 
-        private BankController controller;
+        private BankController controller = BankController.getInstance();
         
         // Default τιμές
         private LocalDateTime timestamp = controller.getTimeSimulator().getCurrentDate();

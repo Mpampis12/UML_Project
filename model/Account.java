@@ -50,19 +50,20 @@ public class Account {
 
     public void deposit(double amount) throws Exception {
         if (amount <= 0) {
-            throw new Exception("Wrong Type of Account");
+            throw new Exception("Wrong Type of Amount");
         }
         this.balance += amount;
     }
 
 
     public void withdraw(double amount) throws Exception {
-        if (amount <= 0) {
-            throw new Exception("Wrong Type of amount");
+        if (amount <= 0.000000) {
+            throw new Exception("Wrong Type of Amount");
         }
         if (this.balance >= amount) {
             this.balance -= amount;
-        } else {
+        }
+        else {
             throw new Exception("Not enough money bruhh!");
         }
     }

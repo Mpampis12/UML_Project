@@ -30,7 +30,7 @@ public class BankController {
 
     private BankController() {
         this.bankSystem = BankSystem.getInstance();
-        //this.transactionManager = bankSystem.getTransactionManager();
+        this.transactionManager = bankSystem.getTransactionManager();
     }
 
     // ============================================================
@@ -163,6 +163,7 @@ public class BankController {
         Account sourceAcc = bankSystem.getAccountManager().getAccount(sourceIban);
         
         if (sourceAcc.getBalance() < (amount + commissionFee)) {
+            System.out.println("Source Balance: " + sourceAcc.getBalance() + ", Required: " + (amount + commissionFee));
             throw new Exception("Insufficient balance for transfer + fee.");
         }
 
