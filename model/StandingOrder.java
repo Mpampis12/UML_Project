@@ -150,4 +150,9 @@ public class StandingOrder {
         if(this.attempts >= 3) this.status = OrderStatus.FAILD;
         else this.nexTime = this.nexTime.plusDays(NEXT_TIME_ON_FAILED);
     }
+
+    public Object getExpiredDay() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getExpiredDay'");
+    }
 }

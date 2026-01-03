@@ -29,7 +29,7 @@ public class BankSystem {
         this.standingOrderManager = new StandingOrderManager();
         this.timeSimulator = new TimeSimulator();
     
-        this.transactionManager = new TransactionManager(this.accountManager);
+        this.transactionManager = new TransactionManager();
         this.daoHandler= DAO.DaoHandler.getInstance();
         this.bankApiService = new BankApiService();
     }

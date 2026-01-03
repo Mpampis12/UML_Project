@@ -154,7 +154,7 @@
       "iban": {
         "ibanNumber": "GR100202503111546001"
       },
-      "balance": 1000.0,
+      "balance": 45.0,
       "creationDate": "09/03/2026 17:10:32",
       "owners": [
         "067688302",
@@ -170,6 +170,112 @@
             "ibanNumber": "GR100202503111546001"
           },
           "timestamp": "03/01/2026 01:42:57"
+        },
+        {
+          "transactionID": "TX-8C7E54A7",
+          "amount": 25.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Transfer via App",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "01/01/2026 06:20:25"
+        },
+        {
+          "transactionID": "TX-213AADA5",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/01/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-DE6D6E76",
+          "amount": 450.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546003: Standing Order: GIOLDASIS RENT",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-03B904B6",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-480E77BC",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-3CD04149",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-2C9FE017",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-B12DA96B",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-266340F8",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-FA861CAA",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "timestamp": "02/08/2026 06:23:03"
         }
       ],
       "type": "PERSONAL"
@@ -178,7 +284,7 @@
       "iban": {
         "ibanNumber": "GR100202503111546002"
       },
-      "balance": 2000.0,
+      "balance": 20.0,
       "creationDate": "20/03/2026 17:10:32",
       "owners": [
         "067688303"
@@ -193,6 +299,200 @@
             "ibanNumber": "GR100202503111546002"
           },
           "timestamp": "03/01/2026 01:43:24"
+        },
+        {
+          "transactionID": "TX-46045DCF",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/01/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-8080B9C1",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-CE22667D",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-E4519427",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-01E5A75C",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-6A413BE6",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-E1EAEB0B",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-B0C47157",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-98FA85E8",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-16CDD53E",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-BB074C16",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-8E8132FC",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-429C65CF",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-1AD858F8",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-6CD39AD4",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7CC669D3",
+          "amount": 60.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203041",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "timestamp": "02/09/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7A39B4B3",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546006: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/09/2026 06:23:03"
         }
       ],
       "type": "PERSONAL"
@@ -201,7 +501,7 @@
       "iban": {
         "ibanNumber": "GR100202503111546003"
       },
-      "balance": 3050.0,
+      "balance": 2400.0,
       "creationDate": "02/04/2026 17:10:32",
       "owners": [
         "067688304"
@@ -216,6 +516,162 @@
             "ibanNumber": "GR100202503111546003"
           },
           "timestamp": "03/01/2026 01:43:46"
+        },
+        {
+          "transactionID": "TX-DE6D6E76",
+          "amount": 450.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546001: Standing Order: GIOLDASIS RENT",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-79776BAC",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-2EFE2B74",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-04B3AED9",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-3FB81AE1",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7F0F012B",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-9480FA41",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-62B0789A",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-347ECE52",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/09/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-BC949E08",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/10/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-5CCD15C2",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/11/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-E907A0BD",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer to GR100202503111546005: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/12/2026 06:23:03"
         }
       ],
       "type": "PERSONAL"
@@ -224,7 +680,7 @@
       "iban": {
         "ibanNumber": "GR100202503111546006"
       },
-      "balance": 625.16,
+      "balance": 2060.7,
       "creationDate": "27/04/2026 17:10:32",
       "owners": [
         "067688305",
@@ -241,6 +697,133 @@
             "ibanNumber": "GR100202503111546006"
           },
           "timestamp": "03/01/2026 01:45:28"
+        },
+        {
+          "transactionID": "TX-8C7E54A7",
+          "amount": 25.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546001: Transfer via App",
+          "source": {
+            "ibanNumber": "GR100202503111546001"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "01/01/2026 06:20:25"
+        },
+        {
+          "transactionID": "TX-347C53F0",
+          "amount": 29.46,
+          "type": "WITHDRAWAL",
+          "description": "Payment of Bill RF: RF10203040",
+          "source": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "01/01/2026 06:20:25"
+        },
+        {
+          "transactionID": "TX-8080B9C1",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-01E5A75C",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-E1EAEB0B",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-98FA85E8",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-BB074C16",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-429C65CF",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-6CD39AD4",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7A39B4B3",
+          "amount": 180.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546002: Standing Order: ΑΓΓΛΙΚΑ Λ.",
+          "source": {
+            "ibanNumber": "GR100202503111546002"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "15/09/2026 06:23:03"
         }
       ],
       "type": "PERSONAL"
@@ -261,7 +844,7 @@
       "iban": {
         "ibanNumber": "GR100202503111546005"
       },
-      "balance": 54.32,
+      "balance": 504.31999999999994,
       "creationDate": "02/06/2026 17:10:32",
       "owners": [
         "067688307"
@@ -276,6 +859,279 @@
             "ibanNumber": "GR100202503111546005"
           },
           "timestamp": "03/01/2026 01:44:53"
+        },
+        {
+          "transactionID": "TX-55B0D37B",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/01/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-79776BAC",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "01/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-519B8EBF",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/02/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-1599BDC6",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-2EFE2B74",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/03/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-783164F2",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-04B3AED9",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/04/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7EA2BB56",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-3FB81AE1",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/05/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-F70BF240",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-7F0F012B",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/06/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-A8F0797A",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-9480FA41",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/07/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-37FCDCCD",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-62B0789A",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/08/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-8373D6DE",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/09/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-347ECE52",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/09/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-11CE02A8",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/10/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-BC949E08",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/10/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-6CD4A9E6",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/11/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-5CCD15C2",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/11/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-0BDAAF44",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/12/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-E907A0BD",
+          "amount": 100.0,
+          "type": "TRANSFER",
+          "description": "Transfer from GR100202503111546003: Standing Order: ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "target": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "28/12/2026 06:23:03"
+        },
+        {
+          "transactionID": "TX-B2EE5E0E",
+          "amount": 50.0,
+          "type": "WITHDRAWAL",
+          "description": "Bill Payment RF: RF10203043",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "02/01/2027 06:23:03"
         }
       ],
       "type": "PERSONAL"
@@ -284,7 +1140,7 @@
       "iban": {
         "ibanNumber": "GR200202503131719401"
       },
-      "balance": 10000.0,
+      "balance": 9880.0,
       "creationDate": "18/06/2026 17:10:32",
       "owners": [
         "090800700"
@@ -299,6 +1155,246 @@
             "ibanNumber": "GR200202503131719401"
           },
           "timestamp": "03/01/2026 01:50:47"
+        },
+        {
+          "transactionID": "TX-9667C0A4",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:25:39"
+        },
+        {
+          "transactionID": "TX-1296939F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:27:59"
+        },
+        {
+          "transactionID": "TX-4F30895F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:30:35"
+        },
+        {
+          "transactionID": "TX-C919A773",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:33:05"
+        },
+        {
+          "transactionID": "TX-5541931B",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:35:40"
+        },
+        {
+          "transactionID": "TX-220F27EF",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:38:11"
+        },
+        {
+          "transactionID": "TX-8E9C283D",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:40:46"
+        },
+        {
+          "transactionID": "TX-DCD834B9",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:43:21"
+        },
+        {
+          "transactionID": "TX-EDA89F48",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:45:51"
+        },
+        {
+          "transactionID": "TX-800062CB",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:48:27"
+        },
+        {
+          "transactionID": "TX-BD96DDA0",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:50:57"
+        },
+        {
+          "transactionID": "TX-BBC16E42",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:53:32"
+        },
+        {
+          "transactionID": "TX-4CA19030",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:56:07"
+        },
+        {
+          "transactionID": "TX-60D7ECE4",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 06:58:28"
+        },
+        {
+          "transactionID": "TX-B884234F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:01:03"
+        },
+        {
+          "transactionID": "TX-1D91F48B",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:03:33"
+        },
+        {
+          "transactionID": "TX-F400C3F0",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:06:08"
+        },
+        {
+          "transactionID": "TX-4B684409",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:08:39"
+        },
+        {
+          "transactionID": "TX-9003B084",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:11:14"
+        },
+        {
+          "transactionID": "TX-1DA33E8F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:13:49"
+        },
+        {
+          "transactionID": "TX-691AF81C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:16:20"
+        },
+        {
+          "transactionID": "TX-BD7677C5",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:18:55"
+        },
+        {
+          "transactionID": "TX-AA9C0430",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:21:25"
+        },
+        {
+          "transactionID": "TX-B59276A2",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 07:24:00"
         }
       ],
       "type": "BUSINESS"
@@ -307,7 +1403,7 @@
       "iban": {
         "ibanNumber": "GR200202503131719402"
       },
-      "balance": 20500.0,
+      "balance": 20409.46,
       "creationDate": "30/06/2026 17:10:32",
       "owners": [
         "090800800"
@@ -322,6 +1418,256 @@
             "ibanNumber": "GR200202503131719402"
           },
           "timestamp": "03/01/2026 01:51:09"
+        },
+        {
+          "transactionID": "TX-2A4EC8E7",
+          "amount": 29.46,
+          "type": "DEPOSIT",
+          "description": "Bill Payment Received RF: RF10203040 from 067688302",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "01/01/2026 06:20:25"
+        },
+        {
+          "transactionID": "TX-E236D105",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:25:39"
+        },
+        {
+          "transactionID": "TX-EA316D55",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:27:59"
+        },
+        {
+          "transactionID": "TX-2E8057D4",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:30:35"
+        },
+        {
+          "transactionID": "TX-677CC06E",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:33:05"
+        },
+        {
+          "transactionID": "TX-FCE4B46D",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:35:40"
+        },
+        {
+          "transactionID": "TX-3918BE57",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:38:11"
+        },
+        {
+          "transactionID": "TX-2F9CFB5A",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:40:46"
+        },
+        {
+          "transactionID": "TX-AEE8BFA8",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:43:21"
+        },
+        {
+          "transactionID": "TX-5EDFF4FE",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:45:51"
+        },
+        {
+          "transactionID": "TX-BF6B7646",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:48:27"
+        },
+        {
+          "transactionID": "TX-8F7D7E5A",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:50:57"
+        },
+        {
+          "transactionID": "TX-0B125030",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:53:32"
+        },
+        {
+          "transactionID": "TX-F9C95776",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:56:07"
+        },
+        {
+          "transactionID": "TX-35EA48BA",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 06:58:28"
+        },
+        {
+          "transactionID": "TX-84157549",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:01:03"
+        },
+        {
+          "transactionID": "TX-0F56E3DB",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:03:33"
+        },
+        {
+          "transactionID": "TX-63FF4554",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:06:08"
+        },
+        {
+          "transactionID": "TX-CF2ED641",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:08:39"
+        },
+        {
+          "transactionID": "TX-97D3D794",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:11:14"
+        },
+        {
+          "transactionID": "TX-C087AE55",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:13:49"
+        },
+        {
+          "transactionID": "TX-15D82444",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:16:20"
+        },
+        {
+          "transactionID": "TX-46884C40",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:18:55"
+        },
+        {
+          "transactionID": "TX-8F8771B6",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:21:25"
+        },
+        {
+          "transactionID": "TX-39354B17",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 07:24:00"
         }
       ],
       "type": "BUSINESS"
@@ -330,7 +1676,7 @@
       "iban": {
         "ibanNumber": "GR200202503131719403"
       },
-      "balance": 100000.0,
+      "balance": 99880.0,
       "creationDate": "07/07/2026 17:10:32",
       "owners": [
         "090800900"
@@ -345,6 +1691,246 @@
             "ibanNumber": "GR200202503131719403"
           },
           "timestamp": "03/01/2026 01:51:28"
+        },
+        {
+          "transactionID": "TX-73EE5755",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:25:39"
+        },
+        {
+          "transactionID": "TX-5403FB00",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:27:59"
+        },
+        {
+          "transactionID": "TX-05D6FF85",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:30:35"
+        },
+        {
+          "transactionID": "TX-99DDA646",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:33:05"
+        },
+        {
+          "transactionID": "TX-659C7F18",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:35:40"
+        },
+        {
+          "transactionID": "TX-24EB960C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:38:11"
+        },
+        {
+          "transactionID": "TX-9E04E5B7",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:40:46"
+        },
+        {
+          "transactionID": "TX-C8F43EE5",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:43:21"
+        },
+        {
+          "transactionID": "TX-2B8F6CAA",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:45:51"
+        },
+        {
+          "transactionID": "TX-7E0B1834",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:48:27"
+        },
+        {
+          "transactionID": "TX-39B2DF4C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:50:57"
+        },
+        {
+          "transactionID": "TX-821F31FB",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:53:32"
+        },
+        {
+          "transactionID": "TX-31870D3F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:56:07"
+        },
+        {
+          "transactionID": "TX-CED83913",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 06:58:28"
+        },
+        {
+          "transactionID": "TX-BBEDC8FA",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:01:03"
+        },
+        {
+          "transactionID": "TX-C5F672F9",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:03:33"
+        },
+        {
+          "transactionID": "TX-3CFA49B9",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:06:08"
+        },
+        {
+          "transactionID": "TX-DD467FC1",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:08:39"
+        },
+        {
+          "transactionID": "TX-60CEA97E",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:11:14"
+        },
+        {
+          "transactionID": "TX-84946F74",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:13:49"
+        },
+        {
+          "transactionID": "TX-428DA7D7",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:16:20"
+        },
+        {
+          "transactionID": "TX-49D8941B",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:18:55"
+        },
+        {
+          "transactionID": "TX-09A1F75F",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:21:25"
+        },
+        {
+          "transactionID": "TX-F55F4695",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 07:24:00"
         }
       ],
       "type": "BUSINESS"
@@ -353,7 +1939,7 @@
       "iban": {
         "ibanNumber": "GR200202503131719404"
       },
-      "balance": 7230.0,
+      "balance": 7110.0,
       "creationDate": "17/07/2026 17:10:32",
       "owners": [
         "090800600"
@@ -368,6 +1954,246 @@
             "ibanNumber": "GR200202503131719404"
           },
           "timestamp": "03/01/2026 01:51:39"
+        },
+        {
+          "transactionID": "TX-9B98A4E6",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:25:39"
+        },
+        {
+          "transactionID": "TX-FE33FD11",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:27:59"
+        },
+        {
+          "transactionID": "TX-C3532F19",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:30:35"
+        },
+        {
+          "transactionID": "TX-93BA615C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:33:05"
+        },
+        {
+          "transactionID": "TX-7585DFB8",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:35:40"
+        },
+        {
+          "transactionID": "TX-8711AE19",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:38:11"
+        },
+        {
+          "transactionID": "TX-133948BD",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:40:46"
+        },
+        {
+          "transactionID": "TX-F58A985C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:43:21"
+        },
+        {
+          "transactionID": "TX-E4E19DCB",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:45:51"
+        },
+        {
+          "transactionID": "TX-45B85270",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:48:27"
+        },
+        {
+          "transactionID": "TX-2D4D9496",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:50:57"
+        },
+        {
+          "transactionID": "TX-3194E082",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:53:32"
+        },
+        {
+          "transactionID": "TX-1F83DAC3",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:56:07"
+        },
+        {
+          "transactionID": "TX-24F1FDCE",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 06:58:28"
+        },
+        {
+          "transactionID": "TX-8C169BA1",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:01:03"
+        },
+        {
+          "transactionID": "TX-4D304A0D",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:03:33"
+        },
+        {
+          "transactionID": "TX-D13CD42D",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:06:09"
+        },
+        {
+          "transactionID": "TX-2EC907D2",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:08:39"
+        },
+        {
+          "transactionID": "TX-AA906097",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:11:14"
+        },
+        {
+          "transactionID": "TX-9C93A33C",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:13:49"
+        },
+        {
+          "transactionID": "TX-B7EDB306",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:16:20"
+        },
+        {
+          "transactionID": "TX-0682490A",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:18:55"
+        },
+        {
+          "transactionID": "TX-D11A8476",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:21:25"
+        },
+        {
+          "transactionID": "TX-422B3B12",
+          "amount": 5.0,
+          "type": "WITHDRAWAL",
+          "description": "Monthly Business Account Fee",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 07:24:00"
         }
       ],
       "type": "BUSINESS"
@@ -429,8 +2255,8 @@
       "expireDate": "31/01/2026 01:53:12",
       "targetIban": "GR200202503131719402",
       "buisinessAfm": "090800800",
-      "payerAfm": "067688302",
-      "billStatus": "PENDING"
+      "payerAfm": "AUTO-PAYMENT",
+      "billStatus": "PAID"
     },
     {
       "rfCode": "RF10203041",
@@ -440,8 +2266,8 @@
       "expireDate": "31/01/2026 01:53:12",
       "targetIban": "GR200202503131719402",
       "buisinessAfm": "090800800",
-      "payerAfm": "067688303",
-      "billStatus": "PENDING"
+      "payerAfm": "AUTO-PAYMENT",
+      "billStatus": "PAID"
     },
     {
       "rfCode": "RF10203042",
@@ -462,8 +2288,8 @@
       "expireDate": "31/01/2026 01:53:12",
       "targetIban": "GR200202503131719402",
       "buisinessAfm": "090800800",
-      "payerAfm": "067688307",
-      "billStatus": "PENDING"
+      "payerAfm": "AUTO-PAYMENT",
+      "billStatus": "PAID"
     },
     {
       "rfCode": "RF10203044",
@@ -553,11 +2379,11 @@
       },
       "targetRfCode": "RF10203040",
       "dayOfMonth": 2,
-      "nexTime": "02/01/2026 02:23:00",
+      "nexTime": "06/09/2026 02:23:00",
       "expiredDay": "03/01/2027 02:25:15",
       "type": "BILL",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -569,10 +2395,10 @@
       },
       "targetRfCode": "RF10203043",
       "dayOfMonth": 2,
-      "nexTime": "02/01/2026 02:23:00",
+      "nexTime": "02/02/2027 02:23:00",
       "expiredDay": "03/01/2027 02:25:15",
       "type": "BILL",
-      "status": "ACTIVE",
+      "status": "COMPLETED",
       "attempts": 0,
       "NEXT_TIME_ON_FAILED": 2
     },
@@ -585,11 +2411,11 @@
       },
       "targetRfCode": "RF10203041",
       "dayOfMonth": 2,
-      "nexTime": "02/01/2026 02:23:00",
+      "nexTime": "06/10/2026 02:23:00",
       "expiredDay": "03/01/2027 02:25:15",
       "type": "BILL",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -601,11 +2427,11 @@
       },
       "targetRfCode": "RF10203050",
       "dayOfMonth": 2,
-      "nexTime": "02/01/2026 02:23:00",
+      "nexTime": "06/01/2026 02:23:00",
       "expiredDay": "03/01/2027 02:25:15",
       "type": "BILL",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -620,11 +2446,11 @@
       },
       "targetRfCode": "-",
       "dayOfMonth": 1,
-      "nexTime": "01/02/2026 02:29:54",
+      "nexTime": "05/03/2026 02:29:54",
       "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -639,11 +2465,11 @@
       },
       "targetRfCode": "-",
       "dayOfMonth": 15,
-      "nexTime": "01/02/2026 02:29:54",
+      "nexTime": "19/10/2026 02:29:54",
       "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -658,11 +2484,11 @@
       },
       "targetRfCode": "-",
       "dayOfMonth": 10,
-      "nexTime": "01/02/2026 02:29:54",
+      "nexTime": "05/02/2026 02:29:54",
       "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
@@ -677,10 +2503,10 @@
       },
       "targetRfCode": "-",
       "dayOfMonth": 28,
-      "nexTime": "01/02/2026 02:29:54",
+      "nexTime": "28/01/2027 02:29:54",
       "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
-      "status": "ACTIVE",
+      "status": "COMPLETED",
       "attempts": 0,
       "NEXT_TIME_ON_FAILED": 2
     },
@@ -696,11 +2522,11 @@
       },
       "targetRfCode": "-",
       "dayOfMonth": 1,
-      "nexTime": "01/02/2026 02:29:54",
+      "nexTime": "05/02/2026 02:29:54",
       "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
-      "status": "ACTIVE",
-      "attempts": 0,
+      "status": "FAILD",
+      "attempts": 3,
       "NEXT_TIME_ON_FAILED": 2
     }
   ]

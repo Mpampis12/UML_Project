@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import control.BankController;
 import services.BankSystem;
 public class WithdrawPanel extends JPanel{
-    
+    private BankController controller;
     public WithdrawPanel() {
+
         setLayout(new GridBagLayout());
         setBackground(StyleHelpers.MUSTARD_BG);
-        
+        this.controller = new BankController();
+
         JPanel card = new StyleHelpers.RoundedPanel(20, Color.WHITE);
         card.setLayout(new GridLayout(7, 2, 10, 10));
         card.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));

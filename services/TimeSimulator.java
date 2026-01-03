@@ -8,7 +8,7 @@ public class TimeSimulator implements Runnable {
 
     private LocalDateTime currentDate;
     private boolean running;
-    private int simulationSpeedMs = 5000000; //1 sec is one mera
+    private int simulationSpeedMs = 5000; //1 sec is one mera
     
  
     private Consumer<LocalDateTime> dateChangeListener;

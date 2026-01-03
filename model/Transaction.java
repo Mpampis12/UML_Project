@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import services.BankSystem;
+
 public class Transaction {
     private String transactionID;
     private double amount;
@@ -119,7 +121,7 @@ public class Transaction {
         private String type;
 
         // Default τιμές
-        private LocalDateTime timestamp = LocalDateTime.now();
+        private LocalDateTime timestamp = BankSystem.getInstance().getTimeSimulator().getCurrentDate();
         private String description = "";
         private String sourceIban = null;
         private String targetIban = null;

@@ -54,7 +54,8 @@ public class HistoryPanel extends JPanel {
         // Load Data
         List<Account> accounts = controller.getAccountsForUser(user);
         List<Transaction> allTrans = new ArrayList<>();
-        for (Account acc : accounts) allTrans.addAll(acc.getTransaction());
+        for (Account acc : accounts) 
+            allTrans.addAll(acc.getTransaction());
         Collections.reverse(allTrans);
 
         for (Transaction t : allTrans) {
