@@ -75,7 +75,7 @@ public class StandingOrder {
 
     public StandingOrder() {}
 
-    public StandingOrder(Iban source, String targetIdentifier, double amount, String description, int dayOfMonth, StandingOrderPurpose type) {
+    public StandingOrder(Iban source, String targetIdentifier, double amount, String description, int dayOfMonth, StandingOrderPurpose type,LocalDateTime expiredDay) {
         this.standinID = UUID.randomUUID().toString().substring(0, 8);
         this.source = source;
         this.amount = amount;
@@ -84,7 +84,7 @@ public class StandingOrder {
         this.type = type;
         this.status = OrderStatus.ACTIVE;
         this.attempts = 0;
-        this.expiredDay = LocalDateTime.now().plusYears(1);
+        this.expiredDay = expiredDay;
 
         if (type == StandingOrderPurpose.TRANSFER) {
             this.target = new Iban(targetIdentifier);

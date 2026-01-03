@@ -1,6 +1,7 @@
 package control;
 
 import services.BankSystem;
+import services.ConfigManager;
 import services.TransactionManager;
 import model.User;
 import model.Account;
@@ -10,13 +11,19 @@ import model.StandingOrder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class BankController {
-
+    
+    private ConfigManager config = ConfigManager.getInstance();
     private TransactionManager transactionManager;
+
+    public ConfigManager getConfig() {
+        return config;
+    }
 
     public BankController() {
         // Παίρνουμε τον TransactionManager μέσα από το Singleton BankSystem
@@ -80,22 +87,33 @@ public class BankController {
         BankSystem.getInstance().getStandingOrderManager().deleteOrder(order);
         saveData();
     }
-public String createBill(String targetIban, String businessAfm, double amount, String description, String payerAfm) {
+public String createBill(String targetIban, String businessAfm, double amount, String description, String payerAfm, String expireDateStr) throws Exception {
+        
         // Δημιουργία τυχαίου RF Code
         String rfCode = "RF" + Math.abs(UUID.randomUUID().getMostSignificantBits());
         rfCode = rfCode.substring(0, 12); 
 
-        LocalDateTime expireDate = BankSystem.getInstance().getTimeSimulator().getCurrentDate().plusDays(30);
+        // Μετατροπή String σε LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate  expireDate;
+        try {
+            expireDate = LocalDate.parse(expireDateStr, formatter);
+        } catch (Exception e) {
+            throw new Exception("Invalid Date Format. Please use dd/MM/yyyy");
+        }
 
-        // Περνάμε το targetIban στον Constructor
-        Bill newBill = new Bill(rfCode, targetIban, amount, description, businessAfm, expireDate);
+        if (expireDate.isBefore(BankSystem.getInstance().getTimeSimulator().getCurrentDate().toLocalDate())) {
+            throw new Exception("Expiration date cannot be in the past.");
+        }
+
+        Bill newBill = new Bill(rfCode, targetIban, amount, description, businessAfm, expireDate.atStartOfDay());
         
         if (payerAfm != null && !payerAfm.isEmpty()) {
             newBill.setPayerAfm(payerAfm); 
         }
 
         BankSystem.getInstance().getBillManager().addBill(newBill);
-        saveData(); // Αποθήκευση στη βάση
+        saveData(); 
         return rfCode;
     }
     public  Bill getBillByRF(String rf) throws Exception {
@@ -136,6 +154,17 @@ public String createBill(String targetIban, String businessAfm, double amount, S
             
             services.BankApiService api = BankSystem.getInstance().getBankApiService();
             services.BankApiService.ApiResponse response;
+            String commStr = String.valueOf(config.getPropertyAsDouble("busness.fee.monthly"));
+            double commPercent = (commStr != null) ? Double.parseDouble(commStr) : 5.0; // Default 5% αν δεν βρεθεί
+            
+            double commissionFee = amount * (commPercent / 100.0);
+            double totalDeduction = amount + commissionFee;
+
+            // Έλεγχος υπολοίπου (γιατί τώρα αφαιρούμε περισσότερα)
+            Account sourceAcc = BankSystem.getInstance().getAccountManager().getAccount(sourceIban);
+            if (sourceAcc.getBalance() < totalDeduction) {
+                throw new Exception("Insufficient balance for transfer + " + commPercent + "% commission (" + commissionFee + "€).");
+            }
 
             // 1. Καλούμε το API
             if (type.equals("SEPA")) {
@@ -148,6 +177,11 @@ public String createBill(String targetIban, String businessAfm, double amount, S
             transactionManager.withdraw(sourceIban, amount, type + " Transfer to " + name + " (ID: " + response.transaction_id + ")",BankSystem.getInstance().getTimeSimulator().getCurrentDate() );
             
             System.out.println("External Transfer Success: " + response.message);
+            // 3. Χρέωση της προμήθειας (ξεχωριστή συναλλαγή για να φαίνεται)
+            if (commissionFee > 0) {
+                transactionManager.withdraw(sourceIban, commissionFee, "Bank Commission Fee (" + commPercent + "%)", BankSystem.getInstance().getTimeSimulator().getCurrentDate());
+                System.out.println("External Transfer Success with Commission: " + commissionFee);
+            }
             saveData();
         }
         public List<StandingOrder> getStandingOrdersForUser(User user) {
@@ -168,9 +202,9 @@ public String createBill(String targetIban, String businessAfm, double amount, S
     }
         return myOrders; 
     }
-    public java.util.List<Account> searchAccounts(String query) {
-        java.util.List<Account> foundAccounts = new java.util.ArrayList<>();
-        java.util.List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers(); // Υποθέτουμε ότι υπάρχει getCustomers/getUsers
+    public  List<Account> searchAccounts(String query) {
+        List<Account> foundAccounts = new  ArrayList<>();
+         List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers(); // Υποθέτουμε ότι υπάρχει getCustomers/getUsers
         
         // 1. Βρες χρήστες που ταιριάζουν
         for (User u : allUsers) {
@@ -204,6 +238,39 @@ public String createBill(String targetIban, String businessAfm, double amount, S
         acc.addOwner(newOwnerAfm);
         saveData();
     }
+    }
+    public List<Bill> getBillsByBusiness(String businessAfm) {
+        List<Bill> allBills = BankSystem.getInstance().getBillManager().getAllBills();
+        List<Bill> myBills = new java.util.ArrayList<>();
+        for (Bill b : allBills) {
+            if (b.getBuisinessAfm().equals(businessAfm)) {
+                myBills.add(b);
+            }
+        }
+        return myBills;
+    }
+
+    public void deleteBill(String rfCode) {
+        List<Bill> bills = BankSystem.getInstance().getBillManager().getAllBills();
+        bills.removeIf(b -> b.getRfCode().equals(rfCode));
+        saveData();
+    }
+    
+    public void updateBill(String rfCode, String targetIban, double amount, String desc, String payerAfm, String expireDateStr) throws Exception {
+        Bill bill = BankSystem.getInstance().getBillManager().getBillByRf(rfCode);
+        if (bill == null) throw new Exception("Bill not found");
+        if (bill.getBillStatus() == Bill.Status.PAID) throw new Exception("Cannot edit a PAID bill.");
+
+        bill.setTargetIban(targetIban);
+        bill.setAmount(amount);
+        bill.setDescription(desc);
+        bill.setPayerAfm(payerAfm);
+        
+        // Update Date
+         
+        bill.setExpireDate(LocalDate.parse(expireDateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay());
+        
+        saveData();
     }
 }
     

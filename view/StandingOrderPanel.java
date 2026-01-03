@@ -10,6 +10,8 @@ import view.StyleHelpers.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList; 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -29,6 +31,7 @@ public class StandingOrderPanel extends JPanel {
     private JComboBox<String> accBox;
     private JButton saveBtn;
     private JButton clearBtn;
+    private JTextField fExpireDate;
 
     private StandingOrder currentEditingOrder = null;
 
@@ -71,7 +74,9 @@ public class StandingOrderPanel extends JPanel {
 
         fTarget = new RoundedTextField(15);
         fAmount = new RoundedTextField(15);
+        fExpireDate = new RoundedTextField(15);
         fDetails = new RoundedTextField(15);
+        fExpireDate.setText("dd/MM/yyyy");
         
         Integer[] days = IntStream.rangeClosed(1, 30).boxed().toArray(Integer[]::new);
         dayBox = new JComboBox<>(days);
@@ -89,6 +94,7 @@ public class StandingOrderPanel extends JPanel {
         formBox.add(fAmount);
         formBox.add(StyleHelpers.createLabel("Execution Day:")); 
         formBox.add(dayBox);
+        
         formBox.add(StyleHelpers.createLabel("Details (Opt):")); 
         formBox.add(fDetails);
         
@@ -107,6 +113,8 @@ public class StandingOrderPanel extends JPanel {
         fieldsPanel.add(fAmount);
         fieldsPanel.add(StyleHelpers.createLabel("Execution Day:")); 
         fieldsPanel.add(dayBox);
+        fieldsPanel.add(StyleHelpers.createLabel("Expires On:")); 
+        fieldsPanel.add(fExpireDate);
         fieldsPanel.add(StyleHelpers.createLabel("Details (Opt):")); 
         fieldsPanel.add(fDetails);
 
@@ -140,6 +148,20 @@ public class StandingOrderPanel extends JPanel {
             int day = (int) dayBox.getSelectedItem();
             String details = fDetails.getText();
             if(details.isEmpty()) details = "Standing Order";
+            // --- Parsing Ημερομηνίας Λήξης ---
+            String dateStr = fExpireDate.getText().trim();
+            LocalDateTime expireDate;
+            try {
+                // Μετατροπή dd/MM/yyyy σε LocalDateTime (τέλος της ημέρας)
+                java.time.LocalDate ld = java.time.LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                expireDate = ld.atTime(23, 59, 59);
+                
+                if (expireDate.isBefore(java.time.LocalDateTime.now())) {
+                    throw new Exception("Expiration date must be in the future.");
+                }
+            } catch (Exception e) {
+                throw new Exception("Invalid Date. Format: dd/MM/yyyy");
+            }
 
             StandingOrder.StandingOrderPurpose type;
             if (target.startsWith("RF") || target.length() < 15) { 
@@ -151,13 +173,14 @@ public class StandingOrderPanel extends JPanel {
             if (currentEditingOrder == null) {
                 StandingOrder so = new StandingOrder(
                     new Iban((String)accBox.getSelectedItem()), 
-                    target, amount, details, day, type
+                    target, amount, details, day, type,expireDate
                 );
                 controller.createStandingOrder(so);
                 JOptionPane.showMessageDialog(this, "Order Created!");
             } else {
                 currentEditingOrder.setSource(new Iban((String)accBox.getSelectedItem()));
                 currentEditingOrder.setType(type);
+                currentEditingOrder.setExpiredDay(expireDate);
                 currentEditingOrder.updateDetails(target, amount, details, day);
                 controller.saveData(); 
                 JOptionPane.showMessageDialog(this, "Order Updated!");
