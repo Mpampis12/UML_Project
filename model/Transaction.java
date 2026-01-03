@@ -3,6 +3,9 @@ package model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import control.BankController;
+import services.BankSystem;
+
 public class Transaction {
     private String transactionID;
     private double amount;
@@ -11,6 +14,7 @@ public class Transaction {
     private Iban source;
     private Iban target;
     private LocalDateTime timestamp;
+    
 
     public enum TransactionType{
         DEPOSIT,
@@ -28,6 +32,7 @@ public class Transaction {
         this.description = builder.description;
         this.source = builder.sourceIban == null ? null : new Iban(builder.sourceIban);
         this.target = builder.targetIban == null ? null : new Iban(builder.targetIban);
+       
     }
 
     
@@ -118,16 +123,19 @@ public class Transaction {
         private double amount;
         private String type;
 
+        private BankController controller;
+        
         // Default τιμές
-        private LocalDateTime timestamp = LocalDateTime.now();
+        private LocalDateTime timestamp = controller.getTimeSimulator().getCurrentDate();
         private String description = "";
         private String sourceIban = null;
         private String targetIban = null;
-
+        
         public Builder(String transactionId, String type, double amount) {
             this.transactionId = transactionId;
             this.type = type;
             this.amount = amount;
+            this.controller = BankController.getInstance();
         }
            public Builder() {
  

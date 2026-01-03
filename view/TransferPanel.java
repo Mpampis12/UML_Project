@@ -33,7 +33,7 @@ public class TransferPanel extends JPanel {
     public TransferPanel(User user, String type, Runnable onSuccess) {
         this.user = user;
         this.type = type;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         this.onTransactionSuccess = onSuccess;
 
         setLayout(new BorderLayout());
@@ -130,16 +130,15 @@ public class TransferPanel extends JPanel {
             if(type.equals("WITHDRAW") || type.equals("DEPOSIT")) {
                 try {
                     double am = Double.parseDouble(fAmount.getText());
-                    if(type.equals("WITHDRAW")) controller.handleWithdraw(src, am);
-                    else controller.handleDeposit(src, am);
+                    if(type.equals("WITHDRAW")) controller.handleWithdraw(src, am,"");
+                    else controller.handleDeposit(src, am,"");
                     JOptionPane.showMessageDialog(this, "Success!");
                     onTransactionSuccess.run();
                 } catch(Exception ex) { JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage()); }
                 return;
             }
 
-            // Case: TRANSFER / PAYMENT (Προετοιμασία Confirmation)
-            StringBuilder sb = new StringBuilder("<html>");
+             StringBuilder sb = new StringBuilder("<html>");
             sb.append("Source: ").append(src).append("<br>");
             
             if(type.equals("TRANSFER")) {
@@ -149,28 +148,28 @@ public class TransferPanel extends JPanel {
             } else if (type.equals("PAYMENT")) {
                  
                 String rfCode = fTarget.getText();
-                Bill bill = BankSystem.getInstance().getBillManager().getBillByRf(rfCode);
-                
-                if (bill == null) {
-                    JOptionPane.showMessageDialog(this, "Bill not found with RF: " + rfCode);
-                    return; // Σταματάμε εδώ, δεν πάμε στο confirm
-                }
-                
-                if (bill.getBillStatus() == Bill.Status.PAID) {
-                    JOptionPane.showMessageDialog(this, "This bill is already PAID!");
+                try {
+                    // STRICT MVC FIX: Κλήση μέσω Controller
+                    Bill bill = controller.getBillByRF(rfCode);
+                    
+                    if (bill.getBillStatus() == Bill.Status.PAID) {
+                        JOptionPane.showMessageDialog(this, "This bill is already PAID!");
+                        return;
+                    }
+                    
+                    fAmount.setText(String.valueOf(bill.getAmount()));
+                    
+                    sb.append("Payment RF: ").append(rfCode).append("<br>");
+                    sb.append("Description: ").append(bill.getDescription()).append("<br>");
+                    sb.append("<b>Bill Amount: ").append(bill.getAmount()).append("€</b>");
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
                     return;
                 }
-                
-                 fAmount.setText(String.valueOf(bill.getAmount()));
-                
-                // Εμφανίζουμε τα στοιχεία του Bill στο Confirmation
-                sb.append("Payment RF: ").append(rfCode).append("<br>");
-                sb.append("Description: ").append(bill.getDescription()).append("<br>");
-                sb.append("<b>Bill Amount: ").append(bill.getAmount()).append("€</b>"); // Bold για έμφαση
             }
 
             sb.append("</html>");
-            
             detailsArea.setText(sb.toString());
             flowLayout.next(flowContainer);
         });

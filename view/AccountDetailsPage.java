@@ -24,6 +24,7 @@ public class AccountDetailsPage extends JPanel {
     private BankBridge navigation;
     private User user;
     private Account account;
+    private BankController controller;
 
     // Χρώματα
     private static final Color MUSTARD_BG = new Color(228, 196, 101);
@@ -32,6 +33,7 @@ public class AccountDetailsPage extends JPanel {
 
     public AccountDetailsPage(BankBridge navigation, User user, Account account) {
         this.navigation = navigation;
+        this.controller = BankController.getInstance();
         this.user = user;
         this.account = account;
 
@@ -148,7 +150,8 @@ public class AccountDetailsPage extends JPanel {
         leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
 
         String mainOwnerAfm = account.getOwners().get(0);
-        User mainOwner = BankSystem.getInstance().getUserManager().getUserByAfm(mainOwnerAfm);
+        User mainOwner = controller.getOwner(mainOwnerAfm);
+        
         String mainName = (mainOwner != null) ? mainOwner.getFirstName() + " " + mainOwner.getLastName() : mainOwnerAfm;
         leftCol.add(createInfoBubble("MAIN OWNER", mainName));
         leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
@@ -156,7 +159,7 @@ public class AccountDetailsPage extends JPanel {
         if (account.getOwners().size() > 1) {
             for (int i = 1; i < account.getOwners().size(); i++) {
                 String secAfm = account.getOwners().get(i);
-                User secUser = BankSystem.getInstance().getUserManager().getUserByAfm(secAfm);
+                User secUser =  controller.getOwner(secAfm);
                 String secName = (secUser != null) ? secUser.getFirstName() + " " + secUser.getLastName() : secAfm;
                 leftCol.add(createInfoBubble("CO-OWNER", secName));
                 leftCol.add(Box.createRigidArea(new Dimension(0, 15)));
@@ -179,7 +182,7 @@ public class AccountDetailsPage extends JPanel {
                 String newAfm = JOptionPane.showInputDialog(this, "Enter User AFM to add as Co-Owner:");
                 if (newAfm != null && !newAfm.trim().isEmpty()) {
                     try {
-                        BankController ctrl = new BankController();
+                        BankController ctrl = BankController.getInstance();
                         ctrl.addOwnerToAccount(account.getIban(), newAfm.trim());
                         JOptionPane.showMessageDialog(this, "Co-Owner Added Successfully!");
                    
@@ -342,7 +345,7 @@ public class AccountDetailsPage extends JPanel {
     }
 
     private JLabel createTransactionRow(Transaction t) {
-        String dateStr = (t.getTransactionID() != null) ? "Date info" : "Just now"; 
+        String dateStr = t.getTimestamp().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         String text = "<html><font size='5' color='#003366'>• " + t.getDescription() + "</font> " 
                     + "<font size='5' color='black'><b>" + t.getAmount() + "€</b></font><br>" 
                     + "<font size='3' color='#555555'>&nbsp;&nbsp;" + dateStr + "</font></html>";

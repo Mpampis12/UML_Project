@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import control.BankController;
+
 import java.awt.*;
 import services.BankSystem;
 import model.User;
@@ -10,10 +13,11 @@ import model.Individual;
 
 public class CreateAccountPanel extends JPanel {
 
+    private BankController controller;
     public CreateAccountPanel(User user) {
         setLayout(new GridBagLayout());
         setBackground(StyleHelpers.MUSTARD_BG); // Το κίτρινο φόντο του θέματος
-
+        this.controller = BankController.getInstance();
         // Κεντρικό Panel (Λευκό & Στρογγυλεμένο)
         JPanel card = new StyleHelpers.RoundedPanel(30, Color.WHITE);
         card.setLayout(new GridLayout(5, 1, 10, 20));
@@ -42,14 +46,14 @@ public class CreateAccountPanel extends JPanel {
                 }
                String afm = user.getAfm();
 
-                 Account newAcc = BankSystem.getInstance().getAccountManager().createAccount(selectedType, 0.0, afm);
+                 
+                 Account newAcc = controller.createAccountForUser(user, selectedType, 0.0,afm);
 
                  if (user instanceof Customer) {
                     ((Customer) user).setNewAccountIban(newAcc.getIban());
                 }
 
-                 BankSystem.getInstance().getDaoHandler().saveAllData();
-
+                 controller.saveData();
                 JOptionPane.showMessageDialog(this, "Account Created Successfully!\nIBAN: " + newAcc.getIban());
                 
             } catch (Exception ex) {

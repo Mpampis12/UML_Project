@@ -5,8 +5,11 @@ import services.BankSystem;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.BankController;
+
 public class DaoHandler {
 
+    BankController controller;
     private JsonDao jsonDao;
     private static DaoHandler instance;
 
@@ -18,6 +21,7 @@ public class DaoHandler {
     }
     private DaoHandler() {
         this.jsonDao = new JsonDao();
+        //this.controller= BankController.getInstance();
     }
 
     public void saveAllData() {
@@ -26,7 +30,7 @@ public class DaoHandler {
        
         JsonDao.DatabaseData dbData = new JsonDao.DatabaseData();
  
-        List<User> allUsers = bank.getUserManager().getUsers();
+        List<User> allUsers = BankController.getInstance().getUsers();
         for (User u : allUsers) {
             if (u instanceof Customer) {
                 dbData.customers.add((Customer) u);

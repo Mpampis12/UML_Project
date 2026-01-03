@@ -9,12 +9,14 @@ import model.Account;
 import model.User;
 import services.BankSystem;
 import services.TimeSimulator;
+import control.BankController;
 
 public class BankView extends JFrame implements BankBridge {
     
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private JLabel dateLabel; 
+    private BankController controller;
 
 
      private LoginPage loginPageScreen;  
@@ -27,6 +29,7 @@ public class BankView extends JFrame implements BankBridge {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);  
+            this.controller = BankController.getInstance();
         
         
         
@@ -109,25 +112,23 @@ public class BankView extends JFrame implements BankBridge {
     }
     @Override
     public void showAccountDetails(User user, Account account) {
-        // Δημιουργούμε τη σελίδα λεπτομερειών
         AccountDetailsPage detailsScreen = new AccountDetailsPage(this, user, account);
         
-        // Την προσθέτουμε στο CardLayout
         mainPanel.add(detailsScreen, "DETAILS");
         
-        // Την εμφανίζουμε
         cardLayout.show(mainPanel, "DETAILS");
         setTitle("Bank of TUC - Account Details: " + account.getIban());
     }
 
     private void initTimeSimulator() {
-        TimeSimulator timer = BankSystem.getInstance().getTimeSimulator();
+        TimeSimulator timer = controller.getTimeSimulator();
+
         
         updateDateLabel(timer.getCurrentDate());
         timer.setDateChangeListener(newDate -> {
             SwingUtilities.invokeLater(() -> updateDateLabel(newDate));
-
-            BankSystem.getInstance().performDailyTasks(newDate);
+            controller.handleDateChange(newDate);
+            
         });
 
         Thread timeThread = new Thread(timer);

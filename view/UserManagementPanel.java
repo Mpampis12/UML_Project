@@ -4,6 +4,9 @@ import model.User;
 import services.BankSystem;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import control.BankController;
+
 import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +17,10 @@ public class UserManagementPanel extends JPanel {
     private DefaultTableModel model;
     private List<User> sourceList;
     private JTextField searchField;
+    private BankController controller;
 
     public UserManagementPanel(List<User> usersToManage) {
+        this.controller = BankController.getInstance();
         this.sourceList = usersToManage;
         setLayout(new BorderLayout(10, 10));
         setBackground(StyleHelpers.MUSTARD_BG);
@@ -115,8 +120,8 @@ public class UserManagementPanel extends JPanel {
 
         int option = JOptionPane.showConfirmDialog(this, message, "Edit User: " + user.getUsername(), JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            BankSystem.getInstance().getUserManager().updateUser(user, fName.getText(), lName.getText(), email.getText(), phone.getText(),username.getText(),password.getText(),afm.getText());
             
+            controller.updateUser(user, fName.getText(), lName.getText(), email.getText(), phone.getText(),username.getText(),password.getText(),afm.getText());
             refreshTable(sourceList); // Update UI
         }
     }

@@ -32,7 +32,7 @@ public class CreateBillPanel extends JPanel {
 
     public CreateBillPanel(User user) {
         this.user = user;
-        this.controller = new BankController();
+        this.controller = BankController.getInstance();
         this.cardList = new ArrayList<>();
 
         setLayout(new GridLayout(1, 2, 20, 0));
