@@ -287,13 +287,17 @@ public class BankController {
     // 6. STANDING ORDERS (FACTORY PATTERN)
     // ============================================================
 
-    public void createStandingOrder(String source, String target, double amount, String desc, int day, java.time.LocalDateTime expireDate) {
+    public void createStandingOrder(String source, String target, double amount, String desc, int day, java.time.LocalDateTime expireDate) throws Exception {
         StandingOrder so;
         
         // Pattern: FACTORY - Η επιλογή του αντικειμένου γίνεται εδώ, όχι στο UI
         if (target.startsWith("RF") || target.length() < 15) { 
             so = StandingOrderFactory.createBillPaymentOrder(source, target, amount, desc, day, expireDate);
         } else {
+            if(BankSystem.getInstance().getAccountManager().getAccount(target)==null){
+              throw new Exception("NOT INTERNAL TARGET IBAN");
+              
+        }
             so = StandingOrderFactory.createTransferOrder(source, target, amount, desc, day, expireDate);
         }
 

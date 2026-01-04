@@ -40,13 +40,16 @@ public class StandingOrderManager {
                     System.out.println("Executing Order: " + order.getStandinID());
 
                     if (order.getType() == StandingOrderPurpose.TRANSFER) {
-              
-                        tm.transfer(
+                        
+                        if(BankSystem.getInstance().getAccountManager().getAccount(order.getTarget().toString())!=null)
+                        {tm.transfer(
                             order.getSource().toString(), 
                             order.getTarget().toString(), 
                             order.getAmount(), 
                             "Standing Order: " + order.getDescription(),BankSystem.getInstance().getTimeSimulator().getCurrentDate() 
-                        );
+                        );}
+                         
+
                         
                     } else if (order.getType() == StandingOrderPurpose.BILL) {
                   

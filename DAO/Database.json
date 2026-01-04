@@ -2,69 +2,139 @@
   "customers": [
     {
       "accountIbans": [
-        "GR254661253742680356",
-        "GR254661253742681467"
+        "GR100202503111546001",
+        "GR100202503111546004",
+        "GR100202503111546006"
       ],
       "username": "ngioldasis",
       "password": "5678f0dfca01f1ce580be471dc4bb47d0851ed18b3eddf22c77d1ccd0d76932e",
-      "firstName": "Nikolaos",
-      "lastName": "Gioldasis",
-      "afm": "123456789",
-      "email": "ngiold@tuc.gr",
-      "phone": "6936996999",
+      "firstName": "Νεκτάριος",
+      "lastName": "Γιολδάσης",
+      "afm": "067688302",
+      "email": "ngioldasis@tuc.gr",
+      "phone": "6911111111",
       "type": "INDIVIDUAL"
     },
     {
       "accountIbans": [
-        "GR557947687381270824"
+        "GR100202503111546002",
+        "GR100202503111546007",
+        "GR100202503111546004",
+        "GR100202503111546006"
+      ],
+      "username": "pappas",
+      "password": "9b67124c644af6f778fdbc3f2644e1d0794a11a53aa5cb4b50629ac119ba8ca8",
+      "firstName": "Νίκος",
+      "lastName": "Παππάς",
+      "afm": "067688303",
+      "email": "pappas@tuc.gr",
+      "phone": "6922222222",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR100202503111546003",
+        "GR100202503111546001"
+      ],
+      "username": "gchalkiadakis",
+      "password": "4e51ad09c27d5bf6823ca67aa821df5a33cb2ca113ea4440ed0b9acba5512c68",
+      "firstName": "Γεώργιος",
+      "lastName": "Χαλκιαδάκης",
+      "afm": "067688304",
+      "email": "gchalkiadakis@tuc.gr",
+      "phone": "6933333333",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR100202503111546006"
+      ],
+      "username": "mteranova",
+      "password": "943658f187da3683b3ce1539b87892ea8fd805e54457b3914da2a0c2496ee776",
+      "firstName": "Μαρία ",
+      "lastName": "Τερενόβα",
+      "afm": "067688305",
+      "email": "mteranova@tuc.gr",
+      "phone": "6944444444",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR074234004375361737"
+      ],
+      "username": "skarakosta",
+      "password": "00361b5a77cba053151cf0d1a216f077e9125ab8fa9d660243ac636d6159e72e",
+      "firstName": "Σοφία",
+      "lastName": "Καρακώστα",
+      "afm": "067688306",
+      "email": "skarakosta@tuc.gr",
+      "phone": "6955555555",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR100202503111546005"
+      ],
+      "username": "edimitriou",
+      "password": "03a1b5f8d5eb9bb28a782b89fd3af5568a5deeeeda08b8eb23b15da832cd3423",
+      "firstName": "Ελένη",
+      "lastName": "Δημητρίου",
+      "afm": "067688307",
+      "email": "edimitriou@tuc.gr",
+      "phone": "6966666666",
+      "type": "INDIVIDUAL"
+    },
+    {
+      "accountIbans": [
+        "GR200202503131719401"
       ],
       "username": "vodafone",
-      "password": "dbadc7136001f22b53a2cca7eea48fac2077a3e64b87d00514f0cbdfb83e01ae",
+      "password": "c591fc93ece9b9b3503abb255cfc61999b7f090ac58b21439d3fa0046f3bf252",
       "firstName": "Vodafone",
       "lastName": "GR",
-      "afm": "111111111",
-      "email": "vodafone@vod.gr",
-      "phone": "6934567891",
+      "afm": "090800700",
+      "email": "info@vodafone.gr",
+      "phone": "6977777777",
       "type": "BUSINESS"
     },
     {
       "accountIbans": [
-        "GR488443944447359232"
+        "GR200202503131719402"
       ],
       "username": "cosmote",
       "password": "3374da1bf2cb8dac0463884e46bbf6423f286b6982699e1222a010953571843d",
-      "firstName": "COSMOTE",
+      "firstName": "Cosmote",
       "lastName": "GR",
-      "afm": "123123456",
-      "email": "COSMOTE@TUC.GR",
-      "phone": "6933333333",
+      "afm": "090800800",
+      "email": "info@cosmote.gr",
+      "phone": "6988888888",
       "type": "BUSINESS"
     },
     {
       "accountIbans": [
-        "GR866067716466865603"
+        "GR200202503131719403"
       ],
-      "username": "mpampis",
-      "password": "78e0fdc47ad7be8e7de27f25c02115e835dacf2a92f45f4bff2003a7b1460f18",
-      "firstName": "Mpampis",
-      "lastName": "Mylonakis",
-      "afm": "123456788",
-      "email": "mpampis@gmail.com",
-      "phone": "6987878787",
-      "type": "INDIVIDUAL"
+      "username": "DEI",
+      "password": "c4ce4cfb5d827f780590ae12e9e7737d4ec6a28da84b06d2c2e60aa5c7fcd638",
+      "firstName": "DEI",
+      "lastName": "GR",
+      "afm": "090800900",
+      "email": "info@dei.gr",
+      "phone": "6999999999",
+      "type": "BUSINESS"
     },
     {
       "accountIbans": [
-        "GR558808022228012979"
+        "GR200202503131719404"
       ],
-      "username": "gerogios",
-      "password": "9742755a550c5a3578ed0c8d0d7515f00df5fb086602ab7b2dc87dc874ade9ac",
-      "firstName": "Geo",
-      "lastName": "Xatzoo",
-      "afm": "123456456",
-      "email": "mpa@mp.com",
-      "phone": "4444444444",
-      "type": "INDIVIDUAL"
+      "username": "nova",
+      "password": "178769ca77dc32ab4ac3c08b8d2de01343e5ebb330c46e5ba001d72eef2c9296",
+      "firstName": "NOVA",
+      "lastName": "GR",
+      "afm": "090800600",
+      "email": "info@NOVA.gr",
+      "phone": "6900000000",
+      "type": "BUSINESS"
     }
   ],
   "admins": [
@@ -72,354 +142,548 @@
       "userRoleString": "Admin",
       "username": "admin",
       "password": "49494a19ec8afb172de2d7d4e28ca47a46fb5275fa3ae755d3f1a1d4d436bde1",
-      "firstName": "Admin",
-      "lastName": "Admin",
+      "firstName": "Bank",
+      "lastName": "Employee",
       "afm": "000000000",
-      "email": "mpampis@tuc.gr",
+      "email": "bankemployee@bankoftuc.gr",
       "phone": "0000000000"
     }
   ],
   "accounts": [
     {
       "iban": {
-        "ibanNumber": "GR254661253742680356"
+        "ibanNumber": "GR100202503111546001"
       },
-      "balance": 904.0,
-      "creationDate": "18/01/2026 21:55:10",
+      "balance": 1000.0,
+      "creationDate": "09/03/2026 17:10:32",
       "owners": [
-        "123456789"
-      ],
-      "transactionList": [],
-      "type": "PERSONAL"
-    },
-    {
-      "iban": {
-        "ibanNumber": "GR254661253742681467"
-      },
-      "balance": 1060.0,
-      "creationDate": "18/01/2026 21:55:10",
-      "owners": [
-        "123456789"
+        "067688302",
+        "067688304"
       ],
       "transactionList": [
         {
-          "transactionID": "TX-EEE4FF1F",
-          "amount": 50.0,
-          "type": "TRANSFER",
-          "description": "Transfer from GR866067716466865603: Transfer via App",
+          "transactionID": "TX-1F245D06",
+          "amount": 1000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
           "source": {
-            "ibanNumber": "GR866067716466865603"
+            "ibanNumber": "GR100202503111546001"
           },
-          "target": {
-            "ibanNumber": "GR254661253742681467"
-          },
-          "timestamp": "09/01/2026 05:01:04"
-        },
-        {
-          "transactionID": "TX-767CC265",
-          "amount": 5.0,
-          "type": "TRANSFER",
-          "description": "Transfer from GR557947687381270824: Standing Order: Standing Order",
-          "source": {
-            "ibanNumber": "GR557947687381270824"
-          },
-          "target": {
-            "ibanNumber": "GR254661253742681467"
-          },
-          "timestamp": "27/02/2026 05:09:13"
+          "timestamp": "03/01/2026 01:42:57"
         }
       ],
       "type": "PERSONAL"
     },
     {
       "iban": {
-        "ibanNumber": "GR557947687381270824"
+        "ibanNumber": "GR100202503111546002"
       },
-      "balance": 1.892000000000003,
-      "creationDate": "12/01/2025 22:40:31",
+      "balance": 2000.0,
+      "creationDate": "20/03/2026 17:10:32",
       "owners": [
-        "111111111"
+        "067688303"
       ],
       "transactionList": [
         {
-          "transactionID": "TX-9BF502DF",
-          "amount": 5.0,
-          "type": "WITHDRAWAL",
-          "description": "Monthly Business Account Fee",
-          "source": {
-            "ibanNumber": "GR557947687381270824"
-          },
-          "timestamp": "01/02/2026 05:06:01"
-        },
-        {
-          "transactionID": "TX-6B5A90F6",
-          "amount": 5.0,
-          "type": "WITHDRAWAL",
-          "description": "Monthly Business Account Fee",
-          "source": {
-            "ibanNumber": "GR557947687381270824"
-          },
-          "timestamp": "01/02/2026 05:09:13"
-        },
-        {
-          "transactionID": "TX-767CC265",
-          "amount": 5.0,
-          "type": "TRANSFER",
-          "description": "Transfer to GR254661253742681467: Standing Order: Standing Order",
-          "source": {
-            "ibanNumber": "GR557947687381270824"
-          },
-          "target": {
-            "ibanNumber": "GR254661253742681467"
-          },
-          "timestamp": "27/02/2026 05:09:13"
-        },
-        {
-          "transactionID": "TX-DAEA38B8",
-          "amount": 5.0,
-          "type": "WITHDRAWAL",
-          "description": "Monthly Business Account Fee",
-          "source": {
-            "ibanNumber": "GR557947687381270824"
-          },
-          "timestamp": "01/03/2026 05:09:13"
-        }
-      ],
-      "type": "BUSINESS"
-    },
-    {
-      "iban": {
-        "ibanNumber": "GR488443944447359232"
-      },
-      "balance": 0.0,
-      "creationDate": "10/01/2026 02:46:22",
-      "owners": [
-        "123123456"
-      ],
-      "transactionList": [],
-      "type": "BUSINESS"
-    },
-    {
-      "iban": {
-        "ibanNumber": "GR866067716466865603"
-      },
-      "balance": 5552598.252,
-      "creationDate": "10/01/2026 03:16:23",
-      "owners": [
-        "123456788"
-      ],
-      "transactionList": [
-        {
-          "transactionID": "TX-EEE4FF1F",
-          "amount": 50.0,
-          "type": "TRANSFER",
-          "description": "Transfer to GR254661253742681467: Transfer via App",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "target": {
-            "ibanNumber": "GR254661253742681467"
-          },
-          "timestamp": "09/01/2026 05:01:04"
-        },
-        {
-          "transactionID": "TX-72C39CFD",
-          "amount": 50.0,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: 1e58b2f4-1336-4ce7-bc6f-62354a2760f3",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "09/01/2026 05:06:01"
-        },
-        {
-          "transactionID": "TX-531DA216",
-          "amount": 0.1,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (0.2%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "09/01/2026 05:06:01"
-        },
-        {
-          "transactionID": "TX-F24B2470",
-          "amount": 50.0,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: 3f919423-1591-49f1-8d3f-987c499a6e4c",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "12/01/2026 05:09:13"
-        },
-        {
-          "transactionID": "TX-E9D94B10",
-          "amount": 0.1,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (0.2%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "12/01/2026 05:09:13"
-        },
-        {
-          "transactionID": "TX-00393CDA",
-          "amount": 100.0,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: 30629bf2-21c6-465e-88fc-68f551b0f5d3",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "14/01/2026 05:15:43"
-        },
-        {
-          "transactionID": "TX-C2C3EF92",
-          "amount": 2.0,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (2.0%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "14/01/2026 05:15:43"
-        },
-        {
-          "transactionID": "TX-140E81E2",
+          "transactionID": "TX-463BD759",
           "amount": 2000.0,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: 7d44dd1e-1e9b-442c-af0b-ee3514f1055c",
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
           "source": {
-            "ibanNumber": "GR866067716466865603"
+            "ibanNumber": "GR100202503111546002"
           },
-          "timestamp": "20/01/2026 05:15:43"
-        },
-        {
-          "transactionID": "TX-9A5EC075",
-          "amount": 40.0,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (2.0%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "20/01/2026 05:15:43"
-        },
-        {
-          "transactionID": "TX-71B2F473",
-          "amount": 20.0,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: f323396f-f817-494e-8200-899fc0d0445a",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "10/01/2026 05:18:42"
-        },
-        {
-          "transactionID": "TX-9713D1C0",
-          "amount": 0.4,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (2.0%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "10/01/2026 05:18:42"
-        },
-        {
-          "transactionID": "TX-F48C3FCF",
-          "amount": 87.4,
-          "type": "WITHDRAWAL",
-          "description": "SEPA Transfer ID: c096f64f-e774-4af9-94dd-b7dfcd15ac34",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "11/01/2026 05:28:40"
-        },
-        {
-          "transactionID": "TX-FF3DD715",
-          "amount": 1.7480000000000002,
-          "type": "WITHDRAWAL",
-          "description": "Bank Commission Fee (2.0%)",
-          "source": {
-            "ibanNumber": "GR866067716466865603"
-          },
-          "timestamp": "11/01/2026 05:28:40"
+          "timestamp": "03/01/2026 01:43:24"
         }
       ],
       "type": "PERSONAL"
     },
     {
       "iban": {
-        "ibanNumber": "GR558808022228012979"
+        "ibanNumber": "GR100202503111546003"
+      },
+      "balance": 3050.0,
+      "creationDate": "02/04/2026 17:10:32",
+      "owners": [
+        "067688304"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-4FBA7160",
+          "amount": 3050.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR100202503111546003"
+          },
+          "timestamp": "03/01/2026 01:43:46"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR100202503111546006"
+      },
+      "balance": 625.16,
+      "creationDate": "27/04/2026 17:10:32",
+      "owners": [
+        "067688305",
+        "067688302",
+        "067688303"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-26F67602",
+          "amount": 625.16,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR100202503111546006"
+          },
+          "timestamp": "03/01/2026 01:45:28"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR074234004375361737"
       },
       "balance": 0.0,
-      "creationDate": "11/01/2026 03:18:22",
+      "creationDate": "15/05/2026 17:10:32",
       "owners": [
-        "123456456"
+        "067688306"
       ],
       "transactionList": [],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR100202503111546005"
+      },
+      "balance": 54.32,
+      "creationDate": "02/06/2026 17:10:32",
+      "owners": [
+        "067688307"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-382B0893",
+          "amount": 54.32,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR100202503111546005"
+          },
+          "timestamp": "03/01/2026 01:44:53"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR200202503131719401"
+      },
+      "balance": 10000.0,
+      "creationDate": "18/06/2026 17:10:32",
+      "owners": [
+        "090800700"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-430E4B67",
+          "amount": 10000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR200202503131719401"
+          },
+          "timestamp": "03/01/2026 01:50:47"
+        }
+      ],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR200202503131719402"
+      },
+      "balance": 20500.0,
+      "creationDate": "30/06/2026 17:10:32",
+      "owners": [
+        "090800800"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-B492F3CF",
+          "amount": 20500.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR200202503131719402"
+          },
+          "timestamp": "03/01/2026 01:51:09"
+        }
+      ],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR200202503131719403"
+      },
+      "balance": 100000.0,
+      "creationDate": "07/07/2026 17:10:32",
+      "owners": [
+        "090800900"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-4E70EE11",
+          "amount": 100000.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR200202503131719403"
+          },
+          "timestamp": "03/01/2026 01:51:28"
+        }
+      ],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR200202503131719404"
+      },
+      "balance": 7230.0,
+      "creationDate": "17/07/2026 17:10:32",
+      "owners": [
+        "090800600"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-DDFB65B6",
+          "amount": 7230.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR200202503131719404"
+          },
+          "timestamp": "03/01/2026 01:51:39"
+        }
+      ],
+      "type": "BUSINESS"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR100202503111546004"
+      },
+      "balance": 1742.0,
+      "creationDate": "12/01/2026 00:39:14",
+      "owners": [
+        "067688302",
+        "067688303"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-A354CEF0",
+          "amount": 1742.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR100202503111546004"
+          },
+          "timestamp": "03/01/2026 01:44:14"
+        }
+      ],
+      "type": "PERSONAL"
+    },
+    {
+      "iban": {
+        "ibanNumber": "GR100202503111546007"
+      },
+      "balance": 25.0,
+      "creationDate": "03/01/2026 00:42:29",
+      "owners": [
+        "067688303"
+      ],
+      "transactionList": [
+        {
+          "transactionID": "TX-0373F77A",
+          "amount": 25.0,
+          "type": "DEPOSIT",
+          "description": "Deposit via Bank Branch",
+          "source": {
+            "ibanNumber": "GR100202503111546007"
+          },
+          "timestamp": "03/01/2026 01:50:10"
+        }
+      ],
       "type": "PERSONAL"
     }
   ],
   "bills": [
     {
-      "rfCode": "RF6752840722",
-      "amount": 50.0,
-      "description": "vf2222222",
-      "dateOfIssue": "04/01/2026 22:40:31",
-      "expireDate": "07/03/2026 00:00:00",
-      "targetIban": "GR557947687381270824",
-      "buisinessAfm": "111111111",
-      "payerAfm": "123456789",
-      "billStatus": "PAID"
+      "rfCode": "RF10203040",
+      "amount": 29.46,
+      "description": "",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719402",
+      "buisinessAfm": "090800800",
+      "payerAfm": "067688302",
+      "billStatus": "PENDING"
     },
     {
-      "rfCode": "RF6752840722",
-      "amount": 50.0,
-      "description": "Renewed Bill: vf2222222",
-      "dateOfIssue": "10/01/2026 02:22:08",
-      "expireDate": "07/03/2026 00:00:00",
-      "targetIban": "GR557947687381270824",
-      "buisinessAfm": "111111111",
-      "payerAfm": "123456789",
-      "billStatus": "PAID"
+      "rfCode": "RF10203041",
+      "amount": 37.45,
+      "description": "CO20250501002",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719402",
+      "buisinessAfm": "090800800",
+      "payerAfm": "067688303",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203042",
+      "amount": 52.0,
+      "description": "CO20250501003",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719402",
+      "buisinessAfm": "090800800",
+      "payerAfm": "067688304",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203043",
+      "amount": 35.99,
+      "description": "CO20250501004",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719402",
+      "buisinessAfm": "090800800",
+      "payerAfm": "067688307",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203044",
+      "amount": 42.11,
+      "description": "CO20250501005",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719402",
+      "buisinessAfm": "090800800",
+      "payerAfm": "067688305",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203045",
+      "amount": 45.5,
+      "description": "VF20250415001",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719401",
+      "buisinessAfm": "090800700",
+      "payerAfm": "067688302",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203046",
+      "amount": 45.5,
+      "description": "VF20250415002",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719401",
+      "buisinessAfm": "090800700",
+      "payerAfm": "067688303",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203047",
+      "amount": 35.6,
+      "description": "VF20250415003",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719401",
+      "buisinessAfm": "090800700",
+      "payerAfm": "067688304",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203048",
+      "amount": 35.0,
+      "description": "VF20250415004",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719401",
+      "buisinessAfm": "090800700",
+      "payerAfm": "067688307",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203049",
+      "amount": 102.0,
+      "description": "NV20250425001",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719404",
+      "buisinessAfm": "090800600",
+      "payerAfm": "067688305",
+      "billStatus": "PENDING"
+    },
+    {
+      "rfCode": "RF10203050",
+      "amount": 37.8,
+      "description": "NV20250425002",
+      "dateOfIssue": "01/01/2026 01:53:12",
+      "expireDate": "31/01/2026 01:53:12",
+      "targetIban": "GR200202503131719404",
+      "buisinessAfm": "090800600",
+      "payerAfm": "067688307",
+      "billStatus": "PENDING"
     }
   ],
   "standingOrders": [
     {
-      "standinID": "34270f48",
-      "amount": 50.0,
-      "description": "test",
+      "standinID": "26c2987f",
+      "amount": 60.0,
+      "description": "Mobile Bill",
       "source": {
-        "ibanNumber": "GR254661253742680356"
+        "ibanNumber": "GR100202503111546001"
       },
-      "target": {
-        "ibanNumber": "-"
-      },
-      "targetRfCode": "RF6752840722",
-      "dayOfMonth": 5,
-      "nexTime": "07/03/2026 23:06:40",
-      "expiredDay": "10/03/2026 23:59:59",
+      "targetRfCode": "RF10203040",
+      "dayOfMonth": 2,
+      "nexTime": "02/01/2026 02:23:00",
+      "expiredDay": "03/01/2027 02:25:15",
       "type": "BILL",
-      "status": "FAILD",
-      "attempts": 3,
+      "status": "ACTIVE",
+      "attempts": 0,
       "NEXT_TIME_ON_FAILED": 2
     },
     {
-      "standinID": "4877afdc",
-      "amount": 5.0,
-      "description": "Standing Order",
+      "standinID": "26c9987f",
+      "amount": 50.0,
+      "description": "067688307",
       "source": {
-        "ibanNumber": "GR557947687381270824"
+        "ibanNumber": "GR100202503111546005"
+      },
+      "targetRfCode": "RF10203043",
+      "dayOfMonth": 2,
+      "nexTime": "02/01/2026 02:23:00",
+      "expiredDay": "03/01/2027 02:25:15",
+      "type": "BILL",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "26c9989f",
+      "amount": 60.0,
+      "description": "Statheri",
+      "source": {
+        "ibanNumber": "GR100202503111546002"
+      },
+      "targetRfCode": "RF10203041",
+      "dayOfMonth": 2,
+      "nexTime": "02/01/2026 02:23:00",
+      "expiredDay": "03/01/2027 02:25:15",
+      "type": "BILL",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "27c9989f",
+      "amount": 45.0,
+      "description": "Nova TV",
+      "source": {
+        "ibanNumber": "GR100202503111546005"
+      },
+      "targetRfCode": "RF10203050",
+      "dayOfMonth": 2,
+      "nexTime": "02/01/2026 02:23:00",
+      "expiredDay": "03/01/2027 02:25:15",
+      "type": "BILL",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "988219a7",
+      "amount": 450.0,
+      "description": "GIOLDASIS RENT",
+      "source": {
+        "ibanNumber": "GR100202503111546001"
       },
       "target": {
-        "ibanNumber": "GR254661253742681467"
+        "ibanNumber": "GR100202503111546003"
       },
       "targetRfCode": "-",
-      "dayOfMonth": 27,
-      "nexTime": "27/03/2026 03:10:32",
-      "expiredDay": "27/12/2028 23:59:59",
+      "dayOfMonth": 1,
+      "nexTime": "01/02/2026 02:29:54",
+      "expiredDay": "03/01/2027 02:30:56",
       "type": "TRANSFER",
       "status": "ACTIVE",
       "attempts": 0,
-      "NEXT_TIME_ON_FAILED": 1
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "98a219a6",
+      "amount": 180.0,
+      "description": "ΑΓΓΛΙΚΑ Λ.",
+      "source": {
+        "ibanNumber": "GR100202503111546002"
+      },
+      "target": {
+        "ibanNumber": "GR100202503111546006"
+      },
+      "targetRfCode": "-",
+      "dayOfMonth": 15,
+      "nexTime": "01/02/2026 02:29:54",
+      "expiredDay": "03/01/2027 02:30:56",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    {
+      "standinID": "98a219a5",
+      "amount": 120.0,
+      "description": "DIDAKTRA K.",
+      "source": {
+        "ibanNumber": "GR100202503111546002"
+      },
+      "target": {
+        "ibanNumber": "DU552202603111549009"
+      },
+      "targetRfCode": "-",
+      "dayOfMonth": 10,
+      "nexTime": "01/02/2026 02:29:54",
+      "expiredDay": "03/01/2027 02:30:56",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
+    },
+    
+    {
+      "standinID": "98a219a2",
+      "amount": 100.0,
+      "description": "ΓΑΛΛΙΚΑ ΕΙΡΗΝΗΣ",
+      "source": {
+        "ibanNumber": "GR100202503111546003"
+      },
+      "target": {
+        "ibanNumber": "GR100202503111546005"
+      },
+      "targetRfCode": "-",
+      "dayOfMonth": 28,
+      "nexTime": "01/02/2026 02:29:54",
+      "expiredDay": "03/01/2027 02:30:56",
+      "type": "TRANSFER",
+      "status": "ACTIVE",
+      "attempts": 0,
+      "NEXT_TIME_ON_FAILED": 2
     }
   ]
 }
