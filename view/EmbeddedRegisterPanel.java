@@ -54,7 +54,14 @@ public class EmbeddedRegisterPanel extends JPanel {
                     );
                     JOptionPane.showMessageDialog(this, "Admin Created Successfully!");
                     // Clear fields
-                    userTxt.setText(""); emailTxt.setText("");
+                    userTxt.setText(""); 
+                    emailTxt.setText("");
+                    passTxt.setText(""); 
+                    nameTxt.setText(""); 
+                    lastTxt.setText(""); 
+                    afmTxt.setText(""); 
+                    phoneTxt.setText(""); 
+                    
                     return;
                 }
                 else {
@@ -67,7 +74,13 @@ public class EmbeddedRegisterPanel extends JPanel {
             }
                 JOptionPane.showMessageDialog(this, "User Created Successfully!");
                 // Clear fields
-                userTxt.setText(""); afmTxt.setText("");
+                    userTxt.setText(""); 
+                    emailTxt.setText("");
+                    passTxt.setText(""); 
+                    nameTxt.setText(""); 
+                    lastTxt.setText(""); 
+                    afmTxt.setText(""); 
+                    phoneTxt.setText(""); 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
             }

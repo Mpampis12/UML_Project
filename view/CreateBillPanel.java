@@ -128,12 +128,19 @@ public class CreateBillPanel extends JPanel {
             if (fAmount.getText().isEmpty()) throw new Exception("Enter Amount");
             double amount = Double.parseDouble(fAmount.getText());
 
+            // --- ΛΟΓΙΚΗ ΑΠΟΘΗΚΕΥΣΗΣ ---
             if (currentEditingBill == null) {
-                // CREATE NEW
+                // CASE 1: CREATE NEW (Τελείως νέος λογαριασμός)
                 String newRf = controller.createBill(targetIban, user.getAfm(), amount, desc, payer, dateStr);
                 JOptionPane.showMessageDialog(this, "Bill Created! RF: " + newRf);
+            
+            } else if (currentEditingBill.getBillStatus() == Bill.Status.PAID) {
+                // CASE 2: RENEW (Ο παλιός είναι πληρωμένος -> Βγάζουμε νέο με ίδιο RF)
+                controller.renewBill(currentEditingBill.getRfCode(), amount, dateStr);
+                JOptionPane.showMessageDialog(this, "Bill Renewed successfully with same RF!\nStanding Orders will detect it.");
+            
             } else {
-                // UPDATE EXISTING
+                // CASE 3: UPDATE EXISTING (Ο λογαριασμός είναι ακόμα Pending -> Τον διορθώνουμε)
                 controller.updateBill(currentEditingBill.getRfCode(), targetIban, amount, desc, payer, dateStr);
                 JOptionPane.showMessageDialog(this, "Bill Updated!");
             }
@@ -151,7 +158,12 @@ public class CreateBillPanel extends JPanel {
         fAmount.setText("");
         fDesc.setText("");
         fExpireDate.setText("dd/MM/yyyy");
+        
+        // Reset Button Style
         saveBtn.setText("Issue Bill");
+        //saveBtn.setBackground(StyleHelpers.BUTTON_COLOR); // Reset color
+        saveBtn.setEnabled(true);
+        
         currentEditingBill = null;
         for(BillCard c : cardList) c.setSelected(false);
     }
@@ -165,18 +177,22 @@ public class CreateBillPanel extends JPanel {
         for (Bill b : myBills) {
             BillCard card = new BillCard(b, 
                 selected -> {
-                    // ON SELECT
+                    // --- ON SELECT ---
                     currentEditingBill = selected;
-                    saveBtn.setText("Update Bill");
                     
                     if (selected.getBillStatus() == Bill.Status.PAID) {
-                        saveBtn.setEnabled(false); // Cannot edit Paid bills
-                        saveBtn.setText("Paid (Locked)");
-                    } else {
+                        // Αν είναι πληρωμένος -> Λειτουργία RENEW
                         saveBtn.setEnabled(true);
+                        saveBtn.setText("Renew (Same RF)");
+                        saveBtn.setBackground(new Color(255, 193, 7)); // Yellow Warning Color
+                    } else {
+                        // Αν είναι εκκρεμής -> Λειτουργία UPDATE
+                        saveBtn.setEnabled(true);
+                        saveBtn.setText("Update Bill");
+                        //saveBtn.setBackground(StyleHelpers.BUTTON_COLOR);
                     }
 
-                    // Fill Form
+                    // Γέμισμα φόρμας
                     ibanSelector.setSelectedItem(selected.getTargetIban());
                     fPayerAfm.setText(selected.getPayerAfm());
                     fAmount.setText(String.valueOf(selected.getAmount()));
@@ -187,9 +203,9 @@ public class CreateBillPanel extends JPanel {
                     for (BillCard c : cardList) c.setSelected(c.getBill().equals(selected));
                 },
                 deleted -> {
-                    // ON DELETE
+                    // --- ON DELETE ---
                     if (deleted.getBillStatus() == Bill.Status.PAID) {
-                        JOptionPane.showMessageDialog(this, "Cannot delete a PAID bill for audit reasons.");
+                        JOptionPane.showMessageDialog(this, "Cannot delete a PAID bill (History).");
                         return;
                     }
                     int confirm = JOptionPane.showConfirmDialog(this, "Delete Bill " + deleted.getRfCode() + "?", "Confirm", JOptionPane.YES_NO_OPTION);

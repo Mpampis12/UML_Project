@@ -3,8 +3,8 @@ package control;
 import services.BankSystem;
 import services.ConfigManager;
 import services.TransactionManager;
-import services.transfer.*; // Import για το Bridge Pattern
-import services.StandingOrderFactory; // Import για το Factory Pattern
+import services.transfer.*;  
+import services.StandingOrderFactory;  
 import services.TimeSimulator;
 import model.*;
 
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import DAO.DaoHandler;
+
 public class BankController {
     private BankSystem bankSystem;
     private TransactionManager transactionManager;
@@ -24,6 +26,7 @@ public class BankController {
         if(instance==null){
             instance = new BankController();
         }
+         
         return instance;
     }
 
@@ -43,17 +46,21 @@ public class BankController {
 
     public void registerUser(String username, char[] password, String fName, String lName, String afm, String email, String phone) throws Exception {
         bankSystem.getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
+        saveData();
     }
 
     public void createAdmin(String username, char[] password, String fName, String lName, String email) throws Exception {
         bankSystem.getUserManager().registerAdmin(username, password, fName, lName, email);
+        saveData();
     }
 
     public void createCustomerByType(String username, char[] password, String fName, String lName, String afm, String email, String phone, String type) throws Exception {
         if(type.equals("BUSINESS")) {
             bankSystem.getUserManager().registerCustomerBuisness(username, password, fName, lName, afm, email, phone);
+            saveData();
         } else {
             bankSystem.getUserManager().registerCustomer(username, password, fName, lName, afm, email, phone);
+            saveData();
         }
     }
 
@@ -141,8 +148,13 @@ public class BankController {
         saveData();
     }
 
-    public void handleTransfer(String sourceIban, String targetIban, double amount) throws Exception {
-        BankCommandPattern transfer = CommandFactory.createCommand("TRANSFER", transactionManager, sourceIban, targetIban, amount, "Transfer via App");
+    public void handleTransfer(String sourceIban, String targetIban, double amount,String description) throws Exception {
+        BankCommandPattern transfer ;
+        if(description.isEmpty())
+              transfer = CommandFactory.createCommand("TRANSFER", transactionManager, sourceIban, targetIban, amount, "Transfer via App");
+        else
+            transfer = CommandFactory.createCommand("TRANSFER", transactionManager, sourceIban, targetIban, amount, description);
+
         transfer.execute();
         saveData();
     }
@@ -182,9 +194,17 @@ public class BankController {
         transfer.makeTransfer(amount, sourceIban, targetIban, name, bic, bankName, address, country);
         
         System.out.println("External Transfer Executed via Bridge: " + type);
-
+        
+        transactionManager.withdraw(
+            sourceIban, 
+            amount, 
+            "External Transfer (" + type + ") to " + name, 
+            bankSystem.getTimeSimulator().getCurrentDate() // Περνάμε και την ώρα
+        );
+        
         // 4. Χρέωση Προμήθειας (ως ξεχωριστό Command)
         if (commissionFee > 0) {
+
             BankCommandPattern feeCmd = CommandFactory.createCommand("WITHDRAW", transactionManager, sourceIban, null, commissionFee, "Bank Commission Fee (" + commPercent + "%)");
             feeCmd.execute();
         }
@@ -316,6 +336,8 @@ public class BankController {
 
     public void handleDateChange(LocalDateTime newDate) {
         bankSystem.performDailyTasks(newDate);
+        saveData();
+
     }
 
     public TimeSimulator getTimeSimulator() {
@@ -325,6 +347,7 @@ public class BankController {
     public Account createAccountForUser(User user, String selectedType, double d, String afm) throws Exception {
         
        Account newAcc = bankSystem.getAccountManager().createAccount(selectedType, 0.0, afm);
+       
        return newAcc;
     }
 
@@ -355,4 +378,39 @@ public class BankController {
     public List<Account> getAccountsByOwner(String afm) {
        return BankSystem.getInstance().getAccountManager().getAccountsByOwner(afm);
     }
+    public void renewBill(String rfCode, double amount, String expireDateStr) throws Exception {
+    // 1. Βρίσκουμε έναν παλιό λογαριασμό με αυτό το RF για να αντιγράψουμε τα στοιχεία της επιχείρησης
+    Bill oldBill = bankSystem.getBillManager().getBillByRf(rfCode);
+    
+    if (oldBill == null) {
+        throw new Exception("Δεν βρέθηκε προηγούμενος λογαριασμός με αυτό το RF.");
+    }
+
+    // 2. Ελέγχουμε την ημερομηνία
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDate expireDate;
+    try {
+        expireDate = LocalDate.parse(expireDateStr, formatter);
+    } catch (Exception e) {
+        throw new Exception("Λάθος μορφή ημερομηνίας. Χρησιμοποιήστε dd/MM/yyyy");
+    }
+
+    // 3. Δημιουργούμε τον ΝΕΟ λογαριασμό (Κλώνο) με το ΙΔΙΟ RF
+    // Προσοχή: Χρησιμοποιούμε το TargetIban και το BusinessAfm από τον παλιό λογαριασμό
+    Bill newBill = new Bill(
+        oldBill.getRfCode(),      // Κρατάμε το ίδιο RF
+        oldBill.getTargetIban(),  // Στέλνουμε τα λεφτά στον ίδιο λογαριασμό επιχείρησης
+        amount,                   // Νέο ποσό
+        "Renewed Bill: " + oldBill.getDescription(), // Περιγραφή
+        oldBill.getBuisinessAfm(),// Ίδιο ΑΦΜ επιχείρησης
+        expireDate.atStartOfDay() // Νέα ημερομηνία λήξης
+    );
+    
+    // Το PayerAfm θα μπει όταν πληρωθεί, οπότε το αφήνουμε null ή όπως είναι στον constructor
+    
+    // 4. Προσθήκη στο σύστημα
+    bankSystem.getBillManager().addBill(newBill);
+    saveData();
+    System.out.println("Bill Renewed/Re-issued: " + rfCode);
+}
 }

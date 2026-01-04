@@ -49,8 +49,12 @@ public class BankSystem {
        return daoHandler;
    }
      public void performDailyTasks(LocalDateTime date) {
-          System.out.println("--- Standing Orders ---");
+         System.out.println("--- Standing Orders ---");
          standingOrderManager.executeDailyOrders(date, transactionManager, billManager);
+         
+         
+         System.out.println("--- Bills Expire ---");
+         billManager.checkExpiredBills(date) ;
            System.out.println("--- Efarmogi bank Policy (Config) ---");
          if (date.getDayOfMonth() == 1) {
             accountManager.chargeBusinessFees();

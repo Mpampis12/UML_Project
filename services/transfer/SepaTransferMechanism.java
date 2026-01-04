@@ -1,6 +1,9 @@
 package services.transfer;
 
 import services.BankSystem;
+
+import javax.swing.JOptionPane;
+
 import services.BankApiService;
 
 public class SepaTransferMechanism implements TransferMechanism {
@@ -8,7 +11,9 @@ public class SepaTransferMechanism implements TransferMechanism {
     public void executeTransfer(double amount, String sourceIban, String targetIban, String name, String bic, String bankName, String address, String country) throws Exception {
         BankApiService api = BankSystem.getInstance().getBankApiService();
         BankApiService.ApiResponse response = api.sendSepaTransfer(amount, name, targetIban, bic, bankName);
-        
-         BankSystem.getInstance().getTransactionManager().withdraw(sourceIban, amount, "SEPA Transfer ID: " + response.transaction_id, BankSystem.getInstance().getTimeSimulator().getCurrentDate());
+         
+        JOptionPane.showMessageDialog( null, "SEPA Response:"+response.message);
+
+         //BankSystem.getInstance().getTransactionManager().withdraw(sourceIban, amount, "SEPA Transfer ID: " + response.transaction_id, BankSystem.getInstance().getTimeSimulator().getCurrentDate());
     }
 }

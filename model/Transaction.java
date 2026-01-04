@@ -123,10 +123,10 @@ public class Transaction {
         private double amount;
         private String type;
 
-        private BankController controller = BankController.getInstance();
+        ///private BankController controller = BankController.getInstance();
         
         // Default τιμές
-        private LocalDateTime timestamp = controller.getTimeSimulator().getCurrentDate();
+        private LocalDateTime timestamp = null;
         private String description = "";
         private String sourceIban = null;
         private String targetIban = null;
@@ -135,7 +135,7 @@ public class Transaction {
             this.transactionId = transactionId;
             this.type = type;
             this.amount = amount;
-            this.controller = BankController.getInstance();
+            
         }
            public Builder() {
  

@@ -50,13 +50,14 @@ public class StandingOrderManager {
                         
                     } else if (order.getType() == StandingOrderPurpose.BILL) {
                   
-                        tm.withdraw(
-                            order.getSource().toString(), 
-                            order.getAmount(), 
-                            "Bill Payment RF: " + order.getTargetRfCode(),BankSystem.getInstance().getTimeSimulator().getCurrentDate() 
+                        String payerAfm = BankSystem.getInstance().getAccountManager().getAccount(order.getSource().toString()).getOwners().getFirst();
+
+                         bm.payBill(
+                            order.getTargetRfCode(),       // RF Code
+                            order.getSource().toString(),  // Payer IBAN
+                            payerAfm,                      // Payer AFM
+                            tm                             // Transaction Manager
                         );
-                        
-                        bm.markAsPaid(order.getTargetRfCode(), "AUTO-PAYMENT FROM" + BankController.getInstance().getOwnersByIban(order.getSource().toString()).getFirst());
                     }
 
                      order.updateNextTime();
@@ -66,7 +67,7 @@ public class StandingOrderManager {
                      System.out.println("Order " + order.getStandinID() + " FAILED: " + e.getMessage());
                     order.failStanding();
                 }
-            }
+             }
         }
     }
     public void setOrders(List<StandingOrder> orders) {

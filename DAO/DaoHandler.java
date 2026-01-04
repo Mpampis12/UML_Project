@@ -30,7 +30,7 @@ public class DaoHandler {
        
         JsonDao.DatabaseData dbData = new JsonDao.DatabaseData();
  
-        List<User> allUsers = BankController.getInstance().getUsers();
+        List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers();
         for (User u : allUsers) {
             if (u instanceof Customer) {
                 dbData.customers.add((Customer) u);

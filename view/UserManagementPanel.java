@@ -1,46 +1,49 @@
 package view;
 
 import model.User;
-import services.BankSystem;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import control.BankController;
-
 import java.awt.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserManagementPanel extends JPanel {
+public class UserManagementPanel extends JPanel implements Refreshable {
 
     private JTable table;
     private DefaultTableModel model;
     private List<User> sourceList;
     private JTextField searchField;
     private BankController controller;
+    private String userType; 
 
-    public UserManagementPanel(List<User> usersToManage) {
+    // Νέος Constructor με τύπο χρήστη
+    public UserManagementPanel(List<User> initialList, String type) {
         this.controller = BankController.getInstance();
-        this.sourceList = usersToManage;
+        this.sourceList = initialList;
+        this.userType = type;
+        
         setLayout(new BorderLayout(10, 10));
         setBackground(StyleHelpers.MUSTARD_BG);
 
-        // --- Search Bar ---
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.setOpaque(false);
         searchField = new StyleHelpers.RoundedTextField(20);
         searchField.setPreferredSize(new Dimension(200, 30));
         JButton searchBtn = StyleHelpers.createRoundedButton("Search (AFM)");
-        
         searchBtn.addActionListener(e -> filterList(searchField.getText()));
         
         topPanel.add(new JLabel("Search: "));
         topPanel.add(searchField);
         topPanel.add(searchBtn);
+        
+        // Κουμπάκι Refresh
+        JButton refreshBtn = StyleHelpers.createRoundedButton("Refresh");
+        refreshBtn.addActionListener(e -> refresh());
+        topPanel.add(refreshBtn);
 
         add(topPanel, BorderLayout.NORTH);
 
-        // --- Table ---
         String[] columns = {"Username", "First Name", "Last Name", "AFM", "Email"};
         model = new DefaultTableModel(columns, 0) {
             @Override public boolean isCellEditable(int row, int column) { return false; }
@@ -52,7 +55,6 @@ public class UserManagementPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        // --- Edit Button ---
         JButton editBtn = StyleHelpers.createRoundedButton("Edit Selected User");
         editBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
@@ -60,11 +62,7 @@ public class UserManagementPanel extends JPanel {
                 String username = (String) model.getValueAt(row, 0);
                 User selected = findUser(username);
                 if (selected != null)
-                    try {
-                        showEditDialog(selected);
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
+                    try { showEditDialog(selected); } catch (Exception e1) { e1.printStackTrace(); }
             }
         });
 
@@ -72,6 +70,17 @@ public class UserManagementPanel extends JPanel {
         bottomPanel.setOpaque(false);
         bottomPanel.add(editBtn);
         add(bottomPanel, BorderLayout.SOUTH);
+    }
+    
+    @Override
+    public void refresh() {
+        if ("ADMIN".equals(userType)) {
+            sourceList = controller.getAdmins();
+        } else {
+            sourceList = controller.getCustomers();
+        }
+        searchField.setText("");
+        refreshTable(sourceList);
     }
 
     private void refreshTable(List<User> list) {
@@ -105,24 +114,18 @@ public class UserManagementPanel extends JPanel {
         JTextField phone = new JTextField(user.getPhone());
         JTextField afm = new JTextField(user.getAfm());
         JTextField username = new JTextField(user.getUsername());
-        JTextField password = new JTextField("-"); // Placeholder
+        JTextField password = new JTextField("-");
 
         Object[] message = {
-            "First Name:", fName,
-            "Last Name:", lName,
-            "Email:", email,
-            "Phone:", phone,
-            "AFM: " , afm,
-            "Username: " , username,
-            "Password: " , password
-
+            "First Name:", fName, "Last Name:", lName,
+            "Email:", email, "Phone:", phone,
+            "AFM:", afm, "Username:", username, "Password:", password
         };
 
-        int option = JOptionPane.showConfirmDialog(this, message, "Edit User: " + user.getUsername(), JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(this, message, "Edit User", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            
             controller.updateUser(user, fName.getText(), lName.getText(), email.getText(), phone.getText(),username.getText(),password.getText(),afm.getText());
-            refreshTable(sourceList); // Update UI
+            refresh();
         }
     }
 }

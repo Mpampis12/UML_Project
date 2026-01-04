@@ -19,7 +19,7 @@ public class TransactionManager {
     public void deposit(String iban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ: Παίρνουμε τον AccountManager μέσω του Singleton BankSystem
         
-        Account account = BankController.getInstance().getAccount(iban);
+        Account account = BankSystem.getInstance().getAccountManager().getAccount(iban);
         
         if (account == null) {
             throw new Exception("Account with IBAN " + iban + " not found.");
@@ -39,13 +39,13 @@ public class TransactionManager {
         account.addTransaction(transaction);
         
         System.out.println("Successful Deposit " + amount + "€ to " + iban);
-        BankController.getInstance().saveData();
+         
         
     }
 
     public void withdraw(String iban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ
-       Account account = BankController.getInstance().getAccount(iban);
+       Account account = BankSystem.getInstance().getAccountManager().getAccount(iban);
         
         if (account == null) {
             throw new Exception("Account not found.");
@@ -62,15 +62,15 @@ public class TransactionManager {
                 .build();
 
         account.addTransaction(transaction);
-        BankController.getInstance().saveData();
+       
         System.out.println("Successful withdrawal " + amount + "€ from " + iban);
     }
 
     public void transfer(String sourceIban, String targetIban, double amount, String description, LocalDateTime date) throws Exception {
         // ΔΙΟΡΘΩΣΗ
         
-        Account sourceAcc = BankController.getInstance().getAccount(sourceIban);
-        Account targetAcc = BankController.getInstance().getAccount(targetIban);
+        Account sourceAcc = BankSystem.getInstance().getAccountManager().getAccount(sourceIban);
+        Account targetAcc = BankSystem.getInstance().getAccountManager().getAccount(targetIban);
          
         if (sourceAcc == null) throw new Exception("Source Account not found.");
         if (targetAcc == null) throw new Exception("Target Account not found.");
@@ -100,7 +100,7 @@ public class TransactionManager {
                 .build();
         targetAcc.addTransaction(tIn); 
 
-        BankController.getInstance().saveData();
+        
         System.out.println("Successful Transfer " + amount + "€ from " + sourceIban + " to " + targetIban);
     }
 
@@ -112,7 +112,7 @@ public class TransactionManager {
         ArrayList<Transaction> transactions = new ArrayList<>();
         
         
-        for (Account acc : BankController.getInstance().getAccountsByOwner(afm)) {
+        for (Account acc :BankSystem.getInstance().getAccountManager().getAccountsByOwner(afm)) {
             transactions.addAll(acc.getTransaction());
         }
         return transactions;

@@ -68,7 +68,11 @@ public class StandingOrder {
 
     private int attempts;
 
-    private final int NEXT_TIME_ON_FAILED = 2; 
+    public int getAttempts() {
+        return attempts;
+    }
+
+    private final int NEXT_TIME_ON_FAILED = 1; 
 
     public enum StandingOrderPurpose{ TRANSFER, BILL }
     public enum OrderStatus { ACTIVE, COMPLETED, FAILD }    
@@ -145,14 +149,20 @@ public class StandingOrder {
         if(nexTime.isAfter(expiredDay)) this.status = OrderStatus.COMPLETED;
     }
     
-    public void failStanding(){
+    public void failStanding() {
         this.attempts++;
-        if(this.attempts >= 3) this.status = OrderStatus.FAILD;
-        else this.nexTime = this.nexTime.plusDays(NEXT_TIME_ON_FAILED);
+        if (this.attempts >= 3) {
+            
+            updateNextTime(); 
+            System.out.println("Order " + standinID + " failed 3 times. Skipped to next cycle: " + nexTime);
+        } else {
+            // Αλλιώς ξαναδοκίμασε σε 1 μέρα
+            this.nexTime = this.nexTime.plusDays(NEXT_TIME_ON_FAILED);
+        }
     }
 
-    public Object getExpiredDay() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getExpiredDay'");
-    }
+      public LocalDateTime getExpiredDay() { // Αλλαγή από Object σε LocalDateTime
+    return expiredDay;
+}
+    
 }

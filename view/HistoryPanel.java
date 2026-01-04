@@ -35,7 +35,7 @@ public class HistoryPanel extends JPanel {
         title.setBorder(new EmptyBorder(0, 0, 20, 0));
 
         // Table Init
-        String[] columns = {"Date", "Type", "Description", "Amount", "Source", "Target"};
+        String[] columns = {"ID","Date", "Type", "Description", "Amount", "Source", "Target"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         JTable table = new JTable(model) { @Override public boolean isCellEditable(int r, int c) { return false; } };
 
@@ -62,7 +62,8 @@ public class HistoryPanel extends JPanel {
             String src = (t.getSource() != null) ? t.getSource().toString() : "-";
             String trg = (t.getTarget() != null) ? t.getTarget().toString() : "-";
             String date = (t.getTransactionID() != null) ? t.getTimestamp().toString() : "-";
-            model.addRow(new Object[]{date, t.getType(), t.getDescription(), String.format("%.2f€", t.getAmount()), src, trg});
+            String id = (t.getTransactionID() != null) ? t.getTransactionID() : "-";
+            model.addRow(new Object[]{id,date, t.getType(), t.getDescription(), String.format("%.2f€", t.getAmount()), src, trg});
         }
 
         JScrollPane scrollPane = new JScrollPane(table);

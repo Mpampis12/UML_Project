@@ -10,7 +10,7 @@ public class eBankingApp {
 
         javax.swing.SwingUtilities.invokeLater(() -> {
             new BankView();
-            DaoHandler.getInstance().saveAllData();
+            //DaoHandler.getInstance().saveAllData();
            
         });
 

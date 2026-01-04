@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
-public class HomePanel extends JPanel {
+public class HomePanel extends JPanel implements Refreshable {
 
     private User user;
     private BankController controller;
@@ -38,19 +38,7 @@ public class HomePanel extends JPanel {
 
         initUI();
         
-        // ΑΥΤΟΜΑΤΟ REFRESH: Όταν εμφανίζεται το Panel, ξαναφορτώνει τα δεδομένα
-        this.addAncestorListener(new AncestorListener() {
-            @Override
-            public void ancestorAdded(AncestorEvent event) {
-                refreshData();
-            }
-
-            @Override
-            public void ancestorRemoved(AncestorEvent event) {}
-
-            @Override
-            public void ancestorMoved(AncestorEvent event) {}
-        });
+        
     }
 
     private void initUI() {
@@ -219,4 +207,10 @@ class TransactionRow extends JPanel {
             add(dateLabel);
         }
     }
+
+@Override
+ 
+public void refresh() {
+    refreshData();
+}
 }

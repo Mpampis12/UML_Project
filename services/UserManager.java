@@ -64,14 +64,14 @@ public class UserManager {
 
          Individual newCustomer = new Individual(username, password, firstName, lastName, afm, email, phone);
         
-         Account defAccount =BankController.getInstance().createAccountForUser(newCustomer, "PERSONAL", 0, afm);
+         Account defAccount = BankSystem.getInstance().getAccountManager().createAccount( "INDVIDUAL", 0.0, afm);
         if (defAccount != null) {
             newCustomer.setNewAccountIban(defAccount.getIban());
         }
 
         this.users.add(newCustomer);
         
-        controller.saveData();
+         
         
         System.out.println("Success register Individual: " + username);
     }
@@ -86,13 +86,14 @@ public class UserManager {
 
          Business newCustomer = new Business(username, password, firstName, lastName, afm, email, phone);
         
-         Account defAccount =BankController.getInstance().createAccountForUser(newCustomer, "BUSINESS", 0, afm);
+         Account defAccount = BankSystem.getInstance().getAccountManager().createAccount( "BUSINESS", 0.0, afm);
+         
         if (defAccount != null) {
             newCustomer.setNewAccountIban(defAccount.getIban());
         }
 
         this.users.add(newCustomer);
-        controller.saveData();
+         
         System.out.println("Success register Business: " + username);
     }
 
@@ -103,7 +104,7 @@ public class UserManager {
         // Οι admins παίρνουν dummy AFM/Phone με βάση τον κώδικά σου, οπότε δεν ελέγχουμε AFM εδώ.
         model.Admin newAdmin = new model.Admin(username, password, firstName, lastName, "000000000", email, "0000000000");
         this.users.add(newAdmin);
-        controller.saveData();
+        
         System.out.println("Success register Admin: " + username);
     }
    
@@ -130,7 +131,7 @@ public class UserManager {
         if (phone == null || !phone.matches(PHONE_REGEX)) throw new Exception("Invalid Phone.");
         if (AFM == null || !AFM.matches(AFM_REGEX)) throw new Exception("Invalid AFM.");
         if(AFM != user.getAfm()){
-             for(Account acc : BankController.getInstance().getAccountsByOwner(user.getAfm())){
+             for(Account acc : BankSystem.getInstance().getAccountManager().getAccountsByOwner(user.getAfm())){
                  acc.setprimaryOwner(AFM); 
              }
             }
@@ -145,7 +146,7 @@ public class UserManager {
             
         user.setAfm(AFM);   
     
-    controller.saveData();
+      
     }
     
      public List<User> getUsers() { return users; }
