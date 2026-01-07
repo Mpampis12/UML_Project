@@ -10,7 +10,7 @@ import control.BankController;
 public class DaoHandler {
 
     BankController controller;
-    private JsonDao jsonDao;
+    private BankDao dataStorage;
     private static DaoHandler instance;
 
     public static DaoHandler getInstance(){
@@ -20,7 +20,7 @@ public class DaoHandler {
         return instance;
     }
     private DaoHandler() {
-        this.jsonDao = new JsonDao();
+        this.dataStorage = new JsonDao();
         //this.controller= BankController.getInstance();
     }
 
@@ -28,7 +28,7 @@ public class DaoHandler {
         BankSystem bank = BankSystem.getInstance();
         
        
-        JsonDao.DatabaseData dbData = new JsonDao.DatabaseData();
+        BankData dbData = new BankData();
  
         List<User> allUsers = BankSystem.getInstance().getUserManager().getUsers();
         for (User u : allUsers) {
@@ -44,14 +44,14 @@ public class DaoHandler {
         dbData.standingOrders = bank.getStandingOrderManager().getOrders();
 
        
-        jsonDao.saveDatabase(dbData);
+        dataStorage.save(dbData);
     }
 
     public void loadAllData() {
         BankSystem bank = BankSystem.getInstance();
 
       
-        JsonDao.DatabaseData dbData = jsonDao.loadDatabase();
+        BankData dbData = dataStorage.load();
 
      
         List<User> allUsers = new ArrayList<>();

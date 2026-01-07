@@ -2,18 +2,14 @@ package DAO;
 
 import com.google.gson.*;
 import model.*;
-
+ 
 import java.io.*;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+ 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
-public class JsonDao {
+ 
+public class JsonDao implements BankDao {
 
     private static final String FILE_PATH = "DAO/Database.json";  
 
@@ -71,16 +67,10 @@ public class JsonDao {
             .create();
 
     
-    public static class DatabaseData {
-        public List<Customer> customers = new ArrayList<>();
-        public List<Admin> admins = new ArrayList<>();
-        public List<Account> accounts = new ArrayList<>();
-        public List<Bill> bills = new ArrayList<>();
-        public List<StandingOrder> standingOrders = new ArrayList<>();
-    }
+    
 
- 
-    public void saveDatabase(DatabaseData data) {
+    @Override
+    public void save(BankData data) {
         try {
             File directory = new File("DAO");
             if (!directory.exists()) {
@@ -97,22 +87,47 @@ public class JsonDao {
         }
     }
 
-  
-    public DatabaseData loadDatabase() {
+    @Override
+    public BankData load() {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
             System.out.println("Database file not found. Creating new empty database.");
-            return new DatabaseData(); 
+            return new BankData(); 
         }
 
         try (Reader reader = new FileReader(FILE_PATH)) {
-            DatabaseData data = gson.fromJson(reader, DatabaseData.class);
-            if (data == null) return new DatabaseData();
+            BankData data = gson.fromJson(reader, BankData.class);
+            if (data == null) return new BankData();
             return data;
         } catch (IOException e) {
             System.out.println("Error loading database: " + e.getMessage());
             e.printStackTrace();
-            return new DatabaseData(); // Επιστροφή άδειας βάσης σε περίπτωση λάθους
+            return new BankData(); // Επιστροφή άδειας βάσης σε περίπτωση λάθους
         }
     }
+
+
+//     @Override
+//     public void save(BankSystem system) {
+//       try (Writer writer = new FileWriter(FILE_PATH)) {
+//             gson.toJson(system, writer);
+//             System.out.println("Data saved successfully.");
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+//     }
+
+
+//    @Override
+//     public BankSystem load() {
+//         try (Reader reader = new FileReader(FILE_PATH)) {
+//             return gson.fromJson(reader, BankSystem.class);
+//         } catch (FileNotFoundException e) {
+//             System.out.println("No db found");
+//             return null;
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//             return null;
+//         }
+//     }
 }
