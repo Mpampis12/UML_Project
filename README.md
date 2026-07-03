@@ -4,7 +4,7 @@ content = """# 🏦 eBankingApp - Σύστημα Ηλεκτρονικής Τρα
 ![UML](https://img.shields.io/badge/UML-Object_Oriented_Design-blue?style=for-the-badge)
 ![JSON](https://img.shields.io/badge/JSON-Data_Storage-lightgrey?style=for-the-badge)
 
-Μια ολοκληρωμένη **Desktop εφαρμογή ηλεκτρονικής τραπεζικής (e-banking)**, γραμμένη σε **Java**. Αναπτύχθηκε στα πλαίσια πανεπιστημιακής εργασίας (Ομάδα 15) και εστιάζει στην εφαρμογή αρχών Αντικειμενοστρεφούς Προγραμματισμού (OOP) και γνωστών Design Patterns.
+Μια ολοκληρωμένη **Desktop εφαρμογή ηλεκτρονικής τραπεζικής (e-banking)**, γραμμένη σε **Java**. Αναπτύχθηκε στα πλαίσια πανεπιστημιακής εργασίας  και εστιάζει στην εφαρμογή αρχών Αντικειμενοστρεφούς Προγραμματισμού (OOP) και γνωστών Design Patterns.
 
 ##  Βασικά Χαρακτηριστικά
 
