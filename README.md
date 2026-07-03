@@ -1,4 +1,4 @@
-content = """# 🏦 eBankingApp - Σύστημα Ηλεκτρονικής Τραπεζικής
+content = """#  eBankingApp - Σύστημα Ηλεκτρονικής Τραπεζικής
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![UML](https://img.shields.io/badge/UML-Object_Oriented_Design-blue?style=for-the-badge)
